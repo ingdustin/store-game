@@ -1,0 +1,450 @@
+// Datos de los 13 juegos del catálogo.
+// Contenido de fichas, benchmarks, pros/contras y veredictos extraídos del
+// espacio de reseñas de cada juego. Editar aquí y relanzar `node build.js`.
+
+const SITE = {
+  name: 'Store Gaming Tech',
+  brand: 'Cuatro Señales',
+  owner: 'Ing. Dustin Díaz',
+  email: 'info@ddagencia.com',
+  site: 'ingdustindiaz.com',
+  updated: '17 de agosto de 2026'
+};
+
+const GAMES = [
+  {
+    slug: 'hades-netflix-edition',
+    title: 'Hades · Netflix Edition',
+    studio: 'Supergiant Games',
+    cat: 'Acción',
+    plats: ['iPhone', 'iPad'],
+    rating: 9.9, reviews: 4500,
+    desc: 'El galardonado roguelike de acción rápida en tu iPhone.',
+    fps: 60, tech: 'Metal 3',
+    old: 24.99, price: 0, today: true,
+    bench: {
+      cpu: 'A15 Bionic o superior',
+      gfx: 'Metal 3',
+      rt: 'No',
+      battery: '9.2 / 10',
+      gamepad: 'Excelente en táctil y mando físico',
+      storage: '3.8 GB'
+    },
+    pros: [
+      'Controles táctiles totalmente personalizables con respuesta háptica del Haptic Engine',
+      'Sincronización instantánea de partidas en iCloud',
+      '60 FPS ultra estables con bajo consumo térmico'
+    ],
+    cons: [
+      'Exclusivo para suscriptores de Netflix Games',
+      'No disponible actualmente para macOS'
+    ],
+    verdict: [
+      'El príncipe del inframundo desafía a los dioses de la mitología griega en un combate frenético a 60 FPS fijos con controles táctiles personalizables.',
+      'Supergiant Games logró una adaptación impecable para pantallas táctiles con retroalimentación háptica precisa. La versión para iOS se ejecuta a 60 imágenes por segundo constantes incluso con docenas de enemigos y efectos de magia en pantalla.'
+    ]
+  },
+  {
+    slug: 'sneaky-sasquatch',
+    title: 'Sneaky Sasquatch',
+    studio: 'RAC7 Games',
+    cat: 'Aventura',
+    plats: ['iPhone', 'iPad', 'Mac', 'Apple Arcade'],
+    rating: 9.9, reviews: 15400,
+    desc: 'La vida cotidiana de un Bigfoot en el ecosistema Apple.',
+    fps: 120, tech: 'Metal 2',
+    old: 4.99, price: 0, arcade: true, exclusive: true,
+    bench: {
+      cpu: 'Cualquier dispositivo Apple reciente',
+      gfx: 'Metal 2',
+      rt: 'No',
+      battery: '9.9 / 10',
+      gamepad: 'Mandos, teclado, mando de Apple TV y táctil',
+      storage: '1.2 GB'
+    },
+    pros: [
+      'Infinitas horas de diversión con física sandbox',
+      'Sincronización instantánea entre iPhone, iPad, Mac, Apple TV y Vision Pro',
+      'Cero anuncios y cero pagos dentro del juego'
+    ],
+    cons: [
+      'Estilo gráfico simplificado pensado para accesibilidad universal'
+    ],
+    verdict: [
+      'Vive como un Sasquatch: sigilo en campamentos, conduce coches, sé médico, alcalde o piloto de carreras en este fascinante sandbox familiar.',
+      'Sneaky Sasquatch es el juego insignia de Apple Arcade. Con actualizaciones gratuitas constantes, ofrece sincronización en la nube impecable que te permite empezar a jugar en el Apple TV de la sala y continuar exactamente donde te quedaste en tu iPhone.'
+    ]
+  },
+  {
+    slug: 'resident-evil-4-remake',
+    title: 'Resident Evil 4 Remake',
+    studio: 'Capcom',
+    cat: 'Acción',
+    plats: ['iPhone', 'iPad', 'Mac'],
+    rating: 9.8, reviews: 2890,
+    desc: 'Terror de supervivencia con trazado de rayos nativo.',
+    fps: 58, tech: 'Metal 3 + Hardware Ray Tracing',
+    old: 59.99, price: 29.99,
+    promo: 'RE4-APPSTORE-VIP',
+    bench: {
+      cpu: 'A17 Pro / M1 o superior',
+      gfx: 'Metal 3 + Hardware Ray Tracing',
+      rt: 'Sí (hardware)',
+      battery: '8 / 10',
+      gamepad: 'DualSense, Xbox Series X, Backbone One',
+      storage: '62 GB'
+    },
+    pros: [
+      'Trazado de rayos por hardware en A18 Pro y M3/M4',
+      'Prueba inicial gratuita antes de desbloquear el juego completo',
+      'Audio 3D espacial optimizado para AirPods Pro y Max'
+    ],
+    cons: [
+      'Se recomienda mando de juego para la mejor precisión',
+      'Calentamiento moderado en partidas prolongadas sin disipación'
+    ],
+    verdict: [
+      'La obra maestra de Capcom adaptada con maestría a iPhone 15 Pro, 16 Pro y Macs M1/M2/M3/M4, con Ray Tracing por hardware en chips A18 Pro y M3/M4.',
+      'El motor RE Engine brilla con fuerza en Apple Silicon. Capcom logró trasladar la experiencia completa de consola con iluminación global por Ray Tracing, texturas de alta resolución y soporte para controles con vibración háptica avanzada.'
+    ]
+  },
+  {
+    slug: 'lies-of-p',
+    title: 'Lies of P',
+    studio: 'NEOWIZ / Round8 Studio',
+    cat: 'RPG',
+    plats: ['Mac', 'Vision Pro'],
+    rating: 9.8, reviews: 3400,
+    desc: 'El aclamado Soulslike victoriano optimizado para Mac M3/M4.',
+    fps: 110, tech: 'Metal 3 + Fast Geometry Pipeline',
+    old: 59.99, price: 39.99,
+    bench: {
+      cpu: 'Apple M1 Pro / M2 / M3 / M4',
+      gfx: 'Metal 3 + Fast Geometry Pipeline',
+      rt: 'Sí (hardware)',
+      battery: '8.8 / 10',
+      gamepad: 'DualSense Edge, Xbox Elite 2',
+      storage: '48 GB'
+    },
+    pros: [
+      'Optimización magistral: 120 FPS fijos a resolución 4K con MetalFX',
+      'Tiempos de carga casi instantáneos gracias al SSD unificado de Apple Silicon',
+      'Modo cine de realidad inmersiva para Apple Vision Pro'
+    ],
+    cons: [
+      'Solo disponible para Mac con Apple Silicon y Vision Pro',
+      'Especialmente exigente en reflejos de alta resolución'
+    ],
+    verdict: [
+      'Una retorcida versión de la historia de Pinocho en la ciudad de Krat, con rendimiento sobresaliente a 120 FPS en pantallas ProMotion de Mac.',
+      'Lies of P está considerado uno de los ports a macOS más pulidos jamás lanzados en la Mac App Store. Con soporte nativo para monitores ultrapanorámicos, trazado de rayos y MetalFX, ofrece un tiempo de respuesta de mando impecable, crucial para los bloqueos perfectos.'
+    ]
+  },
+  {
+    slug: 'death-stranding-directors-cut',
+    title: "Death Stranding Director's Cut",
+    studio: '505 Games / Kojima Productions',
+    cat: 'Aventura',
+    plats: ['iPhone', 'iPad', 'Mac'],
+    rating: 9.7, reviews: 1420,
+    desc: 'El viaje definitivo de Kojima en Apple Silicon.',
+    fps: 60, tech: 'Metal 3 + MetalFX Temporal',
+    old: 39.99, price: 19.99,
+    promo: 'CUATROSENALES-DS50',
+    bench: {
+      cpu: 'A17 Pro / A18 Pro / Apple M1 o superior',
+      gfx: 'Metal 3 + MetalFX Temporal',
+      rt: 'Sí (hardware)',
+      battery: '7.8 / 10',
+      gamepad: 'DualSense, Xbox Wireless, táctil en pantalla',
+      storage: '54.2 GB'
+    },
+    pros: [
+      'Renderizado nativo a 60 FPS mediante MetalFX Spatial y Temporal',
+      'Compatibilidad total con mandos DualSense con respuesta háptica en Mac',
+      'Sincronización de partidas en la nube mediante Universal Purchase'
+    ],
+    cons: [
+      'Requiere más de 50 GB de almacenamiento libre',
+      'Consumo elevado de batería en partidas de más de 2 horas en iPhone'
+    ],
+    verdict: [
+      'Port directo de consola a iOS y macOS utilizando la potencia de Metal 3 y MetalFX Upscaling, con rendimiento nativo de 60 FPS en chips M-series y A17/A18 Pro.',
+      "Death Stranding Director's Cut demuestra el verdadero potencial de Apple Silicon para los juegos AAA. La optimización mediante MetalFX Upscaling, tanto espacial como temporal, permite renderizar paisajes desolados con una claridad asombrosa sin sacrificar la duración de la batería en iPhone 16 Pro o MacBook Pro M3."
+    ]
+  },
+  {
+    slug: 'fantasian-neo-dimension',
+    title: 'Fantasian Neo Dimension',
+    studio: 'Mistwalker / Square Enix',
+    cat: 'RPG',
+    plats: ['iPhone', 'iPad', 'Mac', 'Apple Arcade'],
+    rating: 9.5, reviews: 3120,
+    desc: 'El JRPG hecho a mano por el creador de Final Fantasy.',
+    fps: 120, tech: 'Metal 2.4',
+    old: 19.99, price: 0, arcade: true,
+    bench: {
+      cpu: 'A14 Bionic / M1 o superior',
+      gfx: 'Metal 2.4',
+      rt: 'No',
+      battery: '9.5 / 10',
+      gamepad: 'Táctil, DualSense, Xbox, MFi',
+      storage: '8.5 GB'
+    },
+    pros: [
+      'Escenarios construidos con dioramas reales escaneados en 3D',
+      'Banda sonora original completa compuesta por Nobuo Uematsu',
+      'Incluido en Apple Arcade sin micropagos ni anuncios'
+    ],
+    cons: [
+      'Curva de dificultad elevada en la segunda mitad del juego',
+      'Combate por turnos tradicional que puede no gustar a todos'
+    ],
+    verdict: [
+      'Dioramas reales fotografiados en 3D con música de Nobuo Uematsu, disponible en Apple Arcade sin compras dentro de la app.',
+      'Hironobu Sakaguchi creó más de 150 dioramas hechos a mano para construir los escenarios de Fantasian. Corriendo a 120 FPS fluidos en pantallas ProMotion de iPad Pro e iPhone Pro, es una de las joyas visuales más exclusivas de la tienda.'
+    ]
+  },
+  {
+    slug: 'grid-legends-deluxe-edition',
+    title: 'GRID Legends Deluxe Edition',
+    studio: 'Feral Interactive / Codemasters',
+    cat: 'Simulación',
+    plats: ['Mac', 'iPad'],
+    rating: 9.4, reviews: 880,
+    desc: 'Carreras automovilísticas a alta velocidad con MetalFX.',
+    fps: 90, tech: 'Metal 3',
+    old: 39.99, price: 14.99,
+    promo: 'GRID-50-CUATRO',
+    bench: {
+      cpu: 'M1 / M2 / M3 / M4 o iPad Pro M-series',
+      gfx: 'Metal 3',
+      rt: 'No',
+      battery: '8.4 / 10',
+      gamepad: 'Volantes con force feedback, mandos inalámbricos, táctil',
+      storage: '32.4 GB'
+    },
+    pros: [
+      'Soporte completo para volantes Logitech y Thrustmaster en Mac',
+      'Multijugador multiplataforma de baja latencia',
+      'Opciones gráficas detalladas en iPad Pro (Calidad vs Rendimiento 120 FPS)'
+    ],
+    cons: [
+      'Requiere almacenamiento SSD veloz para evitar tirones de carga de texturas'
+    ],
+    verdict: [
+      'Compite en circuitos urbanos e icónicos de todo el mundo con física realista, clima dinámico y modo historia con actores reales.',
+      'Feral Interactive volvió a superar las expectativas adaptando GRID Legends con tecnología MetalFX. El rendimiento en iPad Pro M2/M4 alcanza los 120 Hz con reflejos en tiempo real y una sensación de velocidad máxima.'
+    ]
+  },
+  {
+    slug: 'assassins-creed-mirage',
+    title: "Assassin's Creed Mirage",
+    studio: 'Ubisoft',
+    cat: 'Aventura',
+    plats: ['iPhone', 'iPad', 'Mac'],
+    rating: 9.3, reviews: 1100,
+    desc: 'Sigilo clásico en Bagdad del siglo IX para iOS y Mac.',
+    fps: 45, tech: 'Metal 3 + MetalFX Spatial',
+    old: 49.99, price: 24.99,
+    promo: 'MIRAGE-APPLE2026',
+    bench: {
+      cpu: 'A17 Pro / A18 Pro / M1 o superior',
+      gfx: 'Metal 3 + MetalFX Spatial',
+      rt: 'Sí (hardware)',
+      battery: '7.5 / 10',
+      gamepad: 'DualSense, Xbox, Razer Kishi',
+      storage: '38.5 GB'
+    },
+    pros: [
+      'Experiencia completa de consola en iPhone 15/16 Pro y Mac M-series',
+      'Mapas detallados con cientos de PNJ simultáneos en pantalla',
+      'Compra universal: una sola adquisición para iPhone, iPad y Mac'
+    ],
+    cons: [
+      'La pantalla táctil resulta incómoda para parkour complejo; requiere mando',
+      'Ocupa cerca de 40 GB'
+    ],
+    verdict: [
+      'Acompaña a Basim en un homenaje a los orígenes del sigilo, con un port completo ejecutable en el bolsillo y gráficos de nivel consola.',
+      'Ubisoft aprovecha las capacidades de MetalFX Upscaling para renderizar la vibrante ciudad de Bagdad. El juego destaca por su densidad de multitudes y sus sombras dinámicas sin caídas pronunciadas de fotogramas.'
+    ]
+  },
+  {
+    slug: 'deducta-sudoku',
+    title: 'Deducta Sudoku',
+    studio: 'Ing. Dustin Díaz · Cuatro Señales',
+    cat: 'Estrategia',
+    plats: ['iPhone', 'iPad', 'Mac', 'Vision Pro'],
+    rating: 4.9, reviews: 15400,
+    desc: 'El desafío de deducción matemática y lógica para Apple Silicon.',
+    fps: 120, tech: 'Metal 3 Nativo',
+    old: 2.99, price: 0, today: true,
+    own: true,
+    appId: '1550244179',
+    appStore: 'https://apps.apple.com/us/app/sudoku-classic-number-puzzle/id1550244179',
+    promo: 'DEDUCTA-FREE-2026',
+    bench: {
+      cpu: 'Todos los chips A14 Bionic / A17 Pro / M1-M4',
+      gfx: 'Metal 3 Nativo',
+      rt: 'No',
+      battery: '10 / 10',
+      gamepad: 'Táctil, Apple Pencil, teclado y ratón',
+      storage: '0.08 GB'
+    },
+    pros: [
+      'Renderizado nativo ultra suave a 120 FPS en pantallas Retina ProMotion',
+      'Integración total de iCloud Sync entre iPhone, iPad, Mac y Vision Pro',
+      'Cumple estrictamente las directrices de privacidad y EULA de la App Store'
+    ],
+    cons: [
+      'Los niveles Maestros de Deducción requieren práctica intensiva'
+    ],
+    verdict: [
+      'Deducta Sudoku (Sudoku Classic Number Puzzle) redefine los juegos de rompecabezas numéricos con tableros interactivos a 120 Hz ProMotion, pistas deductoras en tiempo real y estadísticas avanzadas sincronizadas con iCloud.',
+      'Desarrollado por Ing. Dustin Díaz bajo el sistema de identidad Cuatro Señales, es una app de compra universal para iPhone, iPad, Mac y Vision Pro con política de privacidad y EULA propios adaptados a las directrices de revisión de Apple.'
+    ]
+  },
+  {
+    slug: 'monument-valley-2',
+    title: 'Monument Valley 2',
+    studio: 'ustwo games',
+    cat: 'Estrategia',
+    plats: ['iPhone', 'iPad', 'Apple Arcade'],
+    rating: 4.9, reviews: 48900,
+    desc: 'Una deslumbrante aventura de rompecabezas de geometría imposible.',
+    fps: 120, tech: 'Metal 2',
+    old: 4.99, price: 1.99, arcade: true,
+    promo: 'USTWO-OFFER-2026',
+    bench: {
+      cpu: 'Cualquier iPhone o iPad moderno',
+      gfx: 'Metal 2',
+      rt: 'No',
+      battery: '9.8 / 10',
+      gamepad: 'Táctil y ratón',
+      storage: '0.8 GB'
+    },
+    pros: [
+      'Ganador del Apple Design Award con dirección artística impecable',
+      'Audio inmersivo diseñado especialmente para AirPods',
+      'Experiencia accesible para todas las edades y sin anuncios'
+    ],
+    cons: [
+      'Duración relativamente corta: entre 2 y 3 horas de juego'
+    ],
+    verdict: [
+      'Guía a una madre y a su hija en un viaje a través de arquitecturas ilógicas, descubriendo caminos ilusionistas y rompecabezas poéticos.',
+      'Ganador de múltiples Apple Design Awards, Monument Valley 2 destaca por su estética minimalista inspirada en M. C. Escher, su audio espacial reflexivo y un arte limpio que se ve radiante en las pantallas Liquid Retina XDR de iPad Pro y MacBook.'
+    ]
+  },
+  {
+    slug: 'asly-tic-tac-toe-xo-gomoku',
+    title: 'Asly: Tic Tac Toe XO Gomoku',
+    studio: 'Asly Studio',
+    cat: 'Estrategia',
+    plats: ['iPhone', 'iPad'],
+    rating: 4.9, reviews: 500,
+    desc: 'Cinco formas de jugar al tres en raya en un tablero que por fin se siente bien bajo el pulgar.',
+    fps: 60, tech: 'Metal 2',
+    old: 0, price: 0, today: true,
+    own: true,
+    appId: '6788191425',
+    appStore: 'https://apps.apple.com/us/app/id6788191425',
+    bench: {
+      cpu: 'Cualquier dispositivo Apple reciente',
+      gfx: 'Metal 2',
+      rt: 'No',
+      battery: '9.5 / 10',
+      gamepad: 'Táctil',
+      storage: '0.2 GB'
+    },
+    pros: [
+      'Cinco modos de juego distintos: Ultimate, Gomoku, Misère y Blitz',
+      'Tableros flexibles de 3×3 hasta 5×5',
+      'IA sólida con tres niveles de dificultad'
+    ],
+    cons: [
+      'Se centra en un género clásico; puede no atraer a quien busca acción o RPG'
+    ],
+    verdict: [
+      'Asly toma el juego que todo el mundo conoce y le da cuatro vidas más — Ultimate, Gomoku, Misère y Blitz — con tableros que crecen de 3×3 a 5×5 y una IA que deja de ponértelo fácil.',
+      'Asly reinterpreta el clásico tres en raya con modos y tamaños de tablero variados, ofreciendo tanto partidas rápidas casuales como profundidad estratégica. Su tablero limpio y sin distracciones lo hace perfecto para jugar sobre la marcha.'
+    ]
+  },
+  {
+    slug: 'solitaire-klondike-spider',
+    title: 'Solitaire · Klondike & Spider',
+    studio: 'Solitaire Studio',
+    cat: 'Estrategia',
+    plats: ['iPhone', 'iPad', 'Mac'],
+    rating: 4.8, reviews: 18900,
+    desc: 'El clásico juego de cartas definitivo optimizado a 120 Hz ProMotion.',
+    fps: 120, tech: 'Metal 2.0',
+    old: 4.99, price: 0, today: true,
+    own: true,
+    appId: '1579977123',
+    appStore: 'https://apps.apple.com/us/app/id1579977123',
+    promo: 'SOLITAIRE-VIP-2026',
+    bench: {
+      cpu: 'Todos los iPhone e iPad con iOS 14.0 o posterior',
+      gfx: 'Metal 2.0',
+      rt: 'No',
+      battery: '10 / 10',
+      gamepad: 'Táctil, ratón, trackpad y teclado',
+      storage: '0.15 GB'
+    },
+    pros: [
+      'Animaciones de reparto y triunfo hiperfluidas a 120 Hz en pantallas ProMotion',
+      'Modos Klondike (1 o 3 cartas) y Spider (1, 2 o 4 palos) con pistas ilimitadas',
+      'Bajo consumo de batería y modo oscuro integrado adaptado a iOS'
+    ],
+    cons: [
+      'Enfocado en partidas casuales, sin modo multijugador en tiempo real'
+    ],
+    verdict: [
+      'Una experiencia pulida y relajante de los solitarios Klondike y Spider, con animaciones ultrafluidas a 120 Hz, temas personalizables y cero distracciones.',
+      'Esta versión aprovecha la renderización eficiente de Metal 2 en iOS y macOS para ofrecer respuesta táctil instantánea, animaciones de cartas a 120 FPS fijos y consumo mínimo de energía. Incluye desafíos diarios y soporte para ratón y trackpad en iPadOS y macOS.'
+    ]
+  },
+  {
+    slug: 'genshin-impact',
+    title: 'Genshin Impact',
+    studio: 'HoYoverse',
+    cat: 'RPG',
+    plats: ['iPhone', 'iPad', 'Mac'],
+    rating: 4.7, reviews: 325000,
+    desc: 'Aventura de mundo abierto a 120 FPS en iPad Pro y iPhone 16 Pro.',
+    fps: 115, tech: 'Metal 3 + MetalFX Spatial',
+    old: 0, price: 0, today: true,
+    promo: 'GENSHIN-APPLE-GIFT',
+    bench: {
+      cpu: 'A17 Pro / A18 Pro / M1 o superior',
+      gfx: 'Metal 3 + MetalFX Spatial',
+      rt: 'No',
+      battery: '7.9 / 10',
+      gamepad: 'DualSense, Xbox Series X, táctil',
+      storage: '31.8 GB'
+    },
+    pros: [
+      'Modo gráfico a 120 FPS único en la App Store para dispositivos Apple Pro',
+      'Sincronización de progreso multiplataforma mediante HoYoverse Pass',
+      'Soporte completo para mandos DualSense y Xbox Wireless Controller'
+    ],
+    cons: [
+      'Requiere más de 30 GB tras descargar todos los datos',
+      'Consumo térmico elevado en sesiones largas a máxima tasa de refresco'
+    ],
+    verdict: [
+      'Explora el vasto mundo de Teyvat en este RPG de acción con gráficos anime de vanguardia y soporte exclusivo de 120 FPS en dispositivos con Apple Silicon.',
+      'HoYoverse trabajó junto a ingenieros de Apple para desbloquear el modo exclusivo de 120 FPS en iPad Pro M2/M4 e iPhone 15/16 Pro. Las sombras de alta definición y la distancia de dibujado compiten directamente con consolas de última generación.'
+    ]
+  }
+];
+
+const DEVICES = [
+  { name: 'iPhone 16 Pro Max', os: 'iOS 18.2', game: "Death Stranding Director's Cut", when: 'Hace 5 minutos' },
+  { name: 'MacBook Pro 16" (M4 Max)', os: 'macOS Sequoia 15.1', game: 'Lies of P', when: 'Hace 1 hora' },
+  { name: 'iPad Pro 13" (M4 ProMotion)', os: 'iPadOS 18.2', game: 'Fantasian Neo Dimension', when: 'Ayer' }
+];
+
+module.exports = { SITE, GAMES, DEVICES };

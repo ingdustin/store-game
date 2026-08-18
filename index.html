@@ -4,681 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Store Gaming Tech · Cuatro Señales</title>
-<meta name="description" content="Reseñas técnicas, benchmarks de FPS en chips M-series y A18 Pro, y ofertas exclusivas de juegos para iOS, iPadOS y macOS.">
-<style>
-  :root {
-    --bg: #0b0d12;
-    --bg-elev: #12151d;
-    --card: #161a24;
-    --card-hover: #1c2130;
-    --line: #252b3a;
-    --line-soft: #1e2330;
-    --text: #e8ebf2;
-    --text-dim: #9aa3b8;
-    --text-mute: #6b7488;
-    --accent: #3b82f6;
-    --accent-soft: rgba(59, 130, 246, .14);
-    --green: #22c55e;
-    --green-soft: rgba(34, 197, 94, .14);
-    --amber: #f59e0b;
-    --red: #ef4444;
-    --purple: #a855f7;
-    --radius: 14px;
-    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
-
-  * { box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  a { color: inherit; text-decoration: none; }
-  button { font: inherit; color: inherit; cursor: pointer; }
-
-  .wrap {
-    width: 100%;
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* ---------- Barra de espectro superior ---------- */
-  .spectrum {
-    height: 4px;
-    background: linear-gradient(90deg,
-      #61bb46 0%, #fdb827 20%, #f5821f 40%,
-      #e03a3e 60%, #963d97 80%, #009ddc 100%);
-  }
-
-  /* ---------- Header ---------- */
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(11, 13, 18, .88);
-    backdrop-filter: saturate(180%) blur(16px);
-    -webkit-backdrop-filter: saturate(180%) blur(16px);
-    border-bottom: 1px solid var(--line-soft);
-  }
-
-  .topbar {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    padding: 12px 0;
-  }
-
-  .brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
-
-  .logo {
-    width: 38px; height: 38px;
-    border-radius: 10px;
-    background: linear-gradient(140deg, #ffffff 0%, #ffffff 48%, #2a2f3d 48%, #2a2f3d 100%);
-    display: grid; place-items: center;
-    font-weight: 800; font-size: 17px; color: #0b0d12;
-    box-shadow: 0 0 0 1px var(--line);
-  }
-
-  .brand-name {
-    font-size: 17px; font-weight: 700; letter-spacing: -.3px;
-    display: flex; align-items: center; gap: 8px;
-    white-space: nowrap;
-  }
-
-  .brand-tag {
-    font-family: var(--mono);
-    font-size: 9px; font-weight: 700; letter-spacing: .12em;
-    color: var(--green);
-    background: var(--green-soft);
-    border: 1px solid rgba(34, 197, 94, .3);
-    border-radius: 5px;
-    padding: 2px 6px;
-  }
-
-  .brand-sub {
-    font-family: var(--mono);
-    font-size: 9.5px; letter-spacing: .1em;
-    color: var(--text-mute);
-    text-transform: uppercase;
-  }
-
-  .search {
-    flex: 1;
-    min-width: 0;
-    max-width: 340px;
-    position: relative;
-  }
-
-  .search input {
-    width: 100%;
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 9px 14px 9px 36px;
-    color: var(--text);
-    font-size: 13px;
-    outline: none;
-    transition: border-color .18s, box-shadow .18s;
-  }
-
-  .search input::placeholder { color: var(--text-mute); }
-
-  .search input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-soft);
-  }
-
-  .search svg {
-    position: absolute;
-    left: 13px; top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-mute);
-    pointer-events: none;
-  }
-
-  .header-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
-
-  .continuity {
-    display: flex; align-items: center; gap: 7px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--green);
-    background: var(--green-soft);
-    border: 1px solid rgba(34, 197, 94, .25);
-    border-radius: 999px;
-    padding: 6px 13px;
-    white-space: nowrap;
-  }
-
-  .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, .6);
-    animation: pulse 2.2s infinite;
-  }
-
-  @keyframes pulse {
-    70% { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-  }
-
-  .bell {
-    position: relative;
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    background: var(--bg-elev);
-    display: grid; place-items: center;
-  }
-
-  .bell span {
-    position: absolute;
-    top: -3px; right: -3px;
-    background: var(--red);
-    color: #fff;
-    font-size: 10px; font-weight: 700;
-    min-width: 17px; height: 17px;
-    border-radius: 50%;
-    display: grid; place-items: center;
-    border: 2px solid var(--bg);
-  }
-
-  .profile {
-    display: flex; align-items: center; gap: 9px;
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 5px 12px 5px 5px;
-    white-space: nowrap;
-  }
-
-  .avatar {
-    width: 27px; height: 27px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--purple));
-    display: grid; place-items: center;
-    font-size: 11px; font-weight: 700; color: #fff;
-  }
-
-  .profile-name { font-size: 13px; font-weight: 600; }
-
-  .level {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent);
-    background: var(--accent-soft);
-    border-radius: 5px;
-    padding: 2px 6px;
-  }
-
-  /* ---------- Navegación ---------- */
-  nav {
-    border-top: 1px solid var(--line-soft);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  nav::-webkit-scrollbar { display: none; }
-
-  .nav-inner { display: flex; gap: 6px; padding: 9px 0; }
-
-  .nav-link {
-    display: flex; align-items: center; gap: 7px;
-    font-size: 13px; font-weight: 500;
-    color: var(--text-dim);
-    padding: 8px 13px;
-    border-radius: 9px;
-    white-space: nowrap;
-    transition: background .18s, color .18s;
-  }
-
-  .nav-link:hover { background: var(--card); color: var(--text); }
-
-  .nav-link.active {
-    background: var(--accent-soft);
-    color: #7cb0ff;
-    box-shadow: inset 0 0 0 1px rgba(59, 130, 246, .3);
-  }
-
-  .nav-badge {
-    font-family: var(--mono);
-    font-size: 9px; font-weight: 700;
-    color: var(--red);
-    background: rgba(239, 68, 68, .16);
-    border-radius: 4px;
-    padding: 1px 5px;
-  }
-
-  /* ---------- Hero ---------- */
-  .hero {
-    margin: 26px 0;
-    padding: 44px 40px;
-    border-radius: 22px;
-    border: 1px solid var(--line);
-    background:
-      radial-gradient(900px 380px at 88% -10%, rgba(59, 130, 246, .16), transparent 62%),
-      radial-gradient(600px 300px at 8% 110%, rgba(168, 85, 247, .1), transparent 60%),
-      linear-gradient(160deg, #141824, #0f1219);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--mono);
-    font-size: 11px; letter-spacing: .14em;
-    color: var(--green);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .hero h1 {
-    margin: 0 0 18px;
-    font-size: clamp(30px, 5.2vw, 52px);
-    line-height: 1.08;
-    letter-spacing: -1.6px;
-    font-weight: 800;
-    max-width: 15ch;
-  }
-
-  .hero h1 .grad {
-    background: linear-gradient(92deg, #3b82f6, #60a5fa 45%, #a855f7);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .hero p {
-    margin: 0 0 26px;
-    color: var(--text-dim);
-    font-size: 15px;
-    max-width: 62ch;
-  }
-
-  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-
-  .chip {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--text-dim);
-    background: rgba(255, 255, 255, .04);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 7px 12px;
-  }
-
-  /* ---------- Filtros ---------- */
-  .filters {
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 14px 18px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px 18px;
-    margin-bottom: 12px;
-  }
-
-  .filter-group { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-
-  .filter-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-mute);
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    margin-right: 2px;
-  }
-
-  .pill {
-    font-size: 12.5px;
-    color: var(--text-dim);
-    background: transparent;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 6px 13px;
-    transition: all .16s;
-  }
-
-  .pill:hover { border-color: #38405a; color: var(--text); }
-
-  .pill[aria-pressed="true"] {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-    font-weight: 600;
-  }
-
-  .sort-wrap { margin-left: auto; display: flex; align-items: center; gap: 9px; }
-
-  select {
-    background: var(--card);
-    color: var(--text);
-    border: 1px solid var(--line);
-    border-radius: 9px;
-    padding: 7px 11px;
-    font-size: 12.5px;
-    outline: none;
-    cursor: pointer;
-  }
-
-  select:focus { border-color: var(--accent); }
-
-  .result-count {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-mute);
-    margin: 0 0 20px;
-  }
-
-  .result-count b { color: var(--text); font-weight: 600; }
-
-  /* ---------- Grid de juegos ---------- */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 18px;
-  }
-
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-    transition: transform .2s ease, border-color .2s ease, background .2s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-3px);
-    border-color: #39425c;
-    background: var(--card-hover);
-  }
-
-  .card-top { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-
-  .badge {
-    font-family: var(--mono);
-    font-size: 9.5px; font-weight: 700;
-    letter-spacing: .05em;
-    border-radius: 5px;
-    padding: 3px 7px;
-    text-transform: uppercase;
-  }
-
-  .badge-discount { background: rgba(239, 68, 68, .16); color: #fca5a5; border: 1px solid rgba(239, 68, 68, .3); }
-  .badge-free     { background: var(--green-soft); color: #86efac; border: 1px solid rgba(34, 197, 94, .32); }
-  .badge-arcade   { background: rgba(168, 85, 247, .15); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, .32); }
-  .badge-cat      { background: rgba(255, 255, 255, .05); color: var(--text-dim); border: 1px solid var(--line); }
-
-  .studio-row {
-    display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
-  }
-
-  .studio {
-    font-size: 11.5px;
-    color: var(--text-mute);
-    font-family: var(--mono);
-    line-height: 1.4;
-  }
-
-  .rating { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
-  .rating .score { font-size: 14px; font-weight: 700; color: var(--amber); }
-  .rating .count { font-size: 11px; color: var(--text-mute); font-family: var(--mono); }
-
-  .card h3 {
-    margin: 0;
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: -.35px;
-    line-height: 1.25;
-  }
-
-  .card .desc {
-    margin: 0;
-    font-size: 13px;
-    color: var(--text-dim);
-    flex: 1;
-  }
-
-  .tech-row { display: flex; flex-wrap: wrap; gap: 7px; }
-
-  .tech {
-    font-family: var(--mono);
-    font-size: 10.5px;
-    padding: 4px 9px;
-    border-radius: 6px;
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, .03);
-    color: var(--text-dim);
-  }
-
-  .tech.fps { color: #7cb0ff; border-color: rgba(59, 130, 246, .3); background: var(--accent-soft); }
-
-  .price-row {
-    display: flex; align-items: baseline; gap: 9px;
-    padding-top: 13px;
-    border-top: 1px solid var(--line-soft);
-  }
-
-  .price-old {
-    font-size: 13px;
-    color: var(--text-mute);
-    text-decoration: line-through;
-  }
-
-  .price-new { font-size: 19px; font-weight: 800; letter-spacing: -.4px; }
-  .price-new.free { color: var(--green); }
-
-  .cta {
-    width: 100%;
-    background: var(--accent);
-    border: none;
-    border-radius: 10px;
-    padding: 11px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #fff;
-    transition: background .18s, transform .12s;
-  }
-
-  .cta:hover { background: #2f74e8; }
-  .cta:active { transform: scale(.985); }
-
-  .empty {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text-mute);
-    font-family: var(--mono);
-    font-size: 13px;
-    border: 1px dashed var(--line);
-    border-radius: var(--radius);
-  }
-
-  /* ---------- Sincronización ---------- */
-  .sync {
-    margin: 56px 0 40px;
-    padding: 40px;
-    border-radius: 22px;
-    border: 1px solid var(--line);
-    background:
-      radial-gradient(700px 320px at 92% 0%, rgba(34, 197, 94, .1), transparent 60%),
-      linear-gradient(160deg, #141824, #0f1219);
-  }
-
-  .sync-head {
-    display: flex; flex-wrap: wrap; gap: 20px;
-    align-items: flex-end; justify-content: space-between;
-    margin-bottom: 30px;
-  }
-
-  .sync h2 {
-    margin: 0 0 10px;
-    font-size: clamp(22px, 3.4vw, 32px);
-    letter-spacing: -.9px;
-    font-weight: 800;
-  }
-
-  .sync p { margin: 0; color: var(--text-dim); max-width: 55ch; font-size: 14px; }
-
-  .sync-btn {
-    background: var(--green);
-    border: none;
-    border-radius: 10px;
-    padding: 12px 20px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #06240f;
-    white-space: nowrap;
-    transition: background .18s, opacity .18s;
-  }
-
-  .sync-btn:hover { background: #16a34a; }
-  .sync-btn:disabled { opacity: .6; cursor: default; }
-
-  .devices {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-  }
-
-  .device {
-    background: rgba(255, 255, 255, .03);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 18px;
-  }
-
-  .device-status {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--mono);
-    font-size: 10.5px;
-    color: var(--green);
-    margin-bottom: 12px;
-  }
-
-  .device h4 { margin: 0 0 3px; font-size: 15px; font-weight: 700; }
-
-  .device .os {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-mute);
-    margin: 0 0 14px;
-  }
-
-  .device .label {
-    font-size: 11px;
-    color: var(--text-mute);
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    margin: 0 0 3px;
-  }
-
-  .device .last-game { margin: 0 0 12px; font-size: 13.5px; font-weight: 600; color: #7cb0ff; }
-
-  .device .when {
-    margin: 0;
-    font-family: var(--mono);
-    font-size: 10.5px;
-    color: var(--text-mute);
-    padding-top: 12px;
-    border-top: 1px solid var(--line-soft);
-  }
-
-  /* ---------- Footer ---------- */
-  footer {
-    border-top: 1px solid var(--line-soft);
-    padding: 30px 0 44px;
-    margin-top: 20px;
-  }
-
-  .footer-inner {
-    display: flex; flex-wrap: wrap; gap: 16px;
-    align-items: center; justify-content: space-between;
-  }
-
-  .footer-inner p {
-    margin: 0;
-    font-size: 12px;
-    color: var(--text-mute);
-    max-width: 68ch;
-  }
-
-  .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
-
-  .footer-links a {
-    font-size: 12.5px;
-    color: var(--text-dim);
-    transition: color .16s;
-  }
-
-  .footer-links a:hover { color: var(--text); }
-
-  /* ---------- Responsive ---------- */
-  @media (max-width: 900px) {
-    .search { display: none; }
-    .continuity { display: none; }
-    .brand-sub { display: none; }
-    .profile-name { display: none; }
-    .hero { padding: 34px 24px; }
-    .sync { padding: 28px 22px; }
-  }
-
-  @media (max-width: 560px) {
-    .level { display: none; }
-    .profile { border: none; background: transparent; padding: 0; }
-    .hero { padding: 28px 20px; border-radius: 18px; }
-    .grid { grid-template-columns: 1fr; }
-    .sort-wrap { margin-left: 0; width: 100%; }
-    .filters { padding: 14px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-    html { scroll-behavior: auto; }
-  }
-</style>
+<meta name="description" content="Reseñas técnicas, benchmarks de FPS en chips M-series y A18 Pro, y ofertas de juegos para iOS, iPadOS y macOS.">
+<link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-
 <div class="spectrum"></div>
 
 <header>
   <div class="wrap">
     <div class="topbar">
-      <a class="brand" href="#">
+      <a class="brand" href="index.html">
         <div class="logo">S</div>
         <div>
           <div class="brand-name">Store Gaming <span class="brand-tag">TECH</span></div>
           <div class="brand-sub">Sistema Cuatro Señales · Ing. Dustin Díaz</div>
         </div>
       </a>
-
       <div class="search">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
         </svg>
         <input id="search" type="search" placeholder="Buscar juegos, M-series, Ray Tracing…" aria-label="Buscar juegos">
       </div>
-
       <div class="header-right">
         <div class="continuity"><span class="dot"></span> Continuidad: iPhone 16 Pro Max</div>
         <button class="bell" aria-label="Notificaciones">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/>
           </svg>
           <span>2</span>
@@ -691,24 +42,22 @@
       </div>
     </div>
   </div>
-
   <nav>
     <div class="wrap">
       <div class="nav-inner">
-        <a class="nav-link active" href="#catalogo">🎮 Espacio Juegos</a>
-        <a class="nav-link" href="#catalogo">🏷️ Ofertas Exclusivas <span class="nav-badge">HOY</span></a>
-        <a class="nav-link" href="#catalogo">📰 Lanzamientos &amp; News</a>
-        <a class="nav-link" href="#catalogo">💬 Foro Comunidad</a>
-        <a class="nav-link" href="#sync">✨ Mi Perfil &amp; Logros</a>
-        <a class="nav-link" href="#catalogo">📊 Marketing App Store</a>
-        <a class="nav-link" href="#legal">📄 Términos</a>
+        <a class="nav-link active" href="index.html">🎮 Espacio Juegos</a>
+        <a class="nav-link" href="index.html#catalogo">🏷️ Ofertas Exclusivas <span class="nav-badge">HOY</span></a>
+        <a class="nav-link" href="index.html#catalogo">📰 Lanzamientos &amp; News</a>
+        <a class="nav-link" href="index.html#catalogo">💬 Foro Comunidad</a>
+        <a class="nav-link" href="index.html#sync">✨ Mi Perfil &amp; Logros</a>
+        <a class="nav-link" href="index.html#catalogo">📊 Marketing App Store</a>
+        <a class="nav-link" href="index.html#legal">📄 Legal</a>
       </div>
     </div>
   </nav>
 </header>
 
 <main class="wrap">
-
   <section class="hero">
     <div class="eyebrow">✳ Espacio tecnológico especializado · App Store</div>
     <h1>Descubre los mejores juegos promocionados con <span class="grad">Rendimiento Técnico Pro</span></h1>
@@ -722,9 +71,7 @@
 
   <section id="catalogo">
     <div class="filters">
-      <div class="filter-group" id="cat-filters">
-        <span class="filter-label">Categoría:</span>
-      </div>
+      <div class="filter-group" id="cat-filters"><span class="filter-label">Categoría:</span></div>
       <div class="sort-wrap">
         <span class="filter-label">Ordenar por:</span>
         <select id="sort" aria-label="Ordenar por">
@@ -734,11 +81,8 @@
           <option value="price">💲 Menor Precio</option>
         </select>
       </div>
-      <div class="filter-group" id="plat-filters" style="flex-basis:100%">
-        <span class="filter-label">Plataforma:</span>
-      </div>
+      <div class="filter-group" id="plat-filters" style="flex-basis:100%"><span class="filter-label">Plataforma:</span></div>
     </div>
-
     <p class="result-count" id="count"></p>
     <div class="grid" id="grid"></div>
   </section>
@@ -752,56 +96,79 @@
       </div>
       <button class="sync-btn" id="sync-btn">Forzar Sincronización Cloud</button>
     </div>
-    <div class="devices" id="devices"></div>
+    <div class="devices">
+      <div class="device">
+        <span class="device-status"><span class="dot"></span> Sincronizado</span>
+        <h4>iPhone 16 Pro Max</h4>
+        <p class="os">iOS 18.2</p>
+        <p class="label">Último juego en sesión</p>
+        <p class="last-game">Death Stranding Director's Cut</p>
+        <p class="when">Última actividad: Hace 5 minutos</p>
+      </div>
+      <div class="device">
+        <span class="device-status"><span class="dot"></span> Sincronizado</span>
+        <h4>MacBook Pro 16&quot; (M4 Max)</h4>
+        <p class="os">macOS Sequoia 15.1</p>
+        <p class="label">Último juego en sesión</p>
+        <p class="last-game">Lies of P</p>
+        <p class="when">Última actividad: Hace 1 hora</p>
+      </div>
+      <div class="device">
+        <span class="device-status"><span class="dot"></span> Sincronizado</span>
+        <h4>iPad Pro 13&quot; (M4 ProMotion)</h4>
+        <p class="os">iPadOS 18.2</p>
+        <p class="label">Último juego en sesión</p>
+        <p class="last-game">Fantasian Neo Dimension</p>
+        <p class="when">Última actividad: Ayer</p>
+      </div>
+    </div>
   </section>
-
 </main>
 
 <footer id="legal">
-  <div class="wrap footer-inner">
-    <p>© 2026 Store Gaming Tech · Cuatro Señales. Sitio independiente de reseñas técnicas. No afiliado ni asociado con Apple Inc. Todas las marcas y nombres de juegos pertenecen a sus respectivos propietarios. Precios y descuentos con fines demostrativos.</p>
-    <div class="footer-links">
-      <a href="#legal">Términos</a>
-      <a href="#legal">Privacidad</a>
-      <a href="#catalogo">Contacto</a>
+  <div class="wrap">
+    <div class="footer-cols">
+      <div>
+        <h4>Store Gaming Tech</h4>
+        <p>Espacio tecnológico de reseñas, rendimiento en Apple Silicon, lanzamientos y ofertas de la App Store.</p>
+      </div>
+      <div>
+        <h4>Sistema de identidad Cuatro Señales</h4>
+        <ul>
+          <li><a href="https://ingdustindiaz.com" rel="noopener">ingdustindiaz.com</a></li>
+          <li><a href="mailto:info@ddagencia.com">info@ddagencia.com</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4>Legal por aplicación</h4>
+        <ul>
+          <li><a href="index.html#catalogo">Cada juego incluye su propia URL</a></li>
+          <li><a href="juegos/deducta-sudoku/privacidad.html">Ejemplo: privacidad de Deducta Sudoku</a></li>
+          <li><a href="juegos/deducta-sudoku/terminos.html">Ejemplo: términos de Deducta Sudoku</a></li>
+          <li><a href="juegos/deducta-sudoku/contacto.html">Ejemplo: soporte de Deducta Sudoku</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Ing. Dustin Díaz. Sitio independiente de reseñas técnicas, no afiliado ni asociado con Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX y Apple Arcade son marcas registradas de Apple Inc. Los nombres de juegos y estudios pertenecen a sus respectivos propietarios. Precios, descuentos y códigos con fines demostrativos.</p>
+      <span class="status"><span class="dot"></span> Estado del servidor: activo</span>
     </div>
   </div>
 </footer>
 
 <script>
-const GAMES = [
-  { title: "Hades · Netflix Edition", studio: "Supergiant Games", cat: "Acción", plats: ["iPhone","iPad","Mac"], rating: 9.9, reviews: 4500, desc: "El galardonado roguelike de acción rápida en tu iPhone.", fps: 60, tech: "Metal 3", old: 24.99, price: 0, arcade: false, today: true },
-  { title: "Sneaky Sasquatch", studio: "RAC7 Games", cat: "Aventura", plats: ["iPhone","iPad","Mac","Apple Arcade"], rating: 9.9, reviews: 15400, desc: "La vida cotidiana de un Bigfoot en el ecosistema Apple.", fps: 120, tech: "Metal 2", old: 4.99, price: 0, arcade: true, exclusive: true },
-  { title: "Resident Evil 4 Remake", studio: "Capcom", cat: "Acción", plats: ["iPhone","iPad","Mac"], rating: 9.8, reviews: 2890, desc: "Terror de supervivencia con trazado de rayos nativo.", fps: 58, tech: "Metal 3 + Hardware Ray Tracing", old: 59.99, price: 29.99 },
-  { title: "Lies of P", studio: "NEOWIZ / Round8 Studio", cat: "RPG", plats: ["Mac","iPad"], rating: 9.8, reviews: 3400, desc: "El aclamado Soulslike victoriano optimizado para Mac M3/M4.", fps: 110, tech: "Metal 3 + Fast Geometry Pipeline", old: 59.99, price: 39.99 },
-  { title: "Death Stranding Director's Cut", studio: "505 Games / Kojima Productions", cat: "Aventura", plats: ["iPhone","iPad","Mac"], rating: 9.7, reviews: 1420, desc: "El viaje definitivo de Kojima en Apple Silicon.", fps: 60, tech: "Metal 3 + MetalFX Temporal", old: 39.99, price: 19.99 },
-  { title: "Fantasian Neo Dimension", studio: "Mistwalker / Square Enix", cat: "RPG", plats: ["iPhone","iPad","Mac","Apple Arcade"], rating: 9.5, reviews: 3120, desc: "El JRPG hecho a mano por el creador de Final Fantasy.", fps: 120, tech: "Metal 2.4", old: 19.99, price: 0, arcade: true },
-  { title: "GRID Legends Deluxe Edition", studio: "Feral Interactive / Codemasters", cat: "Simulación", plats: ["Mac","iPad"], rating: 9.4, reviews: 880, desc: "Carreras automovilísticas a alta velocidad con MetalFX.", fps: 90, tech: "Metal 3", old: 39.99, price: 14.99 },
-  { title: "Assassin's Creed Mirage", studio: "Ubisoft", cat: "Aventura", plats: ["iPhone","iPad","Mac"], rating: 9.3, reviews: 1100, desc: "Sigilo clásico en Bagdad del siglo IX para iOS y Mac.", fps: 45, tech: "Metal 3 + MetalFX Spatial", old: 49.99, price: 24.99 },
-  { title: "Deducta Sudoku", studio: "Ing. Dustin Díaz · Cuatro Señales", cat: "Estrategia", plats: ["iPhone","iPad","Mac","Vision Pro"], rating: 4.9, reviews: 15400, desc: "El desafío de deducción matemática y lógica para Apple Silicon.", fps: 120, tech: "Metal 3 Nativo", old: 2.99, price: 0, today: true },
-  { title: "Monument Valley 2", studio: "ustwo games", cat: "Estrategia", plats: ["iPhone","iPad","Apple Arcade"], rating: 4.9, reviews: 48900, desc: "Una deslumbrante aventura de rompecabezas de geometría imposible.", fps: 120, tech: "Metal 2", old: 4.99, price: 1.99, arcade: true },
-  { title: "Asly: Tic Tac Toe XO Gomoku", studio: "Asly Studio", cat: "Estrategia", plats: ["iPhone","iPad"], rating: 4.9, reviews: 500, desc: "Cinco formas de jugar al tres en raya en un tablero que por fin se siente bien bajo el pulgar.", fps: 60, tech: "Metal 2", old: 0, price: 0, today: true },
-  { title: "Solitaire · Klondike & Spider", studio: "Solitaire Studio", cat: "Estrategia", plats: ["iPhone","iPad","Mac"], rating: 4.8, reviews: 18900, desc: "El clásico juego de cartas definitivo optimizado a 120Hz ProMotion.", fps: 120, tech: "Metal 2.0", old: 4.99, price: 0, today: true },
-  { title: "Genshin Impact", studio: "HoYoverse", cat: "RPG", plats: ["iPhone","iPad","Mac"], rating: 4.7, reviews: 325000, desc: "Aventura de mundo abierto a 120 FPS en iPad Pro y iPhone 16 Pro.", fps: 115, tech: "Metal 3 + MetalFX Spatial", old: 0, price: 0, today: true }
-];
-
-const CATEGORIES = ["Todos", "Acción", "RPG", "Estrategia", "Arcade", "Simulación", "Aventura", "Exclusivo Apple"];
-const PLATFORMS  = ["Todas", "iPhone", "iPad", "Mac", "Vision Pro", "Apple Arcade"];
-
-const DEVICES = [
-  { name: 'iPhone 16 Pro Max', os: 'iOS 18.2', game: "Death Stranding Director's Cut", when: 'Hace 5 minutos' },
-  { name: 'MacBook Pro 16" (M4 Max)', os: 'macOS Sequoia 15.1', game: 'Lies of P', when: 'Hace 1 hora' },
-  { name: 'iPad Pro 13" (M4 ProMotion)', os: 'iPadOS 18.2', game: 'Fantasian Neo Dimension', when: 'Ayer' }
-];
-
+const GAMES = [{"slug":"hades-netflix-edition","title":"Hades · Netflix Edition","studio":"Supergiant Games","cat":"Acción","plats":["iPhone","iPad"],"rating":9.9,"reviews":4500,"desc":"El galardonado roguelike de acción rápida en tu iPhone.","fps":60,"tech":"Metal 3","old":24.99,"price":0,"arcade":false,"exclusive":false,"today":true,"own":false},{"slug":"sneaky-sasquatch","title":"Sneaky Sasquatch","studio":"RAC7 Games","cat":"Aventura","plats":["iPhone","iPad","Mac","Apple Arcade"],"rating":9.9,"reviews":15400,"desc":"La vida cotidiana de un Bigfoot en el ecosistema Apple.","fps":120,"tech":"Metal 2","old":4.99,"price":0,"arcade":true,"exclusive":true,"today":false,"own":false},{"slug":"resident-evil-4-remake","title":"Resident Evil 4 Remake","studio":"Capcom","cat":"Acción","plats":["iPhone","iPad","Mac"],"rating":9.8,"reviews":2890,"desc":"Terror de supervivencia con trazado de rayos nativo.","fps":58,"tech":"Metal 3 + Hardware Ray Tracing","old":59.99,"price":29.99,"arcade":false,"exclusive":false,"today":false,"own":false},{"slug":"lies-of-p","title":"Lies of P","studio":"NEOWIZ / Round8 Studio","cat":"RPG","plats":["Mac","Vision Pro"],"rating":9.8,"reviews":3400,"desc":"El aclamado Soulslike victoriano optimizado para Mac M3/M4.","fps":110,"tech":"Metal 3 + Fast Geometry Pipeline","old":59.99,"price":39.99,"arcade":false,"exclusive":false,"today":false,"own":false},{"slug":"death-stranding-directors-cut","title":"Death Stranding Director's Cut","studio":"505 Games / Kojima Productions","cat":"Aventura","plats":["iPhone","iPad","Mac"],"rating":9.7,"reviews":1420,"desc":"El viaje definitivo de Kojima en Apple Silicon.","fps":60,"tech":"Metal 3 + MetalFX Temporal","old":39.99,"price":19.99,"arcade":false,"exclusive":false,"today":false,"own":false},{"slug":"fantasian-neo-dimension","title":"Fantasian Neo Dimension","studio":"Mistwalker / Square Enix","cat":"RPG","plats":["iPhone","iPad","Mac","Apple Arcade"],"rating":9.5,"reviews":3120,"desc":"El JRPG hecho a mano por el creador de Final Fantasy.","fps":120,"tech":"Metal 2.4","old":19.99,"price":0,"arcade":true,"exclusive":false,"today":false,"own":false},{"slug":"grid-legends-deluxe-edition","title":"GRID Legends Deluxe Edition","studio":"Feral Interactive / Codemasters","cat":"Simulación","plats":["Mac","iPad"],"rating":9.4,"reviews":880,"desc":"Carreras automovilísticas a alta velocidad con MetalFX.","fps":90,"tech":"Metal 3","old":39.99,"price":14.99,"arcade":false,"exclusive":false,"today":false,"own":false},{"slug":"assassins-creed-mirage","title":"Assassin's Creed Mirage","studio":"Ubisoft","cat":"Aventura","plats":["iPhone","iPad","Mac"],"rating":9.3,"reviews":1100,"desc":"Sigilo clásico en Bagdad del siglo IX para iOS y Mac.","fps":45,"tech":"Metal 3 + MetalFX Spatial","old":49.99,"price":24.99,"arcade":false,"exclusive":false,"today":false,"own":false},{"slug":"deducta-sudoku","title":"Deducta Sudoku","studio":"Ing. Dustin Díaz · Cuatro Señales","cat":"Estrategia","plats":["iPhone","iPad","Mac","Vision Pro"],"rating":4.9,"reviews":15400,"desc":"El desafío de deducción matemática y lógica para Apple Silicon.","fps":120,"tech":"Metal 3 Nativo","old":2.99,"price":0,"arcade":false,"exclusive":false,"today":true,"own":true},{"slug":"monument-valley-2","title":"Monument Valley 2","studio":"ustwo games","cat":"Estrategia","plats":["iPhone","iPad","Apple Arcade"],"rating":4.9,"reviews":48900,"desc":"Una deslumbrante aventura de rompecabezas de geometría imposible.","fps":120,"tech":"Metal 2","old":4.99,"price":1.99,"arcade":true,"exclusive":false,"today":false,"own":false},{"slug":"asly-tic-tac-toe-xo-gomoku","title":"Asly: Tic Tac Toe XO Gomoku","studio":"Asly Studio","cat":"Estrategia","plats":["iPhone","iPad"],"rating":4.9,"reviews":500,"desc":"Cinco formas de jugar al tres en raya en un tablero que por fin se siente bien bajo el pulgar.","fps":60,"tech":"Metal 2","old":0,"price":0,"arcade":false,"exclusive":false,"today":true,"own":true},{"slug":"solitaire-klondike-spider","title":"Solitaire · Klondike & Spider","studio":"Solitaire Studio","cat":"Estrategia","plats":["iPhone","iPad","Mac"],"rating":4.8,"reviews":18900,"desc":"El clásico juego de cartas definitivo optimizado a 120 Hz ProMotion.","fps":120,"tech":"Metal 2.0","old":4.99,"price":0,"arcade":false,"exclusive":false,"today":true,"own":true},{"slug":"genshin-impact","title":"Genshin Impact","studio":"HoYoverse","cat":"RPG","plats":["iPhone","iPad","Mac"],"rating":4.7,"reviews":325000,"desc":"Aventura de mundo abierto a 120 FPS en iPad Pro y iPhone 16 Pro.","fps":115,"tech":"Metal 3 + MetalFX Spatial","old":0,"price":0,"arcade":false,"exclusive":false,"today":true,"own":false}];
+const CATEGORIES = ["Todos","Acción","RPG","Estrategia","Arcade","Simulación","Aventura","Exclusivo Apple"];
+const PLATFORMS  = ["Todas","iPhone","iPad","Mac","Vision Pro","Apple Arcade"];
 const state = { cat: "Todos", plat: "Todas", sort: "rating", q: "" };
 
 const discountOf = g => g.old > 0 ? Math.round((1 - g.price / g.old) * 100) : 0;
 const money = n => "$" + n.toFixed(2);
-const fmtReviews = n => n.toLocaleString("es-ES");
+const fmt = n => n.toLocaleString("es-ES");
 
-function buildPills(containerId, values, key) {
-  const box = document.getElementById(containerId);
+function buildPills(id, values, key) {
+  const box = document.getElementById(id);
   values.forEach(v => {
     const b = document.createElement("button");
     b.className = "pill";
@@ -809,8 +176,7 @@ function buildPills(containerId, values, key) {
     b.setAttribute("aria-pressed", state[key] === v);
     b.addEventListener("click", () => {
       state[key] = v;
-      box.querySelectorAll(".pill").forEach(p =>
-        p.setAttribute("aria-pressed", p.textContent === v));
+      box.querySelectorAll(".pill").forEach(p => p.setAttribute("aria-pressed", p.textContent === v));
       render();
     });
     box.appendChild(b);
@@ -818,18 +184,12 @@ function buildPills(containerId, values, key) {
 }
 
 function matches(g) {
-  const catOk =
-    state.cat === "Todos" ||
-    (state.cat === "Arcade" ? g.arcade === true :
-     state.cat === "Exclusivo Apple" ? g.exclusive === true :
-     g.cat === state.cat);
-
+  const catOk = state.cat === "Todos" ||
+    (state.cat === "Arcade" ? g.arcade :
+     state.cat === "Exclusivo Apple" ? g.exclusive : g.cat === state.cat);
   const platOk = state.plat === "Todas" || g.plats.includes(state.plat);
-
   const q = state.q.trim().toLowerCase();
-  const textOk = !q || [g.title, g.studio, g.tech, g.desc, g.cat]
-    .join(" ").toLowerCase().includes(q);
-
+  const textOk = !q || [g.title, g.studio, g.tech, g.desc, g.cat].join(" ").toLowerCase().includes(q);
   return catOk && platOk && textOk;
 }
 
@@ -841,84 +201,47 @@ const SORTERS = {
 };
 
 function cardHTML(g) {
-  const off = discountOf(g);
-  const badges = [];
-  if (off > 0) badges.push(`<span class="badge badge-discount">-${off}% dto</span>`);
-  if (g.today) badges.push(`<span class="badge badge-free">¡Gratis hoy!</span>`);
-  if (g.arcade) badges.push(`<span class="badge badge-arcade">Apple Arcade</span>`);
-  if (g.exclusive) badges.push(`<span class="badge badge-arcade">Exclusivo Apple</span>`);
-  badges.push(`<span class="badge badge-cat">${g.cat}</span>`);
-
-  const priceOld = g.old > g.price ? `<span class="price-old">${money(g.old)}</span>` : "";
-  const priceNew = g.price === 0
-    ? `<span class="price-new free">GRATIS</span>`
-    : `<span class="price-new">${money(g.price)}</span>`;
-
-  return `
-    <article class="card">
-      <div class="card-top">${badges.join("")}</div>
-      <div class="studio-row">
-        <span class="studio">${g.studio}</span>
-        <span class="rating">
-          <span class="score">${g.rating.toFixed(1)}</span>
-          <span class="count">(${fmtReviews(g.reviews)})</span>
-        </span>
-      </div>
-      <h3>${g.title}</h3>
-      <p class="desc">${g.desc}</p>
-      <div class="tech-row">
-        <span class="tech fps">${g.fps} FPS</span>
-        <span class="tech">${g.tech}</span>
-      </div>
-      <div class="price-row">${priceOld}${priceNew}</div>
-      <button class="cta">Ver Reseña &amp; Benchmarks</button>
-    </article>`;
+  const off = discountOf(g), badges = [];
+  if (off > 0) badges.push('<span class="badge badge-discount">-' + off + '% dto</span>');
+  if (g.today) badges.push('<span class="badge badge-free">¡Gratis hoy!</span>');
+  if (g.arcade) badges.push('<span class="badge badge-arcade">Apple Arcade</span>');
+  if (g.exclusive) badges.push('<span class="badge badge-arcade">Exclusivo Apple</span>');
+  if (g.own) badges.push('<span class="badge badge-own">App propia</span>');
+  badges.push('<span class="badge badge-cat">' + g.cat + '</span>');
+  const oldP = g.old > g.price ? '<span class="price-old">' + money(g.old) + '</span>' : '';
+  const newP = g.price === 0
+    ? '<span class="price-new free">GRATIS</span>'
+    : '<span class="price-new">' + money(g.price) + '</span>';
+  return '<article class="card">' +
+    '<div class="card-top">' + badges.join('') + '</div>' +
+    '<div class="studio-row"><span class="studio">' + g.studio + '</span>' +
+    '<span class="rating"><span class="score">' + g.rating.toFixed(1) + '</span>' +
+    '<span class="count">(' + fmt(g.reviews) + ')</span></span></div>' +
+    '<h3>' + g.title + '</h3><p class="desc">' + g.desc + '</p>' +
+    '<div class="tech-row"><span class="tech fps">' + g.fps + ' FPS</span>' +
+    '<span class="tech">' + g.tech + '</span></div>' +
+    '<div class="price-row">' + oldP + newP + '</div>' +
+    '<a class="cta" href="juegos/' + g.slug + '/index.html">Ver Reseña &amp; Benchmarks</a></article>';
 }
 
 function render() {
   const list = GAMES.filter(matches).sort(SORTERS[state.sort]);
-  const grid = document.getElementById("grid");
-
-  grid.innerHTML = list.length
+  document.getElementById("grid").innerHTML = list.length
     ? list.map(cardHTML).join("")
-    : `<div class="empty">Sin resultados para los filtros aplicados.</div>`;
-
+    : '<div class="empty">Sin resultados para los filtros aplicados.</div>';
   document.getElementById("count").innerHTML =
-    `Mostrando <b>${list.length}</b> de ${GAMES.length} juegos destacados de la App Store`;
-}
-
-function renderDevices() {
-  document.getElementById("devices").innerHTML = DEVICES.map(d => `
-    <div class="device">
-      <span class="device-status"><span class="dot"></span> Sincronizado</span>
-      <h4>${d.name}</h4>
-      <p class="os">${d.os}</p>
-      <p class="label">Último juego en sesión</p>
-      <p class="last-game">${d.game}</p>
-      <p class="when">Última actividad: ${d.when}</p>
-    </div>`).join("");
+    'Mostrando <b>' + list.length + '</b> de ' + GAMES.length + ' juegos destacados de la App Store';
 }
 
 buildPills("cat-filters", CATEGORIES, "cat");
 buildPills("plat-filters", PLATFORMS, "plat");
-renderDevices();
 render();
 
-document.getElementById("sort").addEventListener("change", e => {
-  state.sort = e.target.value;
-  render();
-});
-
-document.getElementById("search").addEventListener("input", e => {
-  state.q = e.target.value;
-  render();
-});
-
+document.getElementById("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
+document.getElementById("search").addEventListener("input", e => { state.q = e.target.value; render(); });
 document.getElementById("sync-btn").addEventListener("click", e => {
-  const btn = e.currentTarget;
-  const original = btn.textContent;
-  btn.disabled = true;
-  btn.textContent = "Sincronizando…";
+  const btn = e.currentTarget, original = btn.textContent;
+  btn.disabled = true; btn.textContent = "Sincronizando…";
   setTimeout(() => {
     btn.textContent = "✓ Todo al día";
     setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1800);
