@@ -405,6 +405,13 @@ ${promo}
     </div>
   </section>
 
+  ${g.howto ? `<section class="section">
+    <h2>♟ Cómo se juega</h2>
+    <div class="bench-grid">
+      ${g.howto.map(([k, v]) => `<div class="bench-cell"><p class="k">${esc(k)}</p><p class="v soft">${esc(v)}</p></div>`).join('\n      ')}
+    </div>
+  </section>` : ''}
+
   <section class="section">
     <div class="prosandcons">
       <div class="pc-box pros">

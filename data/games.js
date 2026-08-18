@@ -464,6 +464,12 @@ GAMES.push({
     gamepad: 'Táctil',
     storage: 'Por confirmar en el lanzamiento'
   },
+  howto: [
+    ['El tablero', 'Una cuadrícula de 19×19 líneas. Las piedras se colocan sobre las intersecciones, no dentro de las casillas. Los tableros de 9×9 y 13×13 se usan para partidas más cortas y para aprender.'],
+    ['Los turnos', 'Las negras abren la partida y después se alterna. En tu turno colocas una piedra en cualquier intersección libre, o pasas. Las piedras no se mueven una vez colocadas.'],
+    ['Las capturas', 'Las intersecciones vacías que tocan a un grupo son sus libertades. Cuando un grupo se queda sin ninguna, queda rodeado y se retira del tablero.'],
+    ['El final', 'La partida termina cuando ambos jugadores pasan seguidos. Gana quien haya rodeado más territorio, sumando las piedras capturadas al rival.']
+  ],
   pros: [
     'Inteligencia artificial que se ejecuta en el propio dispositivo, sin necesidad de conexión',
     'Reto diario, torneos contra la IA y clasificación de jugadores',
