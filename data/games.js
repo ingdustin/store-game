@@ -441,6 +441,45 @@ const GAMES = [
   }
 ];
 
+GAMES.push({
+  slug: 'go-game-baduk-weiqi-board',
+  title: 'Go Game · Baduk Weiqi Board',
+  studio: 'Ing. Dustin Díaz · Cuatro Señales',
+  cat: 'Estrategia',
+  plats: ['iPhone', 'iPad'],
+  // Sin reseñas todavía: la app aún no está publicada en la App Store.
+  rating: 0, reviews: 0, soon: true,
+  desc: 'El milenario juego de estrategia chino: rodea y controla más territorio que tu rival.',
+  fps: 120, tech: 'Metal 2',
+  old: 0, price: 0,
+  own: true,
+  appId: '6794784391',
+  appStore: 'https://apps.apple.com/us/app/go-game-baduk-weiqi-board/id6794784391',
+  intro: 'El Go —conocido como weiqi en chino o baduk en coreano— es un milenario juego de mesa y estrategia para dos personas originario de China, con más de 2500 años de historia. Se juega sobre una cuadrícula con fichas llamadas piedras, negras y blancas, y el objetivo principal es rodear y controlar la mayor cantidad de territorio posible en el tablero.',
+  bench: {
+    cpu: 'Por confirmar en el lanzamiento',
+    gfx: 'Metal 2',
+    rt: 'No',
+    battery: 'Por confirmar en el lanzamiento',
+    gamepad: 'Táctil',
+    storage: 'Por confirmar en el lanzamiento'
+  },
+  pros: [
+    'Inteligencia artificial que se ejecuta en el propio dispositivo, sin necesidad de conexión',
+    'Reto diario, torneos contra la IA y clasificación de jugadores',
+    'Tamaño de tablero, reglas, sonido, vibración y accesibilidad configurables',
+    'Tableros, fondos, marcos y títulos desbloqueables con monedas del juego'
+  ],
+  cons: [
+    'La curva de aprendizaje del Go es exigente para quien empieza desde cero',
+    'La clasificación y la copia del progreso requieren conexión'
+  ],
+  verdict: [
+    'Un Go completo para iPhone y iPad: partidas contra una IA local, reto diario, torneos y clasificación, con la profundidad de un juego con más de 2500 años de historia.',
+    'La versión gratuita se financia con anuncios no personalizados y ofrece una suscripción anual que los elimina y añade funciones VIP, entre ellas la revisión de tus partidas. El juego funciona sin conexión: solo la clasificación y la copia del progreso necesitan internet.'
+  ]
+});
+
 const DEVICES = [
   { name: 'iPhone 16 Pro Max', os: 'iOS 18.2', game: "Death Stranding Director's Cut", when: 'Hace 5 minutos' },
   { name: 'MacBook Pro 16" (M4 Max)', os: 'macOS Sequoia 15.1', game: 'Lies of P', when: 'Hace 1 hora' },

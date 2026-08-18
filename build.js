@@ -176,7 +176,7 @@ function pageIndex() {
     slug: g.slug, title: g.title, studio: g.studio, cat: g.cat, plats: g.plats,
     rating: g.rating, reviews: g.reviews, desc: g.desc, fps: g.fps, tech: g.tech,
     old: g.old, price: g.price, arcade: !!g.arcade, exclusive: !!g.exclusive,
-    today: !!g.today, own: !!g.own
+    today: !!g.today, own: !!g.own, soon: !!g.soon
   }));
 
   return `${head({
@@ -288,16 +288,20 @@ function cardHTML(g) {
   if (g.arcade) badges.push('<span class="badge badge-arcade">Apple Arcade</span>');
   if (g.exclusive) badges.push('<span class="badge badge-arcade">Exclusivo Apple</span>');
   if (g.own) badges.push('<span class="badge badge-own">App propia</span>');
+  if (g.soon) badges.push('<span class="badge badge-soon">Próximamente</span>');
   badges.push('<span class="badge badge-cat">' + g.cat + '</span>');
   const oldP = g.old > g.price ? '<span class="price-old">' + money(g.old) + '</span>' : '';
   const newP = g.price === 0
     ? '<span class="price-new free">GRATIS</span>'
     : '<span class="price-new">' + money(g.price) + '</span>';
+  const rating = g.reviews === 0
+    ? '<span class="rating"><span class="count">Sin reseñas aún</span></span>'
+    : '<span class="rating"><span class="score">' + g.rating.toFixed(1) + '</span>' +
+      '<span class="count">(' + fmt(g.reviews) + ')</span></span>';
   return '<article class="card">' +
     '<div class="card-top">' + badges.join('') + '</div>' +
     '<div class="studio-row"><span class="studio">' + g.studio + '</span>' +
-    '<span class="rating"><span class="score">' + g.rating.toFixed(1) + '</span>' +
-    '<span class="count">(' + fmt(g.reviews) + ')</span></span></div>' +
+    rating + '</div>' +
     '<h3>' + g.title + '</h3><p class="desc">' + g.desc + '</p>' +
     '<div class="tech-row"><span class="tech fps">' + g.fps + ' FPS</span>' +
     '<span class="tech">' + g.tech + '</span></div>' +
@@ -341,6 +345,7 @@ function pageGame(g) {
   if (g.arcade) badges.push('<span class="badge badge-arcade">Apple Arcade</span>');
   if (g.exclusive) badges.push('<span class="badge badge-arcade">Exclusivo Apple</span>');
   if (g.own) badges.push('<span class="badge badge-own">App propia</span>');
+  if (g.soon) badges.push('<span class="badge badge-soon">Próximamente en la App Store</span>');
   badges.push(`<span class="badge badge-cat">${esc(g.cat)}</span>`);
 
   const promo = g.promo ? `
@@ -369,9 +374,12 @@ ${header({ root: '../../', active: 'catalogo' })}
     <div class="card-top">${badges.join('')}</div>
     <h1>${esc(g.title)}</h1>
     <p class="lede">${esc(g.desc)} Desarrollado por ${esc(g.studio)}.</p>
+    ${g.intro ? `<p class="lede">${esc(g.intro)}</p>` : ''}
     <div class="head-meta">
-      <span class="rating"><span class="score">${g.rating.toFixed(1)}</span>
-        <span class="count">(${g.reviews.toLocaleString('es-ES')} reseñas)</span></span>
+      ${g.reviews === 0
+        ? '<span class="rating"><span class="count">Sin reseñas aún</span></span>'
+        : `<span class="rating"><span class="score">${g.rating.toFixed(1)}</span>
+        <span class="count">(${g.reviews.toLocaleString('es-ES')} reseñas)</span></span>`}
       <div class="price-row" style="border:none;padding:0">
         ${g.old > g.price ? `<span class="price-old">${money(g.old)}</span>` : ''}
         <span class="price-new${g.price === 0 ? ' free' : ''}">${g.price === 0 ? 'GRATIS' : money(g.price)}</span>
