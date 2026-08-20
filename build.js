@@ -146,6 +146,31 @@ function close(script = '') {
 </html>`;
 }
 
+// Contenido legal específico de un juego, si lo hay.
+// Si existe data/legal/<slug>/<archivo>, ese texto sustituye a la plantilla
+// genérica: es contenido verificado contra la app real y manda sobre ella.
+function customDoc(g, file) {
+  const p = path.join(ROOT, 'data', 'legal', g.slug, file);
+  return fs.existsSync(p) ? fs.readFileSync(p, 'utf8').trim() : null;
+}
+
+// Envuelve un documento propio en el layout del sitio, sin doc-head:
+// el contenido ya trae su propio <h1>.
+function customPage(g, file, { title, desc, crumb }) {
+  const body = customDoc(g, file);
+  if (!body) return null;
+  return `${head({ title, desc, root: '../../' })}
+${header({ root: '../../', active: 'legal' })}
+
+<main class="wrap wrap-narrow doc">
+  ${crumbs(g, crumb)}
+  ${body}
+  ${docNav(g, file)}
+</main>
+${footer({ root: '../../', game: g })}
+${close()}`;
+}
+
 // Navegación entre las páginas internas de un juego.
 function docNav(g, current) {
   const items = [
@@ -452,6 +477,12 @@ document.getElementById('copy').addEventListener('click', e => {
 
 function pagePrivacy(g) {
   const n = esc(g.title);
+  const own = customPage(g, 'privacidad.html', {
+    title: `Política de privacidad — ${g.title}`,
+    desc: `Política de privacidad de ${g.title}.`,
+    crumb: 'Privacidad'
+  });
+  if (own) return own;
   return `${head({
     title: `Política de privacidad — ${g.title}`,
     desc: `Política de privacidad de ${g.title}: qué datos maneja la aplicación, para qué los usa y qué puedes hacer con ellos.`,
@@ -525,6 +556,12 @@ ${close()}`;
 
 function pageTerms(g) {
   const n = esc(g.title);
+  const own = customPage(g, 'terminos.html', {
+    title: `Términos de uso y EULA — ${g.title}`,
+    desc: `Términos de uso y condiciones de ${g.title}.`,
+    crumb: 'Términos y EULA'
+  });
+  if (own) return own;
   return `${head({
     title: `Términos de uso y EULA — ${g.title}`,
     desc: `Términos de uso, condiciones y acuerdo de licencia de usuario final (EULA) de ${g.title}.`,
@@ -674,6 +711,12 @@ ${close()}`;
 
 function pageContact(g) {
   const n = esc(g.title);
+  const own = customPage(g, 'contacto.html', {
+    title: `Soporte y contacto — ${g.title}`,
+    desc: `Soporte, preguntas frecuentes y contacto de ${g.title}.`,
+    crumb: 'Soporte y contacto'
+  });
+  if (own) return own;
   const faq = [
     ['¿Puedo jugar sin conexión a internet?',
      'Sí. Los modos principales funcionan completamente sin conexión. Solo el emparejamiento en línea y las clasificaciones necesitan conexión.'],

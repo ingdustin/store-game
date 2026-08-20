@@ -687,3 +687,19 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0 44px; margin-to
   * { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* Documentos legales propios inyectados desde data/legal/<slug>/ */
+.doc article > h1 {
+  margin: 12px 0 12px;
+  font-size: clamp(26px, 4.2vw, 38px);
+  letter-spacing: -1.1px; line-height: 1.15; font-weight: 800;
+}
+.doc article > p:first-of-type em { color: var(--text-mute); font-style: normal; font-family: var(--mono); font-size: 12.5px; }
+.doc dl { margin: 0 0 18px; }
+.doc dt { margin: 22px 0 6px; font-size: 15px; color: var(--text); }
+.doc dd { margin: 0; color: var(--text-dim); font-size: 14.5px; }
+.doc code {
+  font-family: var(--mono); font-size: 12.5px;
+  background: rgba(255,255,255,.05); border: 1px solid var(--line);
+  border-radius: 5px; padding: 1px 5px; color: var(--text-dim);
+}

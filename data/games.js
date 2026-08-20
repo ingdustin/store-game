@@ -275,34 +275,38 @@ const GAMES = [
     title: 'Deducta Sudoku',
     studio: 'Ing. Dustin Díaz · Cuatro Señales',
     cat: 'Estrategia',
-    plats: ['iPhone', 'iPad', 'Mac', 'Vision Pro'],
-    rating: 4.9, reviews: 15400,
-    desc: 'El desafío de deducción matemática y lógica para Apple Silicon.',
+    // Solo iPhone, según la documentación verificada contra la app.
+    plats: ['iPhone'],
+    // Sin valoraciones todavía en la App Store.
+    rating: 0, reviews: 0,
+    desc: 'Un sudoku de deducción pura: cada tablero se resuelve sin adivinar.',
     fps: 120, tech: 'Metal 3 Nativo',
-    old: 2.99, price: 0, today: true,
+    old: 0, price: 0,
     own: true,
     appId: '1550244179',
     appStore: 'https://apps.apple.com/us/app/sudoku-classic-number-puzzle/id1550244179',
-    promo: 'DEDUCTA-FREE-2026',
     bench: {
-      cpu: 'Todos los chips A14 Bionic / A17 Pro / M1-M4',
+      cpu: 'iPhone con iOS 15.0 o posterior',
       gfx: 'Metal 3 Nativo',
       rt: 'No',
-      battery: '10 / 10',
-      gamepad: 'Táctil, Apple Pencil, teclado y ratón',
-      storage: '0.08 GB'
+      battery: 'Sin conexión salvo publicidad; las suscripciones la retiran',
+      gamepad: 'Táctil',
+      storage: '31,3 MB'
     },
     pros: [
-      'Renderizado nativo ultra suave a 120 FPS en pantallas Retina ProMotion',
-      'Integración total de iCloud Sync entre iPhone, iPad, Mac y Vision Pro',
-      'Cumple estrictamente las directrices de privacidad y EULA de la App Store'
+      'Cada tablero tiene solución única verificada y se puede resolver sin adivinar',
+      'Escalera de explicaciones y árbol de habilidades que enseñan la técnica, con informe al terminar',
+      'Sin cuentas ni registro: no pide datos personales y no hay servidores de por medio',
+      'Los anuncios son siempre no personalizados y nunca aparecen sobre el tablero'
     ],
     cons: [
-      'Los niveles Maestros de Deducción requieren práctica intensiva'
+      'Disponible solo para iPhone',
+      'El progreso vive únicamente en el dispositivo: desinstalar la app lo borra',
+      'Las bandas Difícil y Experto y la biblioteca de técnicas requieren la suscripción VIP'
     ],
     verdict: [
-      'Deducta Sudoku (Sudoku Classic Number Puzzle) redefine los juegos de rompecabezas numéricos con tableros interactivos a 120 Hz ProMotion, pistas deductoras en tiempo real y estadísticas avanzadas sincronizadas con iCloud.',
-      'Desarrollado por Ing. Dustin Díaz bajo el sistema de identidad Cuatro Señales, es una app de compra universal para iPhone, iPad, Mac y Vision Pro con política de privacidad y EULA propios adaptados a las directrices de revisión de Apple.'
+      'Un sudoku que se toma en serio la deducción: cada tablero se verifica antes de servirlo para garantizar solución única y que baste la lógica, sin conjeturas. La escalera de explicaciones enseña la técnica en lugar de limitarse a dar el número.',
+      'Funciona íntegramente en el dispositivo, sin cuentas, sin servidores y sin copia en la nube. El nivel gratuito muestra anuncios no personalizados de AdMob; las suscripciones VIP y Sin anuncios los retiran, y VIP añade las bandas Difícil y Experto, la biblioteca de técnicas, los tableros de práctica dirigida, el histórico de informes y las pistas sin límite.'
     ]
   },
   {
