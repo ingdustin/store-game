@@ -171,6 +171,40 @@ ${footer({ root: '../../', game: g })}
 ${close()}`;
 }
 
+// ---------------------------------------------------------------- inglés
+// Las páginas en inglés viven en juegos/<slug>/en/ y solo se generan para los
+// juegos que declaran 'en' en su campo `langs`.
+
+const EN_FILES = [
+  ['../index.html', 'Game page'],
+  ['privacy.html', 'Privacy'],
+  ['terms.html', 'Terms & EULA'],
+  ['marketing.html', 'Marketing'],
+  ['contact.html', 'Support & contact']
+];
+
+function docNavEn(current) {
+  return `<div class="doc-nav">${EN_FILES
+    .filter(([f]) => f !== current)
+    .map(([f, label]) => `<a class="cta-ghost" href="${f}">${label}</a>`)
+    .join('\n    ')}</div>`;
+}
+
+function crumbsEn(g, current) {
+  return `<div class="crumbs">
+    <a href="../../../index.html">Games</a><span>/</span>
+    <a href="../index.html">${esc(g.title)}</a><span>/</span><span>${esc(current)}</span>
+  </div>`;
+}
+
+// Enlace al mismo documento en el otro idioma.
+function langSwitch(to, href) {
+  return `<div class="lang-switch">
+    <span>${to === 'en' ? 'Read this page in' : 'Lee esta página en'}</span>
+    <a href="${href}">${to === 'en' ? 'English' : 'Español'}</a>
+  </div>`;
+}
+
 // Navegación entre las páginas internas de un juego.
 function docNav(g, current) {
   const items = [
@@ -459,6 +493,14 @@ ${promo}
     <h2>📄 Documentación legal y App Store</h2>
     <p style="color:var(--text-dim);max-width:70ch">Esta aplicación cuenta con URLs propias e independientes para cada documento requerido por las directrices de revisión de Apple:</p>
     ${docNav(g, 'index.html')}
+    ${(g.langs || []).includes('en')
+      ? `<p style="color:var(--text-dim);margin-top:18px">Estos documentos están también disponibles en inglés:</p>
+    <div class="doc-nav" style="border:none;padding-top:0;margin-top:10px">
+      <a class="cta-ghost" href="en/privacy.html">Privacy (EN)</a>
+      <a class="cta-ghost" href="en/terms.html">Terms &amp; EULA (EN)</a>
+      <a class="cta-ghost" href="en/marketing.html">Marketing (EN)</a>
+      <a class="cta-ghost" href="en/contact.html">Support (EN)</a>
+    </div>` : ''}
   </section>
 </main>
 ${footer({ root: '../../', game: g })}
@@ -799,6 +841,304 @@ ${footer({ root: '../../', game: g })}
 ${close()}`;
 }
 
+// ---------------------------------------------------------------- páginas EN
+
+function pagePrivacyEn(g) {
+  const n = esc(g.title);
+  return `${head({
+    title: `Privacy Policy — ${g.title}`,
+    desc: `Privacy policy for ${g.title}: what data the app handles, what it is used for and what you can do about it.`,
+    root: '../../../'
+  })}
+${header({ root: '../../../', active: 'legal' })}
+
+<main class="wrap wrap-narrow doc">
+  ${crumbsEn(g, 'Privacy')}
+  ${langSwitch('es', '../privacidad.html')}
+
+  <div class="doc-head">
+    <div class="eyebrow">🔒 App Store &amp; GDPR compliance</div>
+    <h1>Privacy Policy</h1>
+    <p>App: <strong>${n}</strong> · Last updated: ${esc(SITE.updatedEn)}</p>
+  </div>
+
+  <p>This policy sets out, plainly, what data <strong>${n}</strong> handles, what it is used for and what you can do about it. It is written to be read in full: if something is unclear, that is our fault.</p>
+
+  <h2><span class="num">01</span> The essentials</h2>
+  <p>We do not ask for any personal data in order to play. There is no sign-up with email, phone number or social accounts. We do not ask for your real name, your location, your contacts, your camera or your microphone. The app needs no system permission to work, other than notifications if you choose to turn reminders on.</p>
+  <p>The data controller is <strong>${esc(SITE.owner)}</strong>, owner of the app, reachable at <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
+
+  <h2><span class="num">02</span> What stays on your device</h2>
+  <p>Most of your information never leaves the device: your settings (game options, sound, vibration, accessibility), your progress (games played, wins, streaks, achievements, in-game coins and unlocked items) and your saved games.</p>
+  <p>The app also stores an <strong>installation identifier</strong>: a random number generated on your own device and kept in the system keychain. It is not your Apple Account, it does not travel to iCloud and it is not linked to your identity. It exists for two reasons: to recognise your progress backup on the server, and to stop a free trial being repeated indefinitely by reinstalling the app.</p>
+  <p>On iOS that identifier survives uninstalling, because the keychain is not wiped when an app is removed. You can ask us to delete it by writing to the contact address.</p>
+
+  <h2><span class="num">03</span> What is sent to a server</h2>
+  <p>The app may use cloud services for two specific features: the public leaderboard and a backup of your progress. The session is <strong>anonymous</strong>: no account with personal data is created, and neither your email nor your phone number is stored.</p>
+  <p>This is everything that is uploaded, and nothing else:</p>
+  <ul>
+    <li>The installation identifier, to tell your progress apart from other players'.</li>
+    <li>The nickname you type. You choose it and can change it whenever you like. If you type your real name, it will be visible to other players on the leaderboard.</li>
+    <li>Your wins and your best streak, to order the leaderboard.</li>
+    <li>Your progress: coins, achievements, records, daily challenge, unlocked cosmetics and whether you have already used a free trial.</li>
+  </ul>
+
+  <h2><span class="num">04</span> Advertising</h2>
+  <p>The free tier may show ads served by third parties. Ads are <strong>non-personalised</strong>: the app does not request tracking permission, so your advertising identifier is not used to profile you or follow you across other apps.</p>
+  <p>The ad provider may collect technical device data in order to serve ads, measure them and prevent fraud. That processing is governed by the provider's own policies, not by this one.</p>
+  <p>Any paid subscription removes all advertising.</p>
+
+  <h2><span class="num">05</span> Purchases</h2>
+  <p>All purchases are settled by <strong>Apple</strong> through your App Store account. The app never sees or stores your payment method, your name or your address: it only learns from the store whether a purchase completed and whether a subscription is still active.</p>
+
+  <h2><span class="num">06</span> Notifications</h2>
+  <p>Reminders are generated <strong>on your own device</strong>, not from a server, and only if you turn them on. You can switch them off from the app's settings or from the system settings; doing so also cancels any reminders already scheduled.</p>
+
+  <h2><span class="num">07</span> Children</h2>
+  <p>${n} is not directed at children under 13 and does not knowingly collect data from them. As no personal data is requested, there is no identifying information a child could provide through the app.</p>
+
+  <h2><span class="num">08</span> Your rights</h2>
+  <p>You can erase all local data by uninstalling the app, and reset your progress from the app's own data settings.</p>
+  <p>To remove your leaderboard entry, your progress backup and the installation identifier, write to <a href="mailto:${SITE.email}">${SITE.email}</a> quoting the nickname you used. They will be deleted. You may also request a copy of what is held about you, which will be exactly what section 03 lists.</p>
+
+  <div class="callout">
+    <p>If you live in the European Union you can exercise the rights of access, rectification, portability, restriction and erasure granted by the GDPR by writing to <a href="mailto:${SITE.email}">${SITE.email}</a>. Requests are answered within 30 days at the latest.</p>
+  </div>
+
+  <h2><span class="num">09</span> Changes and contact</h2>
+  <p>If this policy changes, this page will be updated along with its date, as will the equivalent text inside the app.</p>
+  <p>For any question: <a href="mailto:${SITE.email}">${SITE.email}</a></p>
+
+  ${docNavEn('privacy.html')}
+</main>
+${footer({ root: '../../../', game: g })}
+${close()}`;
+}
+
+function pageTermsEn(g) {
+  const n = esc(g.title);
+  return `${head({
+    title: `Terms of Use and EULA — ${g.title}`,
+    desc: `Terms of use, conditions and end user licence agreement (EULA) for ${g.title}.`,
+    root: '../../../'
+  })}
+${header({ root: '../../../', active: 'legal' })}
+
+<main class="wrap wrap-narrow doc">
+  ${crumbsEn(g, 'Terms & EULA')}
+  ${langSwitch('es', '../terminos.html')}
+
+  <div class="doc-head">
+    <div class="eyebrow">📄 Terms, conditions and EULA</div>
+    <h1>Terms of Use</h1>
+    <p>App: <strong>${n}</strong> · Last updated: ${esc(SITE.updatedEn)}</p>
+  </div>
+
+  <p>By downloading and using <strong>${n}</strong> you accept these terms. If you do not agree with them, do not use the app. The app is owned by <strong>${esc(SITE.owner)}</strong> (<a href="mailto:${SITE.email}">${SITE.email}</a>).</p>
+
+  <h2><span class="num">01</span> What ${n} is</h2>
+  <p>${esc(g.descEn || g.desc)} The app is developed by ${esc(g.studio)} and distributed through the App Store for ${esc(g.plats.join(', '))}.</p>
+
+  <h2><span class="num">02</span> Licence</h2>
+  <p>You are granted a personal, non-exclusive, revocable and non-transferable licence to use the app on devices that belong to you. You may not resell it, rent it, decompile it or redistribute it.</p>
+
+  <h2><span class="num">03</span> In-game coins and items</h2>
+  <p>Coins, boards, backgrounds, frames, titles and any other unlockable items <strong>have no real monetary value</strong>, cannot be exchanged for money, cannot be transferred to another player and do not leave the app. They are game content and may be rebalanced or changed in future versions.</p>
+  <p>Purchased coins do not expire. If you uninstall the app and there was no cloud backup, your progress and your items cannot be recovered.</p>
+  <p>Tournament entry fees and prizes are in-game coins. There is no gambling and no cash prizes.</p>
+
+  <h2><span class="num">04</span> Paid subscription</h2>
+  <p>The app may offer a subscription that removes advertising and unlocks additional features. The following conditions apply:</p>
+  <ul>
+    <li>Billing is handled by Apple through your App Store account. You are charged when you confirm the purchase.</li>
+    <li>The subscription <strong>renews automatically</strong> at the price then in force, unless you cancel at least 24 hours before the end of the current period. Renewal is charged within the 24 hours before the period ends.</li>
+    <li>You can manage or cancel it at any time from your App Store account settings. Cancelling stops the next renewal but does not cut short the period already paid for.</li>
+    <li>Any free trial offered inside the game is a <strong>gift from the developer</strong>, not an App Store offer: it is free, it does not turn into a subscription and nothing is charged when it ends.</li>
+    <li>Refunds are governed by Apple's policy. The developer cannot process refunds directly; you can request one at <a href="https://reportaproblem.apple.com" rel="noopener">reportaproblem.apple.com</a>.</li>
+  </ul>
+
+  <h2><span class="num">05</span> Advertising</h2>
+  <p>The free tier may show ads served by third parties. The developer does not control the specific content of each ad and does not endorse the products advertised.</p>
+
+  <h2><span class="num">06</span> Conduct</h2>
+  <p>The nickname you choose is visible to other players on the leaderboard. Do not use nicknames that are offensive, that impersonate someone else or that infringe third-party rights: they may be removed from the leaderboard without notice.</p>
+  <p>Manipulating the app to alter scores, coins or rankings is likewise not allowed.</p>
+
+  <h2><span class="num">07</span> Availability</h2>
+  <p>The game works offline in its main modes. Online features — leaderboard and progress backup — depend on third-party services and may be interrupted, changed or withdrawn.</p>
+
+  <h2><span class="num">08</span> Warranties and liability</h2>
+  <p>The app is provided "as is", with no warranty that it is free of errors or that it will run uninterrupted. To the extent permitted by applicable law, the developer is not liable for loss of progress, loss of data or indirect damages arising from use of the app.</p>
+  <p>None of the above limits the rights granted to you by the consumer legislation of your country.</p>
+
+  <h2><span class="num">09</span> Governing law and EU consumers</h2>
+  <p>If you use the app as a consumer, these terms are governed by the law of your country of habitual residence, and you may bring any claim before the courts of your domicile. No jurisdiction other than your own is imposed on you.</p>
+  <div class="callout">
+    <p><strong>Right of withdrawal (Directive 2011/83/EU).</strong> For digital content purchased through the App Store, consumers in the European Union have 14 days to withdraw, handled through Apple's official refund channels.</p>
+    <p><strong>Online dispute resolution.</strong> Under Regulation (EU) 524/2013, the European Commission provides a dispute resolution platform at <a href="https://ec.europa.eu/consumers/odr/" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>
+  </div>
+
+  <h2><span class="num">10</span> Changes and contact</h2>
+  <p>These terms may be updated; the version in force is always the one published in the app and on this page, with its date.</p>
+  <p>For any question: <a href="mailto:${SITE.email}">${SITE.email}</a></p>
+
+  ${docNavEn('terms.html')}
+</main>
+${footer({ root: '../../../', game: g })}
+${close()}`;
+}
+
+function pageMarketingEn(g) {
+  const store = g.appStore
+    ? `<a class="cta" href="${esc(g.appStore)}" rel="noopener">View on the App Store</a>`
+    : '<a class="cta" href="../index.html">View game page</a>';
+
+  return `${head({
+    title: `${g.title} — Official page`,
+    desc: g.descEn || g.desc,
+    root: '../../../'
+  })}
+${header({ root: '../../../', active: 'marketing' })}
+
+<main class="wrap">
+  ${crumbsEn(g, 'Marketing')}
+  ${langSwitch('es', '../marketing.html')}
+
+  <section class="hero">
+    <div class="eyebrow">📊 Marketing page · App Store</div>
+    <h1>${esc(g.title)}</h1>
+    <p>${esc(g.introEn || g.descEn || g.desc)}</p>
+    <div class="chips">
+      <span class="chip">⚡ ${g.fps} FPS</span>
+      <span class="chip">🔷 ${esc(g.tech)}</span>
+      <span class="chip">💲 ${g.price === 0 ? 'Free' : money(g.price)}</span>
+      ${g.appId ? `<span class="chip">🆔 App ID ${esc(g.appId)}</span>` : ''}
+    </div>
+    <div class="head-actions" style="margin-top:26px">
+      ${store}
+      <a class="cta-ghost" href="contact.html">Support &amp; FAQ</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Why it stands out</h2>
+    <div class="grid">
+      ${(g.prosEn || g.pros).map((p, i) => `<article class="card">
+        <div class="card-top"><span class="badge badge-own">0${i + 1}</span></div>
+        <p class="desc" style="font-size:14.5px;color:var(--text)">${esc(p)}</p>
+      </article>`).join('\n      ')}
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Compatibility and requirements</h2>
+    <div class="table-scroll">
+      <table class="spec-table">
+        <tr><th>Platforms</th><td>${esc(g.plats.join(' · '))}</td></tr>
+        <tr><th>Graphics library</th><td>${esc(g.bench.gfx)}</td></tr>
+        <tr><th>Ray tracing</th><td>${g.bench.rt === 'No' ? 'No' : 'Yes (hardware)'}</td></tr>
+        <tr><th>Frame rate</th><td>${g.fps} FPS</td></tr>
+        <tr><th>Controls</th><td>${g.bench.gamepad === 'Táctil' ? 'Touch' : esc(g.bench.gamepad)}</td></tr>
+        <tr><th>Developer</th><td>${esc(g.studio)}</td></tr>
+        ${g.appId ? `<tr><th>App Store ID</th><td>${esc(g.appId)}</td></tr>` : ''}
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Official links</h2>
+    <p style="color:var(--text-dim)">Public, independent URLs required by App Store Connect for this app:</p>
+    ${docNavEn('marketing.html')}
+  </section>
+</main>
+${footer({ root: '../../../', game: g })}
+${close()}`;
+}
+
+function pageContactEn(g) {
+  const n = esc(g.title);
+  const faq = [
+    ['Can I play without an internet connection?',
+     'Yes. The main modes work fully offline. Only online matchmaking and leaderboards need a connection.'],
+    ['How do I earn coins?',
+     'By winning matches, keeping win streaks, completing achievements and playing the daily challenge. You can also get them from the in-app store.'],
+    ['How do I restore a purchase on a new device?',
+     'Open the in-app store and tap "Restore purchases", signed in with the same Apple Account used for the original purchase.'],
+    ['How do I cancel a subscription?',
+     'Subscriptions are managed by Apple, not by us. On your device open Settings → your name → Subscriptions and select the app. Cancel at least 24 hours before the period ends to avoid the next renewal.'],
+    ['I was charged but did not get my item',
+     'Try "Restore purchases" first. If it still does not appear, email us with the date of the purchase and we will sort it out. Refunds are handled by Apple at reportaproblem.apple.com.'],
+    ['How do I delete my account and my data?',
+     `Email ${SITE.email} from the address linked to your account and we will delete it, along with the data associated with it. The privacy policy has the detail.`],
+    ['I lost my progress or my coins',
+     'Progress is tied to the account you signed in with. Sign in with the same account first, and if it is still missing, email us saying roughly when you last played and we will try to recover it.'],
+    ['A rewarded ad did not give me my reward',
+     'Rewards are granted once the ad finishes playing. If an ad closes early or fails to load, wait a moment and try again. If it keeps failing, email us with your device model.']
+  ];
+
+  return `${head({
+    title: `Support and contact — ${g.title}`,
+    desc: `Support, frequently asked questions and contact for ${g.title}. Email us at ${SITE.email}.`,
+    root: '../../../'
+  })}
+${header({ root: '../../../', active: 'legal' })}
+
+<main class="wrap wrap-narrow doc">
+  ${crumbsEn(g, 'Support & contact')}
+  ${langSwitch('es', '../contacto.html')}
+
+  <div class="doc-head">
+    <div class="eyebrow">💬 Support and frequently asked questions</div>
+    <h1>${n} support</h1>
+    <p>Need help, found a bug, or have a suggestion? Email us. We usually reply within 2 business days. Telling us your device model and iOS version helps us help you faster.</p>
+  </div>
+
+  <p style="text-align:center;margin:8px 0 30px">
+    <a class="mailto-big" href="mailto:${SITE.email}?subject=${encodeURIComponent('Support — ' + g.title)}">✉ ${SITE.email}</a>
+  </p>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>Technical support</h3>
+      <p>Bugs, loading errors, performance problems or purchases that do not show up.</p>
+      <a href="mailto:${SITE.email}?subject=${encodeURIComponent('Technical support — ' + g.title)}">${SITE.email}</a>
+    </div>
+    <div class="contact-card">
+      <h3>Privacy and data</h3>
+      <p>Requests to access, port or delete your data and your installation identifier.</p>
+      <a href="mailto:${SITE.email}?subject=${encodeURIComponent('Privacy — ' + g.title)}">${SITE.email}</a>
+    </div>
+    <div class="contact-card">
+      <h3>Press and partnerships</h3>
+      <p>Promo codes, press assets and partnership enquiries.</p>
+      <a href="mailto:${SITE.email}?subject=${encodeURIComponent('Press — ' + g.title)}">${SITE.email}</a>
+    </div>
+  </div>
+
+  <h2><span class="num">?</span> Frequently asked questions</h2>
+  ${faq.map(([q, a]) => `<h3>${esc(q)}</h3>\n  <p>${esc(a)}</p>`).join('\n  ')}
+
+  <div class="callout">
+    <p><strong>Refunds.</strong> All purchases are handled by Apple. To request a refund use <a href="https://reportaproblem.apple.com" rel="noopener">reportaproblem.apple.com</a>; the developer cannot process them directly.</p>
+  </div>
+
+  <h2><span class="num">i</span> Publisher details</h2>
+  <div class="table-scroll">
+    <table class="spec-table">
+      <tr><th>App</th><td>${n}</td></tr>
+      <tr><th>Developer</th><td>${esc(g.studio)}</td></tr>
+      <tr><th>Owner and controller</th><td>${esc(SITE.owner)}</td></tr>
+      <tr><th>Contact email</th><td><a href="mailto:${SITE.email}">${SITE.email}</a></td></tr>
+      ${g.appId ? `<tr><th>App Store ID</th><td>${esc(g.appId)}</td></tr>` : ''}
+    </table>
+  </div>
+
+  ${docNavEn('contact.html')}
+</main>
+${footer({ root: '../../../', game: g })}
+${close()}`;
+}
+
 // ---------------------------------------------------------------- escritura
 
 function write(file, content) {
@@ -818,6 +1158,13 @@ for (const g of GAMES) {
   written.push(write(`${dir}/terminos.html`, pageTerms(g)));
   written.push(write(`${dir}/marketing.html`, pageMarketing(g)));
   written.push(write(`${dir}/contacto.html`, pageContact(g)));
+
+  if ((g.langs || []).includes('en')) {
+    written.push(write(`${dir}/en/privacy.html`, pagePrivacyEn(g)));
+    written.push(write(`${dir}/en/terms.html`, pageTermsEn(g)));
+    written.push(write(`${dir}/en/marketing.html`, pageMarketingEn(g)));
+    written.push(write(`${dir}/en/contact.html`, pageContactEn(g)));
+  }
 }
 
 console.log(`✓ ${written.length} páginas generadas para ${GAMES.length} juegos`);

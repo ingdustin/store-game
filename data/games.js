@@ -8,7 +8,8 @@ const SITE = {
   owner: 'Ing. Dustin Díaz',
   email: 'info@ddagencia.com',
   site: 'ingdustindiaz.com',
-  updated: '17 de agosto de 2026'
+  updated: '17 de agosto de 2026',
+  updatedEn: '17 August 2026'
 };
 
 const GAMES = [
@@ -487,6 +488,45 @@ GAMES.push({
   verdict: [
     'Un Go completo para iPhone y iPad: partidas contra una IA local, reto diario, torneos y clasificación, con la profundidad de un juego con más de 2500 años de historia.',
     'La versión gratuita se financia con anuncios no personalizados y ofrece una suscripción anual que los elimina y añade funciones VIP, entre ellas la revisión de tus partidas. El juego funciona sin conexión: solo la clasificación y la copia del progreso necesitan internet.'
+  ]
+});
+
+GAMES.push({
+  slug: 'block-puzzle-blockmix-trio',
+  title: 'Block Puzzle: Blockmix Trio',
+  studio: 'Ing. Dustin Díaz · Cuatro Señales',
+  cat: 'Estrategia',
+  plats: ['iPhone', 'iPad'],
+  // Sin reseñas todavía: la app aún no está publicada en la App Store.
+  rating: 0, reviews: 0, soon: true,
+  desc: 'Tres piezas por ronda: encájalas en la cuadrícula y despeja líneas antes de quedarte sin hueco.',
+  fps: 60, tech: 'Metal 2',
+  old: 0, price: 0,
+  own: true,
+  langs: ['es', 'en'],
+  appId: '6801892843',
+  appStore: 'https://apps.apple.com/us/app/blockmix-puzzle-trio/id6801892843',
+  intro: 'Blockmix Trio es un rompecabezas de bloques: en cada ronda recibes tres piezas y debes encajarlas en la cuadrícula. Cada fila o columna que completas se despeja y te devuelve espacio. No hay reloj ni cuenta atrás: la partida termina cuando ninguna de las tres piezas cabe en el tablero, así que cada colocación es una decisión sobre el hueco que dejas para la siguiente.',
+  bench: {
+    cpu: 'Por confirmar en el lanzamiento',
+    gfx: 'Metal 2',
+    rt: 'No',
+    battery: 'Por confirmar en el lanzamiento',
+    gamepad: 'Táctil',
+    storage: 'Por confirmar en el lanzamiento'
+  },
+  pros: [
+    'Partidas cortas que se retoman en cualquier momento, sin temporizador ni presión',
+    'Reglas que se entienden en diez segundos y una decisión difícil en cada turno',
+    'Se juega con una sola mano, en vertical y sin conexión'
+  ],
+  cons: [
+    'El género recompensa la planificación: colocar por impulso acaba pronto la partida',
+    'Sin datos de rendimiento verificados hasta que la app esté publicada'
+  ],
+  verdict: [
+    'Un block puzzle clásico y bien entendido: tres piezas por ronda, una cuadrícula que se llena y la tensión de calcular si lo que te den después va a caber.',
+    'La gracia del género no está en la destreza sino en la previsión, y por eso funciona tan bien en ratos sueltos. Al no haber reloj, la partida dura exactamente lo que dure tu planificación.'
   ]
 });
 
