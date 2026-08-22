@@ -25,9 +25,9 @@ const priceLabel = g => g.price === 0 ? 'Gratis' : money(g.price);
 
 // ---------------------------------------------------------------- layout
 
-function head({ title, desc, root }) {
+function head({ title, desc, root, lang = 'es' }) {
   return `<!DOCTYPE html>
-<html lang="es">
+<html lang="${lang}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,7 +39,19 @@ function head({ title, desc, root }) {
 <div class="spectrum"></div>`;
 }
 
-function header({ root, active = '' }) {
+function header({ root, active = '', lang = 'es' }) {
+  const en = lang === 'en';
+  const T = en
+    ? { sub: 'Identity system', games: '🎮 Games', deals: '🏷️ Deals', badge: 'TODAY',
+        news: '📰 Releases &amp; news', forum: '💬 Community', profile: '✨ Profile &amp; achievements',
+        mkt: '📊 App Store marketing', legal: '📄 Legal',
+        search: 'Search games, M-series, ray tracing…', searchAria: 'Search games',
+        bell: 'Notifications', cont: 'Handoff: iPhone 16 Pro Max', level: 'Level 4' }
+    : { sub: 'Sistema', games: '🎮 Espacio Juegos', deals: '🏷️ Ofertas Exclusivas', badge: 'HOY',
+        news: '📰 Lanzamientos &amp; News', forum: '💬 Foro Comunidad', profile: '✨ Mi Perfil &amp; Logros',
+        mkt: '📊 Marketing App Store', legal: '📄 Legal',
+        search: 'Buscar juegos, M-series, Ray Tracing…', searchAria: 'Buscar juegos',
+        bell: 'Notificaciones', cont: 'Continuidad: iPhone 16 Pro Max', level: 'Nivel 4' };
   const link = (href, label, key, badge = '') =>
     `<a class="nav-link${active === key ? ' active' : ''}" href="${href}">${label}${badge}</a>`;
   return `
@@ -50,18 +62,18 @@ function header({ root, active = '' }) {
         <div class="logo">S</div>
         <div>
           <div class="brand-name">Store Gaming <span class="brand-tag">TECH</span></div>
-          <div class="brand-sub">Sistema ${esc(SITE.brand)} · ${esc(SITE.owner)}</div>
+          <div class="brand-sub">${T.sub} ${esc(SITE.brand)} · ${esc(SITE.owner)}</div>
         </div>
       </a>
       <div class="search">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
         </svg>
-        <input id="search" type="search" placeholder="Buscar juegos, M-series, Ray Tracing…" aria-label="Buscar juegos">
+        <input id="search" type="search" placeholder="${T.search}" aria-label="${T.searchAria}">
       </div>
       <div class="header-right">
-        <div class="continuity"><span class="dot"></span> Continuidad: iPhone 16 Pro Max</div>
-        <button class="bell" aria-label="Notificaciones">
+        <div class="continuity"><span class="dot"></span> ${T.cont}</div>
+        <button class="bell" aria-label="${T.bell}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/>
           </svg>
@@ -70,7 +82,7 @@ function header({ root, active = '' }) {
         <div class="profile">
           <div class="avatar">DG</div>
           <span class="profile-name">Dustin Gamer</span>
-          <span class="level">Nivel 4</span>
+          <span class="level">${T.level}</span>
         </div>
       </div>
     </div>
@@ -78,30 +90,31 @@ function header({ root, active = '' }) {
   <nav>
     <div class="wrap">
       <div class="nav-inner">
-        ${link(root + 'index.html', '🎮 Espacio Juegos', 'catalogo')}
-        ${link(root + 'index.html#catalogo', '🏷️ Ofertas Exclusivas', 'ofertas', ' <span class="nav-badge">HOY</span>')}
-        ${link(root + 'index.html#catalogo', '📰 Lanzamientos &amp; News', 'news')}
-        ${link(root + 'index.html#catalogo', '💬 Foro Comunidad', 'foro')}
-        ${link(root + 'index.html#sync', '✨ Mi Perfil &amp; Logros', 'perfil')}
-        ${link(root + 'index.html#catalogo', '📊 Marketing App Store', 'marketing')}
-        ${link(root + 'index.html#legal', '📄 Legal', 'legal')}
+        ${link(root + 'index.html', T.games, 'catalogo')}
+        ${link(root + 'index.html#catalogo', T.deals, 'ofertas', ` <span class="nav-badge">${T.badge}</span>`)}
+        ${link(root + 'index.html#catalogo', T.news, 'news')}
+        ${link(root + 'index.html#catalogo', T.forum, 'foro')}
+        ${link(root + 'index.html#sync', T.profile, 'perfil')}
+        ${link(root + 'index.html#catalogo', T.mkt, 'marketing')}
+        ${link(root + 'index.html#legal', T.legal, 'legal')}
       </div>
     </div>
   </nav>
 </header>`;
 }
 
-function footer({ root, game }) {
+function footer({ root, game, lang = 'es' }) {
+  const en = lang === 'en';
   const base = game ? `${root}juegos/${game.slug}/` : '';
   const legal = game ? `
       <div>
         <h4>${esc(game.title)}</h4>
         <ul>
-          <li><a href="${base}index.html">Ficha técnica y benchmarks</a></li>
-          <li><a href="${base}privacidad.html">Política de privacidad</a></li>
-          <li><a href="${base}terminos.html">Términos de uso y EULA</a></li>
-          <li><a href="${base}marketing.html">Página de marketing</a></li>
-          <li><a href="${base}contacto.html">Soporte y contacto</a></li>
+          <li><a href="${base}index.html">${en ? 'Game page and benchmarks' : 'Ficha técnica y benchmarks'}</a></li>
+          <li><a href="${base}privacidad.html">${en ? 'Privacy policy' : 'Política de privacidad'}</a></li>
+          <li><a href="${base}terminos.html">${en ? 'Terms of use and EULA' : 'Términos de uso y EULA'}</a></li>
+          <li><a href="${base}marketing.html">${en ? 'Marketing page' : 'Página de marketing'}</a></li>
+          <li><a href="${base}contacto.html">${en ? 'Support and contact' : 'Soporte y contacto'}</a></li>
         </ul>
       </div>` : `
       <div>
@@ -120,10 +133,10 @@ function footer({ root, game }) {
     <div class="footer-cols">
       <div>
         <h4>${esc(SITE.name)}</h4>
-        <p>Espacio tecnológico de reseñas, rendimiento en Apple Silicon, lanzamientos y ofertas de la App Store.</p>
+        <p>${en ? 'Technical reviews, Apple Silicon performance, releases and App Store deals.' : 'Espacio tecnológico de reseñas, rendimiento en Apple Silicon, lanzamientos y ofertas de la App Store.'}</p>
       </div>
       <div>
-        <h4>Sistema de identidad ${esc(SITE.brand)}</h4>
+        <h4>${en ? 'Identity system' : 'Sistema de identidad'} ${esc(SITE.brand)}</h4>
         <ul>
           <li><a href="https://${SITE.site}" rel="noopener">${esc(SITE.site)}</a></li>
           <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
@@ -132,8 +145,10 @@ function footer({ root, game }) {
       ${legal}
     </div>
     <div class="footer-bottom">
-      <p>© 2026 ${esc(SITE.owner)}. Sitio independiente de reseñas técnicas, no afiliado ni asociado con Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX y Apple Arcade son marcas registradas de Apple Inc. Los nombres de juegos y estudios pertenecen a sus respectivos propietarios. Precios, descuentos y códigos con fines demostrativos.</p>
-      <span class="status"><span class="dot"></span> Estado del servidor: activo</span>
+      <p>${en
+        ? `© 2026 ${esc(SITE.owner)}. Independent technical review site, not affiliated with or endorsed by Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX and Apple Arcade are trademarks of Apple Inc. Game and studio names belong to their respective owners. Prices, discounts and codes are for demonstration purposes.`
+        : `© 2026 ${esc(SITE.owner)}. Sitio independiente de reseñas técnicas, no afiliado ni asociado con Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX y Apple Arcade son marcas registradas de Apple Inc. Los nombres de juegos y estudios pertenecen a sus respectivos propietarios. Precios, descuentos y códigos con fines demostrativos.`}</p>
+      <span class="status"><span class="dot"></span> ${en ? 'Server status: online' : 'Estado del servidor: activo'}</span>
     </div>
   </div>
 </footer>`;
@@ -175,12 +190,14 @@ ${close()}`;
 // Las páginas en inglés viven en juegos/<slug>/en/ y solo se generan para los
 // juegos que declaran 'en' en su campo `langs`.
 
+// Un juego con lang: 'en' publica TODAS sus páginas en inglés, en las mismas
+// rutas de siempre. No hay versión doble: una sola página por documento.
 const EN_FILES = [
-  ['../index.html', 'Game page'],
-  ['privacy.html', 'Privacy'],
-  ['terms.html', 'Terms & EULA'],
+  ['index.html', 'Game page'],
+  ['privacidad.html', 'Privacy'],
+  ['terminos.html', 'Terms & EULA'],
   ['marketing.html', 'Marketing'],
-  ['contact.html', 'Support & contact']
+  ['contacto.html', 'Support & contact']
 ];
 
 function docNavEn(current) {
@@ -192,17 +209,26 @@ function docNavEn(current) {
 
 function crumbsEn(g, current) {
   return `<div class="crumbs">
-    <a href="../../../index.html">Games</a><span>/</span>
-    <a href="../index.html">${esc(g.title)}</a><span>/</span><span>${esc(current)}</span>
+    <a href="../../index.html">Games</a><span>/</span>
+    ${current ? `<a href="index.html">${esc(g.title)}</a><span>/</span><span>${esc(current)}</span>`
+              : `<span>${esc(g.title)}</span>`}
   </div>`;
 }
 
-// Enlace al mismo documento en el otro idioma.
-function langSwitch(to, href) {
-  return `<div class="lang-switch">
-    <span>${to === 'en' ? 'Read this page in' : 'Lee esta página en'}</span>
-    <a href="${href}">${to === 'en' ? 'English' : 'Español'}</a>
-  </div>`;
+// Redirección desde las rutas /en/ antiguas hacia el documento único.
+function redirectTo(target) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="0; url=../${target}">
+<link rel="canonical" href="../${target}">
+<title>Redirecting…</title>
+</head>
+<body>
+<p>This page has moved to <a href="../${target}">../${target}</a>.</p>
+</body>
+</html>`;
 }
 
 // Navegación entre las páginas internas de un juego.
@@ -493,14 +519,6 @@ ${promo}
     <h2>📄 Documentación legal y App Store</h2>
     <p style="color:var(--text-dim);max-width:70ch">Esta aplicación cuenta con URLs propias e independientes para cada documento requerido por las directrices de revisión de Apple:</p>
     ${docNav(g, 'index.html')}
-    ${(g.langs || []).includes('en')
-      ? `<p style="color:var(--text-dim);margin-top:18px">Estos documentos están también disponibles en inglés:</p>
-    <div class="doc-nav" style="border:none;padding-top:0;margin-top:10px">
-      <a class="cta-ghost" href="en/privacy.html">Privacy (EN)</a>
-      <a class="cta-ghost" href="en/terms.html">Terms &amp; EULA (EN)</a>
-      <a class="cta-ghost" href="en/marketing.html">Marketing (EN)</a>
-      <a class="cta-ghost" href="en/contact.html">Support (EN)</a>
-    </div>` : ''}
   </section>
 </main>
 ${footer({ root: '../../', game: g })}
@@ -843,18 +861,111 @@ ${close()}`;
 
 // ---------------------------------------------------------------- páginas EN
 
+function pageGameEn(g) {
+  const off = discountOf(g);
+  const badges = [];
+  if (off > 0) badges.push(`<span class="badge badge-discount">-${off}% off</span>`);
+  if (g.today) badges.push('<span class="badge badge-free">Free today!</span>');
+  if (g.arcade) badges.push('<span class="badge badge-arcade">Apple Arcade</span>');
+  if (g.own) badges.push('<span class="badge badge-own">Our app</span>');
+  if (g.soon) badges.push('<span class="badge badge-soon">Coming soon to the App Store</span>');
+  badges.push(`<span class="badge badge-cat">${esc(g.catEn || g.cat)}</span>`);
+
+  const store = g.appStore
+    ? `<a class="cta" href="${esc(g.appStore)}" rel="noopener">View on the App Store</a>`
+    : '';
+
+  return `${head({
+    title: `${g.title} · Review and benchmarks · ${SITE.name}`,
+    desc: g.descEn || g.desc,
+    root: '../../', lang: 'en'
+  })}
+${header({ root: '../../', active: 'catalogo', lang: 'en' })}
+
+<main class="wrap">
+  ${crumbsEn(g, null)}
+
+  <section class="game-head">
+    <div class="card-top">${badges.join('')}</div>
+    <h1>${esc(g.title)}</h1>
+    <p class="lede">${esc(g.descEn || g.desc)} Developed by ${esc(g.studio)}.</p>
+    ${g.introEn ? `<p class="lede">${esc(g.introEn)}</p>` : ''}
+    <div class="head-meta">
+      ${g.reviews === 0
+        ? '<span class="rating"><span class="count">No reviews yet</span></span>'
+        : `<span class="rating"><span class="score">${g.rating.toFixed(1)}</span>
+        <span class="count">(${g.reviews.toLocaleString('en-US')} reviews)</span></span>`}
+      <div class="price-row" style="border:none;padding:0">
+        ${g.old > g.price ? `<span class="price-old">${money(g.old)}</span>` : ''}
+        <span class="price-new${g.price === 0 ? ' free' : ''}">${g.price === 0 ? 'FREE' : money(g.price)}</span>
+      </div>
+      <div class="head-actions">
+        ${store}
+        <a class="cta-ghost" href="contacto.html">Support</a>
+      </div>
+    </div>
+  </section>
+
+  ${g.howtoEn ? `<section class="section">
+    <h2>♟ How to play</h2>
+    <div class="bench-grid">
+      ${g.howtoEn.map(([k, v]) => `<div class="bench-cell"><p class="k">${esc(k)}</p><p class="v soft">${esc(v)}</p></div>`).join('\n      ')}
+    </div>
+  </section>` : ''}
+
+  <section class="section">
+    <h2>⚡ Performance on Apple Silicon</h2>
+    <div class="bench-grid">
+      <div class="bench-cell"><p class="k">Average frame rate</p><p class="v hl">${g.fps} FPS</p></div>
+      <div class="bench-cell"><p class="k">Recommended chip</p><p class="v">${esc(g.benchEn?.cpu || g.bench.cpu)}</p></div>
+      <div class="bench-cell"><p class="k">Graphics library</p><p class="v">${esc(g.bench.gfx)}</p></div>
+      <div class="bench-cell"><p class="k">Ray tracing</p><p class="v">${g.bench.rt === 'No' ? 'No' : 'Yes (hardware)'}</p></div>
+      <div class="bench-cell"><p class="k">Battery efficiency</p><p class="v">${esc(g.benchEn?.battery || g.bench.battery)}</p></div>
+      <div class="bench-cell"><p class="k">Storage</p><p class="v">${esc(g.benchEn?.storage || g.bench.storage)}</p></div>
+      <div class="bench-cell"><p class="k">Controls</p><p class="v">${esc(g.benchEn?.gamepad || g.bench.gamepad)}</p></div>
+      <div class="bench-cell"><p class="k">Platforms</p><p class="v">${esc(g.plats.join(' · '))}</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prosandcons">
+      <div class="pc-box pros">
+        <h3>✓ Strengths</h3>
+        <ul>${(g.prosEn || g.pros).map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+      </div>
+      <div class="pc-box cons">
+        <h3>! Things to consider</h3>
+        <ul>${(g.consEn || g.cons).map(c => `<li>${esc(c)}</li>`).join('')}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🏆 Editorial verdict</h2>
+    <div class="verdict">${(g.verdictEn || g.verdict).map(p => `<p>${esc(p)}</p>`).join('\n      ')}</div>
+  </section>
+
+  <section class="section">
+    <h2>📄 Legal and App Store documentation</h2>
+    <p style="color:var(--text-dim);max-width:70ch">This app has its own public, independent URL for every document required by Apple's review guidelines:</p>
+    ${docNavEn('index.html')}
+  </section>
+</main>
+${footer({ root: '../../', game: g, lang: 'en' })}
+${close()}`;
+}
+
 function pagePrivacyEn(g) {
   const n = esc(g.title);
   return `${head({
     title: `Privacy Policy — ${g.title}`,
     desc: `Privacy policy for ${g.title}: what data the app handles, what it is used for and what you can do about it.`,
-    root: '../../../'
+    root: '../../', lang: 'en'
   })}
-${header({ root: '../../../', active: 'legal' })}
+${header({ root: '../../', active: 'legal', lang: 'en' })}
 
 <main class="wrap wrap-narrow doc">
   ${crumbsEn(g, 'Privacy')}
-  ${langSwitch('es', '../privacidad.html')}
 
   <div class="doc-head">
     <div class="eyebrow">🔒 App Store &amp; GDPR compliance</div>
@@ -909,9 +1020,9 @@ ${header({ root: '../../../', active: 'legal' })}
   <p>If this policy changes, this page will be updated along with its date, as will the equivalent text inside the app.</p>
   <p>For any question: <a href="mailto:${SITE.email}">${SITE.email}</a></p>
 
-  ${docNavEn('privacy.html')}
+  ${docNavEn('privacidad.html')}
 </main>
-${footer({ root: '../../../', game: g })}
+${footer({ root: '../../', game: g, lang: 'en' })}
 ${close()}`;
 }
 
@@ -920,13 +1031,12 @@ function pageTermsEn(g) {
   return `${head({
     title: `Terms of Use and EULA — ${g.title}`,
     desc: `Terms of use, conditions and end user licence agreement (EULA) for ${g.title}.`,
-    root: '../../../'
+    root: '../../', lang: 'en'
   })}
-${header({ root: '../../../', active: 'legal' })}
+${header({ root: '../../', active: 'legal', lang: 'en' })}
 
 <main class="wrap wrap-narrow doc">
   ${crumbsEn(g, 'Terms & EULA')}
-  ${langSwitch('es', '../terminos.html')}
 
   <div class="doc-head">
     <div class="eyebrow">📄 Terms, conditions and EULA</div>
@@ -982,27 +1092,26 @@ ${header({ root: '../../../', active: 'legal' })}
   <p>These terms may be updated; the version in force is always the one published in the app and on this page, with its date.</p>
   <p>For any question: <a href="mailto:${SITE.email}">${SITE.email}</a></p>
 
-  ${docNavEn('terms.html')}
+  ${docNavEn('terminos.html')}
 </main>
-${footer({ root: '../../../', game: g })}
+${footer({ root: '../../', game: g, lang: 'en' })}
 ${close()}`;
 }
 
 function pageMarketingEn(g) {
   const store = g.appStore
     ? `<a class="cta" href="${esc(g.appStore)}" rel="noopener">View on the App Store</a>`
-    : '<a class="cta" href="../index.html">View game page</a>';
+    : '<a class="cta" href="index.html">View game page</a>';
 
   return `${head({
     title: `${g.title} — Official page`,
     desc: g.descEn || g.desc,
-    root: '../../../'
+    root: '../../', lang: 'en'
   })}
-${header({ root: '../../../', active: 'marketing' })}
+${header({ root: '../../', active: 'marketing', lang: 'en' })}
 
 <main class="wrap">
   ${crumbsEn(g, 'Marketing')}
-  ${langSwitch('es', '../marketing.html')}
 
   <section class="hero">
     <div class="eyebrow">📊 Marketing page · App Store</div>
@@ -1016,7 +1125,7 @@ ${header({ root: '../../../', active: 'marketing' })}
     </div>
     <div class="head-actions" style="margin-top:26px">
       ${store}
-      <a class="cta-ghost" href="contact.html">Support &amp; FAQ</a>
+      <a class="cta-ghost" href="contacto.html">Support &amp; FAQ</a>
     </div>
   </section>
 
@@ -1051,7 +1160,7 @@ ${header({ root: '../../../', active: 'marketing' })}
     ${docNavEn('marketing.html')}
   </section>
 </main>
-${footer({ root: '../../../', game: g })}
+${footer({ root: '../../', game: g, lang: 'en' })}
 ${close()}`;
 }
 
@@ -1079,13 +1188,12 @@ function pageContactEn(g) {
   return `${head({
     title: `Support and contact — ${g.title}`,
     desc: `Support, frequently asked questions and contact for ${g.title}. Email us at ${SITE.email}.`,
-    root: '../../../'
+    root: '../../', lang: 'en'
   })}
-${header({ root: '../../../', active: 'legal' })}
+${header({ root: '../../', active: 'legal', lang: 'en' })}
 
 <main class="wrap wrap-narrow doc">
   ${crumbsEn(g, 'Support & contact')}
-  ${langSwitch('es', '../contacto.html')}
 
   <div class="doc-head">
     <div class="eyebrow">💬 Support and frequently asked questions</div>
@@ -1133,9 +1241,9 @@ ${header({ root: '../../../', active: 'legal' })}
     </table>
   </div>
 
-  ${docNavEn('contact.html')}
+  ${docNavEn('contacto.html')}
 </main>
-${footer({ root: '../../../', game: g })}
+${footer({ root: '../../', game: g, lang: 'en' })}
 ${close()}`;
 }
 
@@ -1153,18 +1261,22 @@ written.push(write('index.html', pageIndex()));
 
 for (const g of GAMES) {
   const dir = `juegos/${g.slug}`;
-  written.push(write(`${dir}/index.html`, pageGame(g)));
-  written.push(write(`${dir}/privacidad.html`, pagePrivacy(g)));
-  written.push(write(`${dir}/terminos.html`, pageTerms(g)));
-  written.push(write(`${dir}/marketing.html`, pageMarketing(g)));
-  written.push(write(`${dir}/contacto.html`, pageContact(g)));
+  const en = g.lang === 'en';
 
-  if ((g.langs || []).includes('en')) {
-    written.push(write(`${dir}/en/privacy.html`, pagePrivacyEn(g)));
-    written.push(write(`${dir}/en/terms.html`, pageTermsEn(g)));
-    written.push(write(`${dir}/en/marketing.html`, pageMarketingEn(g)));
-    written.push(write(`${dir}/en/contact.html`, pageContactEn(g)));
+  written.push(write(`${dir}/index.html`, en ? pageGameEn(g) : pageGame(g)));
+  written.push(write(`${dir}/privacidad.html`, en ? pagePrivacyEn(g) : pagePrivacy(g)));
+  written.push(write(`${dir}/terminos.html`, en ? pageTermsEn(g) : pageTerms(g)));
+  written.push(write(`${dir}/marketing.html`, en ? pageMarketingEn(g) : pageMarketing(g)));
+  written.push(write(`${dir}/contacto.html`, en ? pageContactEn(g) : pageContact(g)));
+
+  // Las rutas /en/ antiguas redirigen al documento único.
+  if (en) {
+    for (const [from, to] of [['privacy', 'privacidad'], ['terms', 'terminos'],
+                              ['marketing', 'marketing'], ['contact', 'contacto']]) {
+      written.push(write(`${dir}/en/${from}.html`, redirectTo(`${to}.html`)));
+    }
   }
+
 }
 
 console.log(`✓ ${written.length} páginas generadas para ${GAMES.length} juegos`);

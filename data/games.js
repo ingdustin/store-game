@@ -503,10 +503,39 @@ GAMES.push({
   fps: 60, tech: 'Metal 2',
   old: 0, price: 0,
   own: true,
-  langs: ['es', 'en'],
+  lang: 'en',
   appId: '6801892843',
   appStore: 'https://apps.apple.com/us/app/blockmix-puzzle-trio/id6801892843',
   intro: 'Blockmix Trio es un rompecabezas de bloques: en cada ronda recibes tres piezas y debes encajarlas en la cuadrícula. Cada fila o columna que completas se despeja y te devuelve espacio. No hay reloj ni cuenta atrás: la partida termina cuando ninguna de las tres piezas cabe en el tablero, así que cada colocación es una decisión sobre el hueco que dejas para la siguiente.',
+  // Versión en inglés: este juego publica todas sus páginas en ese idioma.
+  catEn: 'Puzzle',
+  descEn: 'Three pieces per round: fit them into the grid and clear lines before you run out of room.',
+  introEn: 'Blockmix Trio is a block puzzle: every round hands you three pieces to fit into the grid. Each row or column you complete clears out and gives the space back. There is no clock and no countdown — the game ends when none of the three pieces fits any more, so every placement is really a decision about the gap you leave for the next one.',
+  benchEn: {
+    cpu: 'To be confirmed at launch',
+    battery: 'To be confirmed at launch',
+    storage: 'To be confirmed at launch',
+    gamepad: 'Touch'
+  },
+  prosEn: [
+    'Short games you can pick up and drop at any moment, with no timer and no pressure',
+    'Rules you grasp in ten seconds and a hard decision on every turn',
+    'Plays one-handed, in portrait, and works offline'
+  ],
+  consEn: [
+    'The genre rewards planning: placing on impulse ends the game quickly',
+    'No verified performance figures until the app is published'
+  ],
+  verdictEn: [
+    'A classic block puzzle that knows exactly what it is: three pieces a round, a grid that keeps filling up, and the tension of working out whether what comes next will still fit.',
+    'The appeal of the genre is foresight rather than dexterity, which is why it works so well in odd spare moments. With no clock running, a game lasts exactly as long as your planning holds up.'
+  ],
+  howtoEn: [
+    ['The grid', 'Pieces are placed on an empty grid. They cannot be rotated, and once placed they stay where they are.'],
+    ['Three at a time', 'Each round gives you three pieces. You may place them in any order, and a new set arrives only once all three are down.'],
+    ['Clearing lines', 'Complete a full row or column and it clears, freeing the space back up for what comes next.'],
+    ['The end', 'The game is over when none of the pieces you are holding fits anywhere on the grid.']
+  ],
   bench: {
     cpu: 'Por confirmar en el lanzamiento',
     gfx: 'Metal 2',
