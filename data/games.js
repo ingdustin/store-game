@@ -6,6 +6,8 @@ const SITE = {
   name: 'Store Gaming Tech',
   brand: 'Cuatro Señales',
   owner: 'Ing. Dustin Díaz',
+  // Titular del copyright que aparece en el pie de todas las páginas.
+  copyright: 'Orange Agencia',
   email: 'info@ddagencia.com',
   site: 'ingdustindiaz.com',
   updated: '17 de agosto de 2026',

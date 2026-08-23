@@ -146,8 +146,8 @@ function footer({ root, game, lang = 'es' }) {
     </div>
     <div class="footer-bottom">
       <p>${en
-        ? `© 2026 ${esc(SITE.owner)}. Independent technical review site, not affiliated with or endorsed by Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX and Apple Arcade are trademarks of Apple Inc. Game and studio names belong to their respective owners. Prices, discounts and codes are for demonstration purposes.`
-        : `© 2026 ${esc(SITE.owner)}. Sitio independiente de reseñas técnicas, no afiliado ni asociado con Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX y Apple Arcade son marcas registradas de Apple Inc. Los nombres de juegos y estudios pertenecen a sus respectivos propietarios. Precios, descuentos y códigos con fines demostrativos.`}</p>
+        ? `© 2026 ${esc(SITE.copyright)}. Independent technical review site, not affiliated with or endorsed by Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX and Apple Arcade are trademarks of Apple Inc. Game and studio names belong to their respective owners. Prices, discounts and codes are for demonstration purposes.`
+        : `© 2026 ${esc(SITE.copyright)}. Sitio independiente de reseñas técnicas, no afiliado ni asociado con Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX y Apple Arcade son marcas registradas de Apple Inc. Los nombres de juegos y estudios pertenecen a sus respectivos propietarios. Precios, descuentos y códigos con fines demostrativos.`}</p>
       <span class="status"><span class="dot"></span> ${en ? 'Server status: online' : 'Estado del servidor: activo'}</span>
     </div>
   </div>
