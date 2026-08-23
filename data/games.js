@@ -498,10 +498,10 @@ GAMES.push({
   title: 'Block Puzzle: Blockmix Trio',
   studio: 'Ing. Dustin Díaz · Cuatro Señales',
   cat: 'Estrategia',
-  plats: ['iPhone', 'iPad'],
+  plats: ['iPhone'],
   // Sin reseñas todavía: la app aún no está publicada en la App Store.
   rating: 0, reviews: 0, soon: true,
-  desc: 'Tres piezas por ronda: encájalas en la cuadrícula y despeja líneas antes de quedarte sin hueco.',
+  desc: 'Tres piezas por ronda en tableros de bloques, hexágonos y deslizamiento: encájalas y limpia líneas antes de quedarte sin sitio.',
   fps: 60, tech: 'Metal 2',
   old: 0, price: 0,
   own: true,
@@ -511,8 +511,8 @@ GAMES.push({
   intro: 'Blockmix Trio es un rompecabezas de bloques: en cada ronda recibes tres piezas y debes encajarlas en la cuadrícula. Cada fila o columna que completas se despeja y te devuelve espacio. No hay reloj ni cuenta atrás: la partida termina cuando ninguna de las tres piezas cabe en el tablero, así que cada colocación es una decisión sobre el hueco que dejas para la siguiente.',
   // Versión en inglés: este juego publica todas sus páginas en ese idioma.
   catEn: 'Puzzle',
-  descEn: 'Three pieces per round: fit them into the grid and clear lines before you run out of room.',
-  introEn: 'Blockmix Trio is a block puzzle: every round hands you three pieces to fit into the grid. Each row or column you complete clears out and gives the space back. There is no clock and no countdown — the game ends when none of the three pieces fits any more, so every placement is really a decision about the gap you leave for the next one.',
+  descEn: 'Three pieces per round across block, hex and sliding boards: fit them in and clear lines before you run out of room.',
+  introEn: 'Blockmix hands you three pieces every round and asks you to fit them into the board. Complete a line and it clears, giving the space back. There is no clock: the game ends when none of the pieces fits any more, so every placement is really a decision about the gap you leave for the next one. Beyond the classic block board it also plays on hex and sliding boards, and a leaderboard tracks best scores.',
   benchEn: {
     cpu: 'To be confirmed at launch',
     battery: 'To be confirmed at launch',
@@ -520,17 +520,19 @@ GAMES.push({
     gamepad: 'Touch'
   },
   prosEn: [
-    'Short games you can pick up and drop at any moment, with no timer and no pressure',
-    'Rules you grasp in ten seconds and a hard decision on every turn',
-    'Plays one-handed, in portrait, and works offline'
+    'Three board types in one app: block, hex and sliding',
+    'Every mode runs offline; only the leaderboard needs a connection',
+    'No timer and no pressure — games are as short or long as your planning holds up',
+    'Ads are non-personalised, and Remove ads or a VIP subscription takes them away entirely'
   ],
   consEn: [
-    'The genre rewards planning: placing on impulse ends the game quickly',
+    'No cloud backup: uninstalling the app loses your progress and your items for good',
+    'The genre rewards planning — placing on impulse ends a game quickly',
     'No verified performance figures until the app is published'
   ],
   verdictEn: [
-    'A classic block puzzle that knows exactly what it is: three pieces a round, a grid that keeps filling up, and the tension of working out whether what comes next will still fit.',
-    'The appeal of the genre is foresight rather than dexterity, which is why it works so well in odd spare moments. With no clock running, a game lasts exactly as long as your planning holds up.'
+    'A block puzzle that knows exactly what it is — three pieces a round, a board that keeps filling up, and the tension of working out whether what comes next will still fit — stretched across block, hex and sliding variants.',
+    'Everything runs on the device, with only the leaderboard reaching a server, and that upload is limited to a nickname, a best score and a timestamp. The free tier is ad-supported, with a one-off Remove ads purchase and an annual Blockmix VIP subscription as the ways to drop the advertising.'
   ],
   howtoEn: [
     ['The grid', 'Pieces are placed on an empty grid. They cannot be rotated, and once placed they stay where they are.'],

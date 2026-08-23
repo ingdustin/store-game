@@ -215,6 +215,22 @@ function crumbsEn(g, current) {
   </div>`;
 }
 
+// Igual que customPage, para juegos que publican en inglés.
+function customPageEn(g, file, { title, desc, crumb }) {
+  const body = customDoc(g, file);
+  if (!body) return null;
+  return `${head({ title, desc, root: '../../', lang: 'en' })}
+${header({ root: '../../', active: 'legal', lang: 'en' })}
+
+<main class="wrap wrap-narrow doc">
+  ${crumbsEn(g, crumb)}
+  ${body}
+  ${docNavEn(file)}
+</main>
+${footer({ root: '../../', game: g, lang: 'en' })}
+${close()}`;
+}
+
 // Redirección desde las rutas /en/ antiguas hacia el documento único.
 function redirectTo(target) {
   return `<!DOCTYPE html>
@@ -957,6 +973,12 @@ ${close()}`;
 
 function pagePrivacyEn(g) {
   const n = esc(g.title);
+  const own = customPageEn(g, 'privacidad.html', {
+    title: `Privacy Policy — ${g.title}`,
+    desc: `Privacy policy for ${g.title}.`,
+    crumb: 'Privacy'
+  });
+  if (own) return own;
   return `${head({
     title: `Privacy Policy — ${g.title}`,
     desc: `Privacy policy for ${g.title}: what data the app handles, what it is used for and what you can do about it.`,
@@ -1028,6 +1050,12 @@ ${close()}`;
 
 function pageTermsEn(g) {
   const n = esc(g.title);
+  const own = customPageEn(g, 'terminos.html', {
+    title: `Terms of Use and EULA — ${g.title}`,
+    desc: `Terms of use and end user licence agreement for ${g.title}.`,
+    crumb: 'Terms & EULA'
+  });
+  if (own) return own;
   return `${head({
     title: `Terms of Use and EULA — ${g.title}`,
     desc: `Terms of use, conditions and end user licence agreement (EULA) for ${g.title}.`,
