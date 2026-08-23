@@ -523,7 +523,7 @@ GAMES.push({
     'Three board types in one app: block, hex and sliding',
     'Every mode runs offline; only the leaderboard needs a connection',
     'No timer and no pressure — games are as short or long as your planning holds up',
-    'Ads are non-personalised, and Remove ads or a VIP subscription takes them away entirely'
+    'Ads are non-personalised, and a one-off Remove ads purchase drops them for good'
   ],
   consEn: [
     'No cloud backup: uninstalling the app loses your progress and your items for good',
@@ -532,7 +532,7 @@ GAMES.push({
   ],
   verdictEn: [
     'A block puzzle that knows exactly what it is — three pieces a round, a board that keeps filling up, and the tension of working out whether what comes next will still fit — stretched across block, hex and sliding variants.',
-    'Everything runs on the device, with only the leaderboard reaching a server, and that upload is limited to a nickname, a best score and a timestamp. The free tier is ad-supported, with a one-off Remove ads purchase and an annual Blockmix VIP subscription as the ways to drop the advertising.'
+    'Everything runs on the device, with only the leaderboard reaching a server, and that upload is limited to a nickname, a best score and a timestamp. The free tier is ad-supported: a one-off Remove ads purchase clears the advertising permanently, and two annual plans — Blockmix No Ads and Blockmix VIP — bundle it with daily coins, wheel spins and, on VIP, unlimited lives and every skin.'
   ],
   howtoEn: [
     ['The grid', 'Pieces are placed on an empty grid. They cannot be rotated, and once placed they stay where they are.'],
