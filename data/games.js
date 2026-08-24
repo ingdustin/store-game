@@ -506,6 +506,11 @@ GAMES.push({
   old: 0, price: 0,
   own: true,
   lang: 'en',
+  // Estas páginas están declaradas en App Store Connect como la política,
+  // el EULA y el soporte de la app: su pie debe acreditar al responsable
+  // del documento, no al portal de reseñas.
+  shortName: 'Blockmix',
+  legalFooter: true,
   appId: '6801892843',
   appStore: 'https://apps.apple.com/us/app/blockmix-puzzle-trio/id6801892843',
   intro: 'Blockmix Trio es un rompecabezas de bloques: en cada ronda recibes tres piezas y debes encajarlas en la cuadrícula. Cada fila o columna que completas se despeja y te devuelve espacio. No hay reloj ni cuenta atrás: la partida termina cuando ninguna de las tres piezas cabe en el tablero, así que cada colocación es una decisión sobre el hueco que dejas para la siguiente.',

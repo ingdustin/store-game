@@ -716,3 +716,9 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0 44px; margin-to
   transition: border-color .16s, background .16s;
 }
 .lang-switch a:hover { border-color: #39425c; background: var(--card); }
+
+/* Pie de las páginas declaradas como documentos legales de una app */
+.footer-bottom.legal-note { display: block; }
+.footer-bottom.legal-note p { margin: 0 0 10px; max-width: 82ch; }
+.footer-bottom.legal-note p:last-child { margin-bottom: 0; }
+.footer-bottom.legal-note a { color: #7cb0ff; text-decoration: underline; text-underline-offset: 2px; }

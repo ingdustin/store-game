@@ -103,7 +103,25 @@ function header({ root, active = '', lang = 'es' }) {
 </header>`;
 }
 
-function footer({ root, game, lang = 'es' }) {
+// Pie para las páginas declaradas en App Store Connect como documentos de la
+// app. Acredita al responsable del documento y retira lo que pertenece al
+// portal de reseñas: el crédito a un tercero, el aviso de precios de muestra
+// y el indicador de estado del servidor.
+function docFooterBottom(game, en) {
+  const name = game.shortName ? `${esc(game.shortName)} — ${esc(game.title)}` : esc(game.title);
+  return en
+    ? `<div class="footer-bottom legal-note">
+      <p>© 2026 ${esc(SITE.owner)}. ${name} is developed and published by ${esc(SITE.owner)}. This is the official page for the document above. Contact: <a href="mailto:${SITE.email}">${SITE.email}</a></p>
+      <p>Apple, iPhone and App Store are trademarks of Apple Inc. This app is not affiliated with, sponsored or endorsed by Apple Inc. Prices are set by the App Store in each country's own currency.</p>
+    </div>`
+    : `<div class="footer-bottom legal-note">
+      <p>© 2026 ${esc(SITE.owner)}. ${name} está desarrollada y publicada por ${esc(SITE.owner)}. Esta es la página oficial del documento anterior. Contacto: <a href="mailto:${SITE.email}">${SITE.email}</a></p>
+      <p>Apple, iPhone y App Store son marcas comerciales de Apple Inc. Esta aplicación no está afiliada a Apple Inc., ni patrocinada ni respaldada por Apple Inc. Los precios los fija App Store en la moneda de cada país.</p>
+    </div>`;
+}
+
+// `doc: true` marca una página legal de la app (privacidad, términos, soporte).
+function footer({ root, game, lang = 'es', doc = false }) {
   const en = lang === 'en';
   const base = game ? `${root}juegos/${game.slug}/` : '';
   const legal = game ? `
@@ -144,12 +162,12 @@ function footer({ root, game, lang = 'es' }) {
       </div>
       ${legal}
     </div>
-    <div class="footer-bottom">
+    ${doc && game && game.legalFooter ? docFooterBottom(game, en) : `<div class="footer-bottom">
       <p>${en
         ? `© 2026 ${esc(SITE.copyright)}. Independent technical review site, not affiliated with or endorsed by Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX and Apple Arcade are trademarks of Apple Inc. Game and studio names belong to their respective owners. Prices, discounts and codes are for demonstration purposes.`
         : `© 2026 ${esc(SITE.copyright)}. Sitio independiente de reseñas técnicas, no afiliado ni asociado con Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX y Apple Arcade son marcas registradas de Apple Inc. Los nombres de juegos y estudios pertenecen a sus respectivos propietarios. Precios, descuentos y códigos con fines demostrativos.`}</p>
       <span class="status"><span class="dot"></span> ${en ? 'Server status: online' : 'Estado del servidor: activo'}</span>
-    </div>
+    </div>`}
   </div>
 </footer>`;
 }
@@ -182,7 +200,7 @@ ${header({ root: '../../', active: 'legal' })}
   ${body}
   ${docNav(g, file)}
 </main>
-${footer({ root: '../../', game: g })}
+${footer({ root: '../../', game: g, doc: true })}
 ${close()}`;
 }
 
@@ -227,7 +245,7 @@ ${header({ root: '../../', active: 'legal', lang: 'en' })}
   ${body}
   ${docNavEn(file)}
 </main>
-${footer({ root: '../../', game: g, lang: 'en' })}
+${footer({ root: '../../', game: g, lang: 'en', doc: true })}
 ${close()}`;
 }
 
@@ -624,7 +642,7 @@ ${header({ root: '../../', active: 'legal' })}
 
   ${docNav(g, 'privacidad.html')}
 </main>
-${footer({ root: '../../', game: g })}
+${footer({ root: '../../', game: g, doc: true })}
 ${close()}`;
 }
 
@@ -704,7 +722,7 @@ ${header({ root: '../../', active: 'legal' })}
 
   ${docNav(g, 'terminos.html')}
 </main>
-${footer({ root: '../../', game: g })}
+${footer({ root: '../../', game: g, doc: true })}
 ${close()}`;
 }
 
@@ -871,7 +889,7 @@ ${header({ root: '../../', active: 'legal' })}
 
   ${docNav(g, 'contacto.html')}
 </main>
-${footer({ root: '../../', game: g })}
+${footer({ root: '../../', game: g, doc: true })}
 ${close()}`;
 }
 
@@ -1044,7 +1062,7 @@ ${header({ root: '../../', active: 'legal', lang: 'en' })}
 
   ${docNavEn('privacidad.html')}
 </main>
-${footer({ root: '../../', game: g, lang: 'en' })}
+${footer({ root: '../../', game: g, lang: 'en', doc: true })}
 ${close()}`;
 }
 
@@ -1122,7 +1140,7 @@ ${header({ root: '../../', active: 'legal', lang: 'en' })}
 
   ${docNavEn('terminos.html')}
 </main>
-${footer({ root: '../../', game: g, lang: 'en' })}
+${footer({ root: '../../', game: g, lang: 'en', doc: true })}
 ${close()}`;
 }
 
@@ -1271,7 +1289,7 @@ ${header({ root: '../../', active: 'legal', lang: 'en' })}
 
   ${docNavEn('contacto.html')}
 </main>
-${footer({ root: '../../', game: g, lang: 'en' })}
+${footer({ root: '../../', game: g, lang: 'en', doc: true })}
 ${close()}`;
 }
 
