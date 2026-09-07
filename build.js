@@ -21,6 +21,37 @@ const { SITE, SERVICES, HOW_WE_WORK, PROJECTS } = require('./data/site.js');
 
 const ROOT = __dirname;
 
+// ---------------------------------------------------------------- URLs congeladas
+//
+// Estas rutas están declaradas en App Store Connect y dentro de binarios ya
+// publicados. No se pueden mover, renombrar ni dejar de generar: una URL legal
+// caída es rechazo inmediato por Guideline 5.1.1, y no hay forma de corregirlo
+// sin publicar una versión nueva de la app.
+//
+// El build falla si alguna deja de producirse. No quitar entradas de esta lista.
+const FROZEN_URLS = [
+  'juegos/deducta-sudoku/index.html',
+  'juegos/deducta-sudoku/privacidad.html',
+  'juegos/deducta-sudoku/terminos.html',
+  'juegos/deducta-sudoku/contacto.html',
+  'juegos/deducta-sudoku/marketing.html',
+  'juegos/solitaire-klondike-spider/index.html',
+  'juegos/solitaire-klondike-spider/privacidad.html',
+  'juegos/solitaire-klondike-spider/terminos.html',
+  'juegos/solitaire-klondike-spider/contacto.html',
+  'juegos/solitaire-klondike-spider/marketing.html',
+  'juegos/asly-tic-tac-toe-xo-gomoku/index.html',
+  'juegos/asly-tic-tac-toe-xo-gomoku/privacidad.html',
+  'juegos/asly-tic-tac-toe-xo-gomoku/terminos.html',
+  'juegos/asly-tic-tac-toe-xo-gomoku/contacto.html',
+  'juegos/asly-tic-tac-toe-xo-gomoku/marketing.html',
+  // Blockmix: la ruta nueva. La antigua vive del 301 del .htaccess y de las
+  // páginas de respaldo, porque hay un binario en revisión que la enlaza.
+  'juegos/blockmix/privacidad.html',
+  'juegos/blockmix/terminos.html',
+  'juegos/blockmix/contacto.html'
+];
+
 const esc = s => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
@@ -481,6 +512,24 @@ function write(file, content) {
   return file;
 }
 
+// Redirección estática, como respaldo de las reglas del .htaccess.
+function redirectPage(dest, title) {
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="0; url=${dest}">
+<link rel="canonical" href="${dest}">
+<meta name="robots" content="noindex">
+<title>${esc(title)}</title>
+</head>
+<body>
+<p>Esta página se ha movido a <a href="${dest}">${dest}</a>.</p>
+</body>
+</html>
+`;
+}
+
 const written = [];
 written.push(write('index.html', pageHome()));
 written.push(write('404.html', page404()));
@@ -491,6 +540,10 @@ for (const p of PROJECTS) {
   const dir = `juegos/${p.slug}`;
   written.push(write(`${dir}/index.html`, pageProject(p)));
   written.push(write(`${dir}/contacto.html`, pageSupport(p)));
+
+  // marketing.html existía antes y puede estar declarada como Marketing URL
+  // en App Store Connect: se conserva, apuntando a la página del proyecto.
+  written.push(write(`${dir}/marketing.html`, redirectPage('index.html', p.name)));
 
   const priv = pageLegal(p, 'privacy', {
     titleEs: 'Política de privacidad', titleEn: 'Privacy Policy', file: 'privacidad.html'
@@ -506,7 +559,19 @@ for (const p of PROJECTS) {
   else sinDoc.push(`${p.slug}: faltan términos`);
 }
 
+// Guarda: ninguna URL congelada puede dejar de existir.
+const perdidas = FROZEN_URLS.filter(u => !fs.existsSync(path.join(ROOT, u)));
+if (perdidas.length) {
+  console.error('\n✗ FALTAN URLs QUE NO PUEDEN ROMPERSE');
+  console.error('  Están declaradas en App Store Connect y en binarios ya publicados.');
+  console.error('  Perderlas es rechazo por Guideline 5.1.1 y no se corrige sin publicar');
+  console.error('  una versión nueva de la app.\n');
+  perdidas.forEach(u => console.error(`   falta  ${u}`));
+  process.exit(1);
+}
+
 console.log(`✓ ${written.length} páginas generadas para ${PROJECTS.length} proyectos`);
+console.log(`✓ ${FROZEN_URLS.length} URLs congeladas verificadas`);
 if (sinDoc.length) {
   console.log('\n⚠ Proyectos sin documento legal (no se publicó página):');
   sinDoc.forEach(s => console.log(`   ${s}`));

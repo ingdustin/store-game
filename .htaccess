@@ -18,6 +18,10 @@ ErrorDocument 404 /404.html
 RedirectMatch 301 ^/juegos/block-puzzle-blockmix-trio/?$ /juegos/blockmix/
 RedirectMatch 301 ^/juegos/block-puzzle-blockmix-trio/(.*)$ /juegos/blockmix/$1
 
+# La antigua marketing.html de cada proyecto puede estar declarada como
+# Marketing URL en App Store Connect: lleva a la página del proyecto.
+RedirectMatch 301 ^/juegos/([^/]+)/marketing\.html$ /juegos/$1/index.html
+
 # ---------------------------------------------------------------- T7
 # Las páginas legales tienen que ser accesibles y legibles: HTTPS y nada más.
 <IfModule mod_rewrite.c>
