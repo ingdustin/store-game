@@ -1,0 +1,14 @@
+---
+# Alternativa sin GitHub Actions: cPanel → Git™ Version Control.
+# cPanel lee este archivo al pulsar "Deploy HEAD Commit" y copia el sitio
+# a public_html. Requiere que el plan de hosting tenga SSH activado.
+#
+# Ajusta la ruta de destino si tu dominio no cuelga de public_html
+# (por ejemplo /home/USUARIO/public_html/subdominio/).
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/$(whoami)/public_html/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp    index.html   $DEPLOYPATH
+    - /bin/cp -R assets       $DEPLOYPATH
+    - /bin/cp -R juegos       $DEPLOYPATH

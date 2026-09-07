@@ -1,50 +1,66 @@
-# store-game
+# myorange.agency
 
-Sitio estático de **Store Gaming Tech** — catálogo de reseñas técnicas de juegos de la
-App Store, con una URL propia por juego y las páginas legales que exige App Store Connect.
+Sitio estático de **Orange Agencia**, estudio de desarrollo de software y aplicaciones
+móviles. Presenta los servicios, el portafolio y aloja la documentación legal que la
+App Store exige para cada app publicada.
 
 ## Estructura
 
 ```
-index.html                        catálogo con filtros, orden y búsqueda
-assets/styles.css                 hoja de estilos compartida
-data/games.js                     fuente de datos (13 juegos)
-build.js                          generador estático
-juegos/<slug>/index.html          ficha: benchmarks, pros/contras, veredicto
-juegos/<slug>/privacidad.html     política de privacidad
-juegos/<slug>/terminos.html       términos de uso y EULA
-juegos/<slug>/marketing.html      página de marketing
-juegos/<slug>/contacto.html       soporte, FAQ y contacto
+index.html                        home de la agencia
+404.html                          página de error (ErrorDocument del .htaccess)
+.htaccess                         sin autoindex, 301 de la ruta antigua de Blockmix, HTTPS
+assets/styles.css                 hoja de estilos
+data/site.js                      datos del sitio: servicios y portafolio
+data/legal/<slug>/                textos legales verificados de cada app
+data/legal/_plantilla/            respaldo cuando una app no tiene texto propio
+tools/import-legal.js             convierte los .txt de una app a HTML
+build.js                          generador
+juegos/index.html                 portafolio
+juegos/<slug>/index.html          página de proyecto
+juegos/<slug>/privacidad.html     política de privacidad (ES + EN)
+juegos/<slug>/terminos.html       términos y EULA (ES + EN)
+juegos/<slug>/contacto.html       soporte y contacto (ES + EN)
 ```
 
-## Regenerar el sitio
+## Regenerar
 
 ```bash
 node build.js
 ```
 
-Genera 66 páginas (1 catálogo + 13 juegos × 5 páginas). No necesita dependencias.
+Sin dependencias. Avisa por consola de qué documentos legales se están publicando con la
+plantilla genérica en lugar del texto verificado de la app.
 
-## Añadir o editar un juego
+## Reglas que no se pueden romper
 
-Todo el contenido vive en [`data/games.js`](data/games.js). Añade una entrada al array
-`GAMES` y relanza `node build.js`: el catálogo, la ficha y las cuatro páginas legales se
-crean solas.
+**Las rutas legales de las apps ya publicadas están declaradas en App Store Connect y
+dentro de los binarios.** Si una cambia o deja de responder 200, Apple rechaza la app por
+la Guideline 5.1.1. Afecta a `deducta-sudoku`, `solitaire-klondike-spider` y
+`asly-tic-tac-toe-xo-gomoku`.
 
-Los campos `bench`, `pros`, `cons` y `verdict` alimentan la ficha técnica. `own: true`
-marca las apps propias, y `appStore` / `appId` enlazan con su ficha real en la tienda.
+**La ruta antigua de Blockmix mantiene un 301 indefinido.** Hay un binario en revisión
+cuyos enlaces apuntan a `/juegos/block-puzzle-blockmix-trio/`. La regla vive en el
+`.htaccess` y hay además páginas de redirección de respaldo en esa carpeta.
 
-## Plantillas legales
+**Cada página legal contiene las dos versiones, español e inglés**, en el mismo documento
+con anclas `#es` y `#en`. La app enlaza a una URL fija por documento y no puede elegir
+idioma.
 
-Las páginas de privacidad, términos, marketing y soporte son **genéricas y reutilizables**
-para cualquier aplicación publicada en la App Store: hablan de identificador de instalación,
-sesión anónima, publicidad no personalizada, compras liquidadas por Apple, renovación
-automática de suscripciones, derecho de desistimiento de la UE y derechos RGPD.
+**Los textos legales se publican literalmente.** La copia web y la copia empotrada en la
+app tienen que decir lo mismo.
 
-El correo de contacto de todas ellas es `info@ddagencia.com` y se cambia en un solo sitio:
-la constante `SITE` de `data/games.js`.
+## Añadir o actualizar los textos legales de una app
 
-## Publicar
+```bash
+node tools/import-legal.js <slug> <directorio-con-los-txt>
+node build.js
+```
 
-Al ser HTML estático sin build step, funciona en GitHub Pages tal cual: Settings → Pages →
-rama `main`, carpeta `/root`.
+Busca `privacy_es.txt`, `privacy_en.txt`, `terms_es.txt` y `terms_en.txt`.
+
+## Pendiente
+
+Publicadas con la plantilla genérica, a la espera del texto verificado de cada app:
+`solitaire-klondike-spider`, `asly-tic-tac-toe-xo-gomoku`, `go-game-baduk-weiqi-board`, y
+la versión en inglés de `deducta-sudoku`.

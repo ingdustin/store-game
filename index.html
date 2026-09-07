@@ -3,254 +3,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Store Gaming Tech · Cuatro Señales</title>
-<meta name="description" content="Reseñas técnicas, benchmarks de FPS en chips M-series y A18 Pro, y ofertas de juegos para iOS, iPadOS y macOS.">
+<title>Orange Agencia — Desarrollo de software y aplicaciones móviles</title>
+<meta name="description" content="Orange Agencia es un estudio de desarrollo de software y aplicaciones móviles: diseñamos, programamos y publicamos apps para iOS, y nos ocupamos del cumplimiento en la App Store.">
+<meta property="og:title" content="Orange Agencia — Desarrollo de software y aplicaciones móviles">
+<meta property="og:description" content="Orange Agencia es un estudio de desarrollo de software y aplicaciones móviles: diseñamos, programamos y publicamos apps para iOS, y nos ocupamos del cumplimiento en la App Store.">
+<meta property="og:type" content="website">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-<div class="spectrum"></div>
 
 <header>
-  <div class="wrap">
-    <div class="topbar">
-      <a class="brand" href="index.html">
-        <div class="logo">S</div>
-        <div>
-          <div class="brand-name">Store Gaming <span class="brand-tag">TECH</span></div>
-          <div class="brand-sub">Sistema Cuatro Señales · Ing. Dustin Díaz</div>
-        </div>
-      </a>
-      <div class="search">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
-        </svg>
-        <input id="search" type="search" placeholder="Buscar juegos, M-series, Ray Tracing…" aria-label="Buscar juegos">
-      </div>
-      <div class="header-right">
-        <div class="continuity"><span class="dot"></span> Continuidad: iPhone 16 Pro Max</div>
-        <button class="bell" aria-label="Notificaciones">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-            <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/>
-          </svg>
-          <span>2</span>
-        </button>
-        <div class="profile">
-          <div class="avatar">DG</div>
-          <span class="profile-name">Dustin Gamer</span>
-          <span class="level">Nivel 4</span>
-        </div>
-      </div>
-    </div>
+  <div class="wrap topbar">
+    <a class="brand" href="index.html">
+      <span class="logo" aria-hidden="true"></span>
+      <span class="brand-text">
+        <span class="brand-name">Orange Agencia</span>
+        <span class="brand-sub">Desarrollo de software y aplicaciones móviles</span>
+      </span>
+    </a>
+    <nav>
+      <a class="nav-link active" href="index.html">Inicio</a>
+      <a class="nav-link" href="index.html#servicios">Servicios</a>
+      <a class="nav-link" href="juegos/index.html">Proyectos</a>
+      <a class="nav-link" href="index.html#contacto">Contacto</a>
+    </nav>
   </div>
-  <nav>
-    <div class="wrap">
-      <div class="nav-inner">
-        <a class="nav-link active" href="index.html">🎮 Espacio Juegos</a>
-        <a class="nav-link" href="index.html#catalogo">🏷️ Ofertas Exclusivas <span class="nav-badge">HOY</span></a>
-        <a class="nav-link" href="index.html#catalogo">📰 Lanzamientos &amp; News</a>
-        <a class="nav-link" href="index.html#catalogo">💬 Foro Comunidad</a>
-        <a class="nav-link" href="index.html#sync">✨ Mi Perfil &amp; Logros</a>
-        <a class="nav-link" href="index.html#catalogo">📊 Marketing App Store</a>
-        <a class="nav-link" href="index.html#legal">📄 Legal</a>
-      </div>
-    </div>
-  </nav>
 </header>
 
-<main class="wrap">
+<main>
   <section class="hero">
-    <div class="eyebrow">✳ Espacio tecnológico especializado · App Store</div>
-    <h1>Descubre los mejores juegos promocionados con <span class="grad">Rendimiento Técnico Pro</span></h1>
-    <p>Consulta reseñas exhaustivas, tasas de cuadros por segundo (FPS) en chips M-series y A18 Pro, ofertas exclusivas con códigos promo y comunidad activa en iOS, iPadOS y macOS.</p>
-    <div class="chips">
-      <span class="chip">🔷 Metal 3 &amp; MetalFX</span>
-      <span class="chip">🟢 Universal Purchase</span>
-      <span class="chip">🔴 Sincronización Cloud Continuidad</span>
+    <div class="wrap">
+      <p class="eyebrow">Estudio de desarrollo · myorange.agency</p>
+      <h1>Diseñamos, programamos y publicamos <em>aplicaciones móviles</em>.</h1>
+      <p class="lede">Orange Agencia es un estudio de desarrollo de software dirigido por Ing. Dustin Díaz. Llevamos un producto desde la primera pantalla hasta la ficha publicada en la App Store, incluido todo lo que Apple exige por el camino.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#contacto">Hablemos de tu proyecto</a>
+        <a class="btn btn-ghost" href="juegos/index.html">Ver el portafolio</a>
+      </div>
     </div>
   </section>
 
-  <section id="catalogo">
-    <div class="filters">
-      <div class="filter-group" id="cat-filters"><span class="filter-label">Categoría:</span></div>
-      <div class="sort-wrap">
-        <span class="filter-label">Ordenar por:</span>
-        <select id="sort" aria-label="Ordenar por">
-          <option value="rating">⭐ Mejor Valorados</option>
-          <option value="discount">🔥 Mayor Descuento</option>
-          <option value="fps">⚡ Rendimiento FPS</option>
-          <option value="price">💲 Menor Precio</option>
-        </select>
+  <section class="section" id="servicios">
+    <div class="wrap">
+      <h2>Qué hacemos</h2>
+      <div class="grid-services">
+        <article class="service">
+          <h3>Aplicaciones móviles</h3>
+          <p>Desarrollo de apps para iOS con Flutter y Swift, desde la primera pantalla hasta el binario firmado. Arquitectura, estado, rendimiento y pruebas.</p>
+        </article>
+        <article class="service">
+          <h3>Publicación y cumplimiento</h3>
+          <p>Preparación completa para App Store Connect: privacidad, EULA, compras integradas, suscripciones, consentimiento en la UE y respuesta a revisiones.</p>
+        </article>
+        <article class="service">
+          <h3>Producto y backend</h3>
+          <p>Servicios en la nube, autenticación, sincronización y analítica cuando el producto los necesita, y nada cuando no.</p>
+        </article>
+        <article class="service">
+          <h3>Web y automatización</h3>
+          <p>Sitios estáticos, páginas de producto y automatización de despliegue e integración continua.</p>
+        </article>
       </div>
-      <div class="filter-group" id="plat-filters" style="flex-basis:100%"><span class="filter-label">Plataforma:</span></div>
     </div>
-    <p class="result-count" id="count"></p>
-    <div class="grid" id="grid"></div>
   </section>
 
-  <section class="sync" id="sync">
-    <div class="sync-head">
-      <div>
-        <div class="eyebrow">☁ Ecosistema · Universal Purchase &amp; Cloud Sync</div>
-        <h2>Sincronización Multiplataforma Continuidad</h2>
-        <p>Inicia tu partida en el iPhone durante tu trayecto y continúala sin interrupciones en tu Mac o iPad.</p>
+  <section class="section section-alt" id="metodo">
+    <div class="wrap">
+      <h2>Cómo trabajamos</h2>
+      <div class="grid-how">
+        <article class="how">
+          <span class="how-num">01</span>
+          <h3>Alcance cerrado</h3>
+          <p>Cada proyecto empieza con un alcance escrito y unos criterios de aceptación verificables.</p>
+        </article>
+        <article class="how">
+          <span class="how-num">02</span>
+          <h3>Entregas visibles</h3>
+          <p>Se entrega funcionando y en manos del cliente, no en capturas de pantalla.</p>
+        </article>
+        <article class="how">
+          <span class="how-num">03</span>
+          <h3>Cumplimiento desde el principio</h3>
+          <p>La privacidad y los términos se escriben junto al código, no la víspera del envío.</p>
+        </article>
       </div>
-      <button class="sync-btn" id="sync-btn">Forzar Sincronización Cloud</button>
     </div>
-    <div class="devices">
-      <div class="device">
-        <span class="device-status"><span class="dot"></span> Sincronizado</span>
-        <h4>iPhone 16 Pro Max</h4>
-        <p class="os">iOS 18.2</p>
-        <p class="label">Último juego en sesión</p>
-        <p class="last-game">Death Stranding Director's Cut</p>
-        <p class="when">Última actividad: Hace 5 minutos</p>
+  </section>
+
+  <section class="section" id="proyectos">
+    <div class="wrap">
+      <h2>Proyectos</h2>
+      <p class="section-lede">Producto propio, diseñado y desarrollado en el estudio, y publicado bajo nuestra cuenta de desarrollador.</p>
+      <div class="grid-projects">
+        
+      <article class="project-card">
+        <div class="project-head">
+          <h3><a href="juegos/deducta-sudoku/index.html">Deducta Sudoku</a></h3>
+          <span class="tag tag-live">En la App Store</span>
+        </div>
+        <p class="project-tagline">Sudoku de deducción: cada tablero se resuelve sin adivinar.</p>
+        <p class="project-meta">Diseño, desarrollo y publicación · Flutter · Metal · StoreKit</p>
+        <a class="link-arrow" href="juegos/deducta-sudoku/index.html">Ver el proyecto</a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-head">
+          <h3><a href="juegos/solitaire-klondike-spider/index.html">Solitaire: Klondike Spider</a></h3>
+          <span class="tag tag-live">En la App Store</span>
+        </div>
+        <p class="project-tagline">Klondike y Spider con animaciones a 120 Hz y modo oscuro.</p>
+        <p class="project-meta">Desarrollo y publicación · Flutter · StoreKit</p>
+        <a class="link-arrow" href="juegos/solitaire-klondike-spider/index.html">Ver el proyecto</a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-head">
+          <h3><a href="juegos/asly-tic-tac-toe-xo-gomoku/index.html">Asly: Tic Tac Toe XO Gomoku</a></h3>
+          <span class="tag tag-live">En la App Store</span>
+        </div>
+        <p class="project-tagline">Cinco modos sobre un mismo tablero, con IA de tres niveles.</p>
+        <p class="project-meta">Desarrollo y publicación · Flutter · StoreKit</p>
+        <a class="link-arrow" href="juegos/asly-tic-tac-toe-xo-gomoku/index.html">Ver el proyecto</a>
+      </article>
       </div>
-      <div class="device">
-        <span class="device-status"><span class="dot"></span> Sincronizado</span>
-        <h4>MacBook Pro 16&quot; (M4 Max)</h4>
-        <p class="os">macOS Sequoia 15.1</p>
-        <p class="label">Último juego en sesión</p>
-        <p class="last-game">Lies of P</p>
-        <p class="when">Última actividad: Hace 1 hora</p>
+      
+      <h3 class="subhead">En desarrollo</h3>
+      <div class="grid-projects">
+        
+      <article class="project-card">
+        <div class="project-head">
+          <h3><a href="juegos/blockmix/index.html">Blockmix Puzzle Trio</a></h3>
+          <span class="tag">En desarrollo</span>
+        </div>
+        <p class="project-tagline">Tres piezas por ronda sobre tableros de bloques, hexágonos y deslizamiento.</p>
+        <p class="project-meta">Diseño, desarrollo y publicación · Flutter · Firebase · AdMob · StoreKit</p>
+        <a class="link-arrow" href="juegos/blockmix/index.html">Ver el proyecto</a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-head">
+          <h3><a href="juegos/go-game-baduk-weiqi-board/index.html">Baduk</a></h3>
+          <span class="tag">En desarrollo</span>
+        </div>
+        <p class="project-tagline">El juego de Go, con motor de inteligencia artificial en el dispositivo.</p>
+        <p class="project-meta">Diseño, desarrollo y publicación · Flutter · Firebase</p>
+        <a class="link-arrow" href="juegos/go-game-baduk-weiqi-board/index.html">Ver el proyecto</a>
+      </article>
       </div>
-      <div class="device">
-        <span class="device-status"><span class="dot"></span> Sincronizado</span>
-        <h4>iPad Pro 13&quot; (M4 ProMotion)</h4>
-        <p class="os">iPadOS 18.2</p>
-        <p class="label">Último juego en sesión</p>
-        <p class="last-game">Fantasian Neo Dimension</p>
-        <p class="when">Última actividad: Ayer</p>
-      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="contacto">
+    <div class="wrap contact-block">
+      <h2>Contacto</h2>
+      <p class="lede">Cuéntanos qué necesitas construir. Respondemos en un plazo de dos días laborables.</p>
+      <p><a class="btn" href="mailto:info@ddagencia.com">info@ddagencia.com</a></p>
+      <dl class="identity">
+        <dt>Responsable</dt><dd>Ing. Dustin Díaz</dd>
+        <dt>Correo</dt><dd><a href="mailto:info@ddagencia.com">info@ddagencia.com</a></dd>
+        <dt>Sitio</dt><dd>myorange.agency</dd>
+      </dl>
     </div>
   </section>
 </main>
 
-<footer id="legal">
-  <div class="wrap">
-    <div class="footer-cols">
-      <div>
-        <h4>Store Gaming Tech</h4>
-        <p>Espacio tecnológico de reseñas, rendimiento en Apple Silicon, lanzamientos y ofertas de la App Store.</p>
-      </div>
-      <div>
-        <h4>Sistema de identidad Cuatro Señales</h4>
-        <ul>
-          <li><a href="https://ingdustindiaz.com" rel="noopener">ingdustindiaz.com</a></li>
-          <li><a href="mailto:info@ddagencia.com">info@ddagencia.com</a></li>
-        </ul>
-      </div>
-      
-      <div>
-        <h4>Legal por aplicación</h4>
-        <ul>
-          <li><a href="index.html#catalogo">Cada juego incluye su propia URL</a></li>
-          <li><a href="juegos/deducta-sudoku/privacidad.html">Ejemplo: privacidad de Deducta Sudoku</a></li>
-          <li><a href="juegos/deducta-sudoku/terminos.html">Ejemplo: términos de Deducta Sudoku</a></li>
-          <li><a href="juegos/deducta-sudoku/contacto.html">Ejemplo: soporte de Deducta Sudoku</a></li>
-        </ul>
-      </div>
+<footer>
+  <div class="wrap footer-main">
+    <div>
+      <p class="footer-brand">Orange Agencia</p>
+      <p>Desarrollo de software y aplicaciones móviles</p>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 Orange Agencia. Sitio independiente de reseñas técnicas, no afiliado ni asociado con Apple Inc. Apple, iPhone, iPad, Mac, App Store, MetalFX y Apple Arcade son marcas registradas de Apple Inc. Los nombres de juegos y estudios pertenecen a sus respectivos propietarios. Precios, descuentos y códigos con fines demostrativos.</p>
-      <span class="status"><span class="dot"></span> Estado del servidor: activo</span>
+    <div>
+      <h4>Contacto</h4>
+      <p><a href="mailto:info@ddagencia.com">info@ddagencia.com</a></p>
+    </div>
+    <div>
+      <h4>Proyectos</h4>
+      <p><a href="juegos/index.html">Ver el portafolio</a></p>
     </div>
   </div>
+  <div class="wrap footer-bottom">
+    <p>© 2026 Orange Agencia · Ing. Dustin Díaz. Apple, iPhone, iPad y App Store son marcas comerciales de Apple Inc. Este sitio no está afiliado a Apple Inc., ni patrocinado ni respaldado por Apple Inc.</p>
+  </div>
 </footer>
-
-<script>
-const GAMES = [{"slug":"hades-netflix-edition","title":"Hades · Netflix Edition","studio":"Supergiant Games","cat":"Acción","plats":["iPhone","iPad"],"rating":9.9,"reviews":4500,"desc":"El galardonado roguelike de acción rápida en tu iPhone.","fps":60,"tech":"Metal 3","old":24.99,"price":0,"arcade":false,"exclusive":false,"today":true,"own":false,"soon":false},{"slug":"sneaky-sasquatch","title":"Sneaky Sasquatch","studio":"RAC7 Games","cat":"Aventura","plats":["iPhone","iPad","Mac","Apple Arcade"],"rating":9.9,"reviews":15400,"desc":"La vida cotidiana de un Bigfoot en el ecosistema Apple.","fps":120,"tech":"Metal 2","old":4.99,"price":0,"arcade":true,"exclusive":true,"today":false,"own":false,"soon":false},{"slug":"resident-evil-4-remake","title":"Resident Evil 4 Remake","studio":"Capcom","cat":"Acción","plats":["iPhone","iPad","Mac"],"rating":9.8,"reviews":2890,"desc":"Terror de supervivencia con trazado de rayos nativo.","fps":58,"tech":"Metal 3 + Hardware Ray Tracing","old":59.99,"price":29.99,"arcade":false,"exclusive":false,"today":false,"own":false,"soon":false},{"slug":"lies-of-p","title":"Lies of P","studio":"NEOWIZ / Round8 Studio","cat":"RPG","plats":["Mac","Vision Pro"],"rating":9.8,"reviews":3400,"desc":"El aclamado Soulslike victoriano optimizado para Mac M3/M4.","fps":110,"tech":"Metal 3 + Fast Geometry Pipeline","old":59.99,"price":39.99,"arcade":false,"exclusive":false,"today":false,"own":false,"soon":false},{"slug":"death-stranding-directors-cut","title":"Death Stranding Director's Cut","studio":"505 Games / Kojima Productions","cat":"Aventura","plats":["iPhone","iPad","Mac"],"rating":9.7,"reviews":1420,"desc":"El viaje definitivo de Kojima en Apple Silicon.","fps":60,"tech":"Metal 3 + MetalFX Temporal","old":39.99,"price":19.99,"arcade":false,"exclusive":false,"today":false,"own":false,"soon":false},{"slug":"fantasian-neo-dimension","title":"Fantasian Neo Dimension","studio":"Mistwalker / Square Enix","cat":"RPG","plats":["iPhone","iPad","Mac","Apple Arcade"],"rating":9.5,"reviews":3120,"desc":"El JRPG hecho a mano por el creador de Final Fantasy.","fps":120,"tech":"Metal 2.4","old":19.99,"price":0,"arcade":true,"exclusive":false,"today":false,"own":false,"soon":false},{"slug":"grid-legends-deluxe-edition","title":"GRID Legends Deluxe Edition","studio":"Feral Interactive / Codemasters","cat":"Simulación","plats":["Mac","iPad"],"rating":9.4,"reviews":880,"desc":"Carreras automovilísticas a alta velocidad con MetalFX.","fps":90,"tech":"Metal 3","old":39.99,"price":14.99,"arcade":false,"exclusive":false,"today":false,"own":false,"soon":false},{"slug":"assassins-creed-mirage","title":"Assassin's Creed Mirage","studio":"Ubisoft","cat":"Aventura","plats":["iPhone","iPad","Mac"],"rating":9.3,"reviews":1100,"desc":"Sigilo clásico en Bagdad del siglo IX para iOS y Mac.","fps":45,"tech":"Metal 3 + MetalFX Spatial","old":49.99,"price":24.99,"arcade":false,"exclusive":false,"today":false,"own":false,"soon":false},{"slug":"deducta-sudoku","title":"Deducta Sudoku","studio":"Ing. Dustin Díaz · Cuatro Señales","cat":"Estrategia","plats":["iPhone"],"rating":0,"reviews":0,"desc":"Un sudoku de deducción pura: cada tablero se resuelve sin adivinar.","fps":120,"tech":"Metal 3 Nativo","old":0,"price":0,"arcade":false,"exclusive":false,"today":false,"own":true,"soon":false},{"slug":"monument-valley-2","title":"Monument Valley 2","studio":"ustwo games","cat":"Estrategia","plats":["iPhone","iPad","Apple Arcade"],"rating":4.9,"reviews":48900,"desc":"Una deslumbrante aventura de rompecabezas de geometría imposible.","fps":120,"tech":"Metal 2","old":4.99,"price":1.99,"arcade":true,"exclusive":false,"today":false,"own":false,"soon":false},{"slug":"asly-tic-tac-toe-xo-gomoku","title":"Asly: Tic Tac Toe XO Gomoku","studio":"Asly Studio","cat":"Estrategia","plats":["iPhone","iPad"],"rating":4.9,"reviews":500,"desc":"Cinco formas de jugar al tres en raya en un tablero que por fin se siente bien bajo el pulgar.","fps":60,"tech":"Metal 2","old":0,"price":0,"arcade":false,"exclusive":false,"today":true,"own":true,"soon":false},{"slug":"solitaire-klondike-spider","title":"Solitaire · Klondike & Spider","studio":"Solitaire Studio","cat":"Estrategia","plats":["iPhone","iPad","Mac"],"rating":4.8,"reviews":18900,"desc":"El clásico juego de cartas definitivo optimizado a 120 Hz ProMotion.","fps":120,"tech":"Metal 2.0","old":4.99,"price":0,"arcade":false,"exclusive":false,"today":true,"own":true,"soon":false},{"slug":"genshin-impact","title":"Genshin Impact","studio":"HoYoverse","cat":"RPG","plats":["iPhone","iPad","Mac"],"rating":4.7,"reviews":325000,"desc":"Aventura de mundo abierto a 120 FPS en iPad Pro y iPhone 16 Pro.","fps":115,"tech":"Metal 3 + MetalFX Spatial","old":0,"price":0,"arcade":false,"exclusive":false,"today":true,"own":false,"soon":false},{"slug":"go-game-baduk-weiqi-board","title":"Go Game · Baduk Weiqi Board","studio":"Ing. Dustin Díaz · Cuatro Señales","cat":"Estrategia","plats":["iPhone","iPad"],"rating":0,"reviews":0,"desc":"El milenario juego de estrategia chino: rodea y controla más territorio que tu rival.","fps":120,"tech":"Metal 2","old":0,"price":0,"arcade":false,"exclusive":false,"today":false,"own":true,"soon":true},{"slug":"block-puzzle-blockmix-trio","title":"Block Puzzle: Blockmix Trio","studio":"Ing. Dustin Díaz · Cuatro Señales","cat":"Estrategia","plats":["iPhone"],"rating":0,"reviews":0,"desc":"Tres piezas por ronda en tableros de bloques, hexágonos y deslizamiento: encájalas y limpia líneas antes de quedarte sin sitio.","fps":60,"tech":"Metal 2","old":0,"price":0,"arcade":false,"exclusive":false,"today":false,"own":true,"soon":true}];
-const CATEGORIES = ["Todos","Acción","RPG","Estrategia","Arcade","Simulación","Aventura","Exclusivo Apple"];
-const PLATFORMS  = ["Todas","iPhone","iPad","Mac","Vision Pro","Apple Arcade"];
-const state = { cat: "Todos", plat: "Todas", sort: "rating", q: "" };
-
-const discountOf = g => g.old > 0 ? Math.round((1 - g.price / g.old) * 100) : 0;
-const money = n => "$" + n.toFixed(2);
-const fmt = n => n.toLocaleString("es-ES");
-
-function buildPills(id, values, key) {
-  const box = document.getElementById(id);
-  values.forEach(v => {
-    const b = document.createElement("button");
-    b.className = "pill";
-    b.textContent = v;
-    b.setAttribute("aria-pressed", state[key] === v);
-    b.addEventListener("click", () => {
-      state[key] = v;
-      box.querySelectorAll(".pill").forEach(p => p.setAttribute("aria-pressed", p.textContent === v));
-      render();
-    });
-    box.appendChild(b);
-  });
-}
-
-function matches(g) {
-  const catOk = state.cat === "Todos" ||
-    (state.cat === "Arcade" ? g.arcade :
-     state.cat === "Exclusivo Apple" ? g.exclusive : g.cat === state.cat);
-  const platOk = state.plat === "Todas" || g.plats.includes(state.plat);
-  const q = state.q.trim().toLowerCase();
-  const textOk = !q || [g.title, g.studio, g.tech, g.desc, g.cat].join(" ").toLowerCase().includes(q);
-  return catOk && platOk && textOk;
-}
-
-const SORTERS = {
-  rating:   (a, b) => b.rating - a.rating || b.reviews - a.reviews,
-  discount: (a, b) => discountOf(b) - discountOf(a),
-  fps:      (a, b) => b.fps - a.fps,
-  price:    (a, b) => a.price - b.price
-};
-
-function cardHTML(g) {
-  const off = discountOf(g), badges = [];
-  if (off > 0) badges.push('<span class="badge badge-discount">-' + off + '% dto</span>');
-  if (g.today) badges.push('<span class="badge badge-free">¡Gratis hoy!</span>');
-  if (g.arcade) badges.push('<span class="badge badge-arcade">Apple Arcade</span>');
-  if (g.exclusive) badges.push('<span class="badge badge-arcade">Exclusivo Apple</span>');
-  if (g.own) badges.push('<span class="badge badge-own">App propia</span>');
-  if (g.soon) badges.push('<span class="badge badge-soon">Próximamente</span>');
-  badges.push('<span class="badge badge-cat">' + g.cat + '</span>');
-  const oldP = g.old > g.price ? '<span class="price-old">' + money(g.old) + '</span>' : '';
-  const newP = g.price === 0
-    ? '<span class="price-new free">GRATIS</span>'
-    : '<span class="price-new">' + money(g.price) + '</span>';
-  const rating = g.reviews === 0
-    ? '<span class="rating"><span class="count">Sin reseñas aún</span></span>'
-    : '<span class="rating"><span class="score">' + g.rating.toFixed(1) + '</span>' +
-      '<span class="count">(' + fmt(g.reviews) + ')</span></span>';
-  return '<article class="card">' +
-    '<div class="card-top">' + badges.join('') + '</div>' +
-    '<div class="studio-row"><span class="studio">' + g.studio + '</span>' +
-    rating + '</div>' +
-    '<h3>' + g.title + '</h3><p class="desc">' + g.desc + '</p>' +
-    '<div class="tech-row"><span class="tech fps">' + g.fps + ' FPS</span>' +
-    '<span class="tech">' + g.tech + '</span></div>' +
-    '<div class="price-row">' + oldP + newP + '</div>' +
-    '<a class="cta" href="juegos/' + g.slug + '/index.html">Ver Reseña &amp; Benchmarks</a></article>';
-}
-
-function render() {
-  const list = GAMES.filter(matches).sort(SORTERS[state.sort]);
-  document.getElementById("grid").innerHTML = list.length
-    ? list.map(cardHTML).join("")
-    : '<div class="empty">Sin resultados para los filtros aplicados.</div>';
-  document.getElementById("count").innerHTML =
-    'Mostrando <b>' + list.length + '</b> de ' + GAMES.length + ' juegos destacados de la App Store';
-}
-
-buildPills("cat-filters", CATEGORIES, "cat");
-buildPills("plat-filters", PLATFORMS, "plat");
-render();
-
-document.getElementById("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
-document.getElementById("search").addEventListener("input", e => { state.q = e.target.value; render(); });
-document.getElementById("sync-btn").addEventListener("click", e => {
-  const btn = e.currentTarget, original = btn.textContent;
-  btn.disabled = true; btn.textContent = "Sincronizando…";
-  setTimeout(() => {
-    btn.textContent = "✓ Todo al día";
-    setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1800);
-  }, 900);
-});
-</script>
 </body>
 </html>

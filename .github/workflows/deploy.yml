@@ -1,0 +1,78 @@
+name: Desplegar a cPanel
+
+# Publica el sitio en el hosting cada vez que cambia main.
+# Sube solo los archivos que sirve la web: index.html, assets/ y juegos/.
+# El generador (build.js, data/) se queda fuera del servidor.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # permite lanzarlo a mano desde la pestaña Actions
+
+concurrency:
+  group: deploy-cpanel      # evita dos despliegues pisándose
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Comprobar que hay credenciales
+        id: check
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          CF_ZONE: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          if [ -z "$FTP_SERVER" ]; then
+            echo "listo=no" >> "$GITHUB_OUTPUT"
+            echo "::warning::Faltan los secrets FTP_SERVER, FTP_USERNAME y FTP_PASSWORD. Configúralos en Settings → Secrets and variables → Actions."
+          else
+            echo "listo=si" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -n "$CF_ZONE" ]; then
+            echo "cloudflare=si" >> "$GITHUB_OUTPUT"
+          else
+            echo "cloudflare=no" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Regenerar el sitio
+        if: steps.check.outputs.listo == 'si'
+        run: node build.js
+
+      - name: Preparar lo que se publica
+        if: steps.check.outputs.listo == 'si'
+        run: |
+          mkdir -p _site
+          cp index.html 404.html _site/
+          # .htaccess desactiva el autoindex y sirve el 301 de la ruta antigua
+          # de Blockmix: sin él, el despliegue queda incompleto.
+          cp .htaccess _site/
+          cp -r assets juegos _site/
+          echo "archivos a subir: $(find _site -type f | wc -l)"
+          test -f _site/.htaccess || { echo "::error::falta .htaccess"; exit 1; }
+
+      - name: Subir por FTP
+        if: steps.check.outputs.listo == 'si'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps                       # cPanel admite FTPS; usa 'ftp' solo si tu host no lo soporta
+          port: ${{ vars.FTP_PORT || 21 }}
+          local-dir: ./_site/
+          server-dir: ${{ vars.FTP_REMOTE_DIR || '/public_html/' }}
+          # Sube solo lo que cambió: guarda un índice en el servidor.
+          state-name: .ftp-deploy-state.json
+
+      # Opcional: sin esto, Cloudflare puede seguir sirviendo la versión anterior.
+      - name: Purgar caché de Cloudflare
+        if: steps.check.outputs.listo == 'si' && steps.check.outputs.cloudflare == 'si'
+        run: |
+          curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' | head -c 300

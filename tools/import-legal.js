@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 // Convierte los textos legales de una app (.txt en Markdown ligero) a los
-// fragmentos HTML que build.js inyecta en lugar de las plantillas genéricas.
+// fragmentos HTML que build.js publica.
 //
 //   node tools/import-legal.js <slug> <directorio-con-los-txt>
 //
-// Espera encontrar privacy_en.txt, privacy_es.txt, terms_en.txt y terms_es.txt.
-// Escribe en data/legal/<slug>/:
-//   privacidad.html / terminos.html          -> el idioma que publica el juego
-//   privacidad.es.html / terminos.es.html    -> el otro idioma, guardado sin publicar
+// Busca privacy_es.txt, privacy_en.txt, terms_es.txt y terms_en.txt, y escribe
+// en data/legal/<slug>/ un fichero por documento e idioma:
 //
-// El idioma que se publica se decide por el campo `lang` del juego en
-// data/games.js: 'en' publica los _en, cualquier otro valor publica los _es.
+//   privacy.es.html   privacy.en.html   terms.es.html   terms.en.html
+//
+// build.js publica las dos versiones dentro de una misma página, con anclas
+// #es y #en, porque la app enlaza a una URL fija por documento y no puede
+// elegir idioma. Los textos se publican literalmente, sin reescribir.
 
 const fs = require('fs');
 const path = require('path');
@@ -18,13 +19,6 @@ const path = require('path');
 const [, , slug, srcDir] = process.argv;
 if (!slug || !srcDir) {
   console.error('Uso: node tools/import-legal.js <slug> <directorio-con-los-txt>');
-  process.exit(1);
-}
-
-const { GAMES } = require('../data/games.js');
-const game = GAMES.find(g => g.slug === slug);
-if (!game) {
-  console.error(`No existe ningún juego con slug "${slug}" en data/games.js`);
   process.exit(1);
 }
 
@@ -36,9 +30,9 @@ const inline = s => esc(s)
   .replace(/\b(reportaproblem\.apple\.com)\b/g, '<a href="https://$1" rel="noopener">$1</a>')
   .replace(/\b(ec\.europa\.eu\/consumers\/odr)\b/g, '<a href="https://$1" rel="noopener">$1</a>');
 
-// Markdown ligero -> <article>. Soporta #, >, ##, listas con - y **negrita**.
+// Markdown ligero -> HTML. Soporta #, >, ##, listas con - y **negrita**.
 function toHtml(txt) {
-  const out = ['<article>'];
+  const out = [];
   let inList = false;
   const closeList = () => { if (inList) { out.push('  </ul>'); inList = false; } };
 
@@ -48,16 +42,16 @@ function toHtml(txt) {
 
     if (line.startsWith('# ')) {
       closeList();
-      out.push(`  <h1>${inline(line.slice(2))}</h1>`);
+      out.push(`  <h2 class="doc-title">${inline(line.slice(2))}</h2>`);
     } else if (line.startsWith('> ')) {
       closeList();
-      out.push(`  <p><em>${inline(line.slice(2))}</em></p>`);
+      out.push(`  <p class="doc-date">${inline(line.slice(2))}</p>`);
     } else if (line.startsWith('## ')) {
       closeList();
       const m = line.slice(3).match(/^(\d+)\.\s*(.+)$/);
       out.push(m
-        ? `  <h2><span class="num">${m[1].padStart(2, '0')}</span>${inline(m[2])}</h2>`
-        : `  <h2>${inline(line.slice(3))}</h2>`);
+        ? `  <h3><span class="num">${m[1].padStart(2, '0')}</span>${inline(m[2])}</h3>`
+        : `  <h3>${inline(line.slice(3))}</h3>`);
     } else if (line.startsWith('- ')) {
       if (!inList) { out.push('  <ul>'); inList = true; }
       out.push(`    <li>${inline(line.slice(2))}</li>`);
@@ -67,23 +61,21 @@ function toHtml(txt) {
     }
   }
   closeList();
-  out.push('</article>');
   return out.join('\n') + '\n';
 }
 
-const publica = game.lang === 'en' ? 'en' : 'es';
-const otro = publica === 'en' ? 'es' : 'en';
 const dstDir = path.join(__dirname, '..', 'data', 'legal', slug);
 fs.mkdirSync(dstDir, { recursive: true });
 
 const jobs = [
-  [`privacy_${publica}.txt`, 'privacidad.html', true],
-  [`terms_${publica}.txt`, 'terminos.html', true],
-  [`privacy_${otro}.txt`, `privacidad.${otro}.html`, false],
-  [`terms_${otro}.txt`, `terminos.${otro}.html`, false]
+  ['privacy_es.txt', 'privacy.es.html'],
+  ['privacy_en.txt', 'privacy.en.html'],
+  ['terms_es.txt', 'terms.es.html'],
+  ['terms_en.txt', 'terms.en.html']
 ];
 
-for (const [from, to, publicado] of jobs) {
+let written = 0;
+for (const [from, to] of jobs) {
   const src = path.join(srcDir, from);
   if (!fs.existsSync(src)) {
     console.warn(`· falta ${from}, se omite`);
@@ -91,8 +83,9 @@ for (const [from, to, publicado] of jobs) {
   }
   const html = toHtml(fs.readFileSync(src, 'utf8'));
   fs.writeFileSync(path.join(dstDir, to), html, 'utf8');
-  console.log(`${publicado ? '✓' : '·'} ${to.padEnd(20)} ${String(html.length).padStart(5)} bytes${publicado ? '' : '  (guardado, sin publicar)'}`);
+  console.log(`✓ ${to.padEnd(18)} ${String(html.length).padStart(5)} bytes`);
+  written++;
 }
 
-console.log(`\nIdioma publicado: ${publica.toUpperCase()} (game.lang = ${game.lang || 'es'})`);
+console.log(`\n${written} documentos escritos en data/legal/${slug}/`);
 console.log('Ejecuta ahora: node build.js');
