@@ -54,6 +54,11 @@ const HOW_WE_WORK = [
 const PROJECTS = [
   {
     slug: 'deducta-sudoku',
+    // Datos comprobados en la App Store
+    storeName: 'Sudoku Deducta Classic',
+    version: '2.0.1',
+    lastUpdate: 'agosto de 2026',
+    icon: 'assets/apps/deducta-sudoku.png',
     name: 'Deducta Sudoku',
     tagline: 'Sudoku de deducción: cada tablero se resuelve sin adivinar.',
     status: 'published',
@@ -74,6 +79,11 @@ const PROJECTS = [
   },
   {
     slug: 'solitaire-klondike-spider',
+    // Datos comprobados en la App Store
+    storeName: 'Solitaire: Klondike Spider',
+    version: '7.1',
+    lastUpdate: 'julio de 2026',
+    icon: 'assets/apps/solitaire-klondike-spider.png',
     name: 'Solitaire: Klondike Spider',
     tagline: 'Klondike y Spider con animaciones a 120 Hz y modo oscuro.',
     status: 'published',
@@ -93,6 +103,11 @@ const PROJECTS = [
   },
   {
     slug: 'asly-tic-tac-toe-xo-gomoku',
+    // Datos comprobados en la App Store
+    storeName: 'Asly: Tic Tac Toe XO Gomoku',
+    version: '3.0.0',
+    lastUpdate: 'agosto de 2026',
+    icon: 'assets/apps/asly-tic-tac-toe-xo-gomoku.png',
     name: 'Asly: Tic Tac Toe XO Gomoku',
     tagline: 'Cinco modos sobre un mismo tablero, con IA de tres niveles.',
     status: 'published',

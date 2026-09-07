@@ -77,24 +77,20 @@ function head({ title, desc, root, lang = 'es' }) {
 function header({ root, active = '', lang = 'es' }) {
   const en = lang === 'en';
   const T = en
-    ? { home: 'Home', services: 'Services', work: 'Work', contact: 'Contact' }
-    : { home: 'Inicio', services: 'Servicios', work: 'Proyectos', contact: 'Contacto' };
+    ? { work: 'Work', services: 'Services', contact: 'Contact' }
+    : { work: 'Proyectos', services: 'Servicios', contact: 'Contacto' };
   const link = (href, label, key) =>
     `<a class="nav-link${active === key ? ' active' : ''}" href="${href}">${label}</a>`;
   return `
 <header>
   <div class="wrap topbar">
     <a class="brand" href="${root}index.html">
-      <span class="logo" aria-hidden="true"></span>
-      <span class="brand-text">
-        <span class="brand-name">${esc(SITE.name)}</span>
-        <span class="brand-sub">${esc(en ? SITE.taglineEn : SITE.tagline)}</span>
-      </span>
+      <b>${esc(SITE.name)}</b>
+      <span>${esc(SITE.domain)}</span>
     </a>
     <nav>
-      ${link(root + 'index.html', T.home, 'home')}
-      ${link(root + 'index.html#servicios', T.services, 'services')}
       ${link(root + 'juegos/index.html', T.work, 'work')}
+      ${link(root + 'index.html#servicios', T.services, 'services')}
       ${link(root + 'index.html#contacto', T.contact, 'contact')}
     </nav>
   </div>
@@ -104,24 +100,22 @@ function header({ root, active = '', lang = 'es' }) {
 function footer({ root, project = null, lang = 'es' }) {
   const en = lang === 'en';
 
-  // Pie de un documento legal: acredita al responsable del documento.
+  // Pie de un documento legal: acredita a quien responde por el documento.
   if (project) {
-    const legalNav = `
-      <nav class="footer-docs">
-        <a href="index.html">${en ? 'Project' : 'Proyecto'}</a>
-        <a href="privacidad.html">${en ? 'Privacy' : 'Privacidad'}</a>
-        <a href="terminos.html">${en ? 'Terms & EULA' : 'Términos y EULA'}</a>
-        <a href="contacto.html">${en ? 'Support' : 'Soporte'}</a>
-      </nav>`;
     return `
 <footer>
   <div class="wrap">
-    ${legalNav}
-    <p class="legal-note">© 2026 ${esc(SITE.owner)}. ${esc(project.name)} ${en
+    <div class="footer-links" style="margin-bottom:26px">
+      <a href="index.html">${en ? 'Project' : 'Proyecto'}</a>
+      <a href="privacidad.html">${en ? 'Privacy' : 'Privacidad'}</a>
+      <a href="terminos.html">${en ? 'Terms and EULA' : 'Términos y EULA'}</a>
+      <a href="contacto.html">${en ? 'Support' : 'Soporte'}</a>
+    </div>
+    <p class="fine">© 2026 ${esc(SITE.owner)}. ${esc(project.name)} ${en
       ? `is developed and published by ${esc(SITE.owner)} (${esc(SITE.name)}). This is the official page for the document above. Contact: <a href="mailto:${SITE.email}">${SITE.email}</a>`
       : `está desarrollada y publicada por ${esc(SITE.owner)} (${esc(SITE.name)}). Esta es la página oficial del documento anterior. Contacto: <a href="mailto:${SITE.email}">${SITE.email}</a>`}</p>
-    <p class="legal-note">${en
-      ? 'Apple, iPhone, iPad and App Store are trademarks of Apple Inc. This app is not affiliated with, sponsored or endorsed by Apple Inc. Prices are set by the App Store in each country’s own currency.'
+    <p class="fine">${en
+      ? 'Apple, iPhone, iPad and App Store are trademarks of Apple Inc. This app is not affiliated with, sponsored or endorsed by Apple Inc. Prices are set by the App Store in each country\u2019s own currency.'
       : 'Apple, iPhone, iPad y App Store son marcas comerciales de Apple Inc. Esta aplicación no está afiliada a Apple Inc., ni patrocinada ni respaldada por Apple Inc. Los precios los fija App Store en la moneda de cada país.'}</p>
   </div>
 </footer>
@@ -131,24 +125,17 @@ function footer({ root, project = null, lang = 'es' }) {
 
   return `
 <footer>
-  <div class="wrap footer-main">
-    <div>
-      <p class="footer-brand">${esc(SITE.name)}</p>
-      <p>${esc(en ? SITE.taglineEn : SITE.tagline)}</p>
+  <div class="wrap">
+    <div class="footer-top">
+      <p><b>${esc(SITE.name)}</b><br>${esc(SITE.tagline)}</p>
+      <div class="footer-links">
+        <a href="${root}juegos/index.html">Proyectos</a>
+        <a href="${root}index.html#servicios">Servicios</a>
+        <a href="mailto:${SITE.email}">${SITE.email}</a>
+      </div>
     </div>
-    <div>
-      <h4>${en ? 'Contact' : 'Contacto'}</h4>
-      <p><a href="mailto:${SITE.email}">${SITE.email}</a></p>
-    </div>
-    <div>
-      <h4>${en ? 'Work' : 'Proyectos'}</h4>
-      <p><a href="${root}juegos/index.html">${en ? 'See the portfolio' : 'Ver el portafolio'}</a></p>
-    </div>
-  </div>
-  <div class="wrap footer-bottom">
-    <p>© 2026 ${esc(SITE.copyright)} · ${esc(SITE.owner)}. ${en
-      ? 'Apple, iPhone, iPad and App Store are trademarks of Apple Inc. This site is not affiliated with, sponsored or endorsed by Apple Inc.'
-      : 'Apple, iPhone, iPad y App Store son marcas comerciales de Apple Inc. Este sitio no está afiliado a Apple Inc., ni patrocinado ni respaldado por Apple Inc.'}</p>
+    <p class="fine">© 2026 ${esc(SITE.copyright)}. Responsable: ${esc(SITE.owner)}.</p>
+    <p class="fine">Apple, iPhone, iPad y App Store son marcas comerciales de Apple Inc. Este sitio no está afiliado a Apple Inc., ni patrocinado ni respaldado por Apple Inc.</p>
   </div>
 </footer>
 </body>
@@ -157,39 +144,71 @@ function footer({ root, project = null, lang = 'es' }) {
 
 // ---------------------------------------------------------------- home
 
+// Ficha de proyecto en lista. Muestra datos comprobables, no adjetivos.
+function workItem(p, root) {
+  const href = `${root}${p.slug}/index.html`;
+  const icono = p.icon
+    ? `<img class="work-icon" src="${root}../${p.icon}" alt="Icono de ${esc(p.name)}" width="64" height="64" loading="lazy">`
+    : '<span class="work-icon-blank" aria-hidden="true"></span>';
+  const meta = p.status === 'published'
+    ? `<span class="pill pill-live">En la App Store</span><br>
+        Versión <b>${esc(p.version)}</b><br>
+        Actualizada en ${esc(p.lastUpdate)}<br>
+        ${esc(p.platforms.join(', '))}`
+    : `<span class="pill">En desarrollo</span><br>
+        ${esc(p.tech.slice(0, 2).join(', '))}<br>
+        ${esc(p.platforms.join(', '))}`;
+
+  return `
+      <a class="work-item" href="${href}">
+        ${icono}
+        <div>
+          <div class="work-name">${esc(p.name)}</div>
+          <p class="work-desc">${esc(p.tagline)}</p>
+        </div>
+        <div class="work-meta">${meta}</div>
+      </a>`;
+}
+
 function pageHome() {
   const publicados = PROJECTS.filter(p => p.status === 'published');
-  const enDesarrollo = PROJECTS.filter(p => p.status !== 'published');
-
-  const tarjeta = p => `
-      <article class="project-card">
-        <div class="project-head">
-          <h3><a href="juegos/${p.slug}/index.html">${esc(p.name)}</a></h3>
-          ${p.status === 'published'
-            ? '<span class="tag tag-live">En la App Store</span>'
-            : '<span class="tag">En desarrollo</span>'}
-        </div>
-        <p class="project-tagline">${esc(p.tagline)}</p>
-        <p class="project-meta">${esc(p.role)} · ${esc(p.tech.join(' · '))}</p>
-        <a class="link-arrow" href="juegos/${p.slug}/index.html">Ver el proyecto</a>
-      </article>`;
 
   return `${head({
-    title: `${SITE.name} — ${SITE.tagline}`,
-    desc: `${SITE.name} es un estudio de desarrollo de software y aplicaciones móviles: diseñamos, programamos y publicamos apps para iOS, y nos ocupamos del cumplimiento en la App Store.`,
+    title: `${SITE.name}, ${SITE.tagline}`,
+    desc: `Estudio de desarrollo dirigido por ${SITE.owner}. Apps para iPhone construidas, publicadas y mantenidas en la App Store, con su documentación legal al día.`,
     root: ''
   })}
-${header({ root: '', active: 'home' })}
+${header({ root: '', active: '' })}
 
 <main>
   <section class="hero">
     <div class="wrap">
-      <p class="eyebrow">Estudio de desarrollo · ${esc(SITE.domain)}</p>
-      <h1>Diseñamos, programamos y publicamos <em>aplicaciones móviles</em>.</h1>
-      <p class="lede">${esc(SITE.name)} es un estudio de desarrollo de software dirigido por ${esc(SITE.owner)}. Llevamos un producto desde la primera pantalla hasta la ficha publicada en la App Store, incluido todo lo que Apple exige por el camino.</p>
-      <div class="hero-actions">
-        <a class="btn" href="#contacto">Hablemos de tu proyecto</a>
-        <a class="btn btn-ghost" href="juegos/index.html">Ver el portafolio</a>
+      <div class="hero-grid">
+        <div>
+          <h1>Construimos y publicamos apps para iPhone.</h1>
+          <p>Estudio dirigido por ${esc(SITE.owner)}. Tres apps propias en la App Store, mantenidas y actualizadas.</p>
+        </div>
+        <div class="hero-aside">
+          <b>Nos ocupamos de la parte que atasca los envíos</b>
+          Privacidad, EULA, compras integradas, suscripciones de renovación automática y consentimiento en la Unión Europea.
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn" href="#contacto">Escríbenos</a>
+        <a class="btn btn-ghost" href="juegos/index.html">Ver los proyectos</a>
+      </div>
+
+      <div class="proof">
+        <p class="proof-label">Publicadas por el estudio</p>
+        <div class="proof-row">
+          ${publicados.map(p => `<a class="proof-app" href="${esc(p.appStore)}" rel="noopener">
+            <img src="${p.icon}" alt="Icono de ${esc(p.name)}" width="46" height="46" loading="lazy">
+            <span>
+              <b>${esc(p.storeName)}</b>
+              <span>Versión ${esc(p.version)} · ${esc(p.lastUpdate)}</span>
+            </span>
+          </a>`).join('\n          ')}
+        </div>
       </div>
     </div>
   </section>
@@ -197,24 +216,24 @@ ${header({ root: '', active: 'home' })}
   <section class="section" id="servicios">
     <div class="wrap">
       <h2>Qué hacemos</h2>
-      <div class="grid-services">
-        ${SERVICES.map(s => `<article class="service">
-          <h3>${esc(s.title)}</h3>
-          <p>${esc(s.text)}</p>
-        </article>`).join('\n        ')}
+      <p class="section-lede">Trabajamos de principio a fin sobre el mismo producto: el código, la tienda y lo que Apple pide por el camino.</p>
+      <div class="services">
+        ${SERVICES.map(x => `<div class="service">
+          <h3>${esc(x.title)}</h3>
+          <p>${esc(x.text)}</p>
+        </div>`).join('\n        ')}
       </div>
     </div>
   </section>
 
-  <section class="section section-alt" id="metodo">
+  <section class="section">
     <div class="wrap">
       <h2>Cómo trabajamos</h2>
-      <div class="grid-how">
-        ${HOW_WE_WORK.map(([t, d], i) => `<article class="how">
-          <span class="how-num">0${i + 1}</span>
+      <div class="method">
+        ${HOW_WE_WORK.map(([t, d]) => `<div>
           <h3>${esc(t)}</h3>
           <p>${esc(d)}</p>
-        </article>`).join('\n        ')}
+        </div>`).join('\n        ')}
       </div>
     </div>
   </section>
@@ -222,27 +241,24 @@ ${header({ root: '', active: 'home' })}
   <section class="section" id="proyectos">
     <div class="wrap">
       <h2>Proyectos</h2>
-      <p class="section-lede">Producto propio, diseñado y desarrollado en el estudio, y publicado bajo nuestra cuenta de desarrollador.</p>
-      <div class="grid-projects">
-        ${publicados.map(tarjeta).join('\n')}
+      <p class="section-lede">Producto propio. Cada uno publica su política de privacidad y sus términos, en español e inglés, tal como exige la App Store.</p>
+      <div class="work">
+        ${PROJECTS.map(p => workItem(p, 'juegos/')).join('\n')}
       </div>
-      ${enDesarrollo.length ? `
-      <h3 class="subhead">En desarrollo</h3>
-      <div class="grid-projects">
-        ${enDesarrollo.map(tarjeta).join('\n')}
-      </div>` : ''}
     </div>
   </section>
 
-  <section class="section section-alt" id="contacto">
-    <div class="wrap contact-block">
-      <h2>Contacto</h2>
-      <p class="lede">Cuéntanos qué necesitas construir. Respondemos en un plazo de dos días laborables.</p>
-      <p><a class="btn" href="mailto:${SITE.email}">${SITE.email}</a></p>
-      <dl class="identity">
-        <dt>Responsable</dt><dd>${esc(SITE.owner)}</dd>
-        <dt>Correo</dt><dd><a href="mailto:${SITE.email}">${SITE.email}</a></dd>
-        <dt>Sitio</dt><dd>${esc(SITE.domain)}</dd>
+  <section class="section" id="contacto">
+    <div class="wrap contact">
+      <div>
+        <h2>Contacto</h2>
+        <p>Cuéntanos qué quieres construir o en qué se ha atascado un envío. Respondemos en dos días laborables.</p>
+        <a class="btn" href="mailto:${SITE.email}">${SITE.email}</a>
+      </div>
+      <dl class="facts">
+        <div><dt>Responsable</dt><dd>${esc(SITE.owner)}</dd></div>
+        <div><dt>Correo</dt><dd>${SITE.email}</dd></div>
+        <div><dt>Sitio</dt><dd>${esc(SITE.domain)}</dd></div>
       </dl>
     </div>
   </section>
@@ -253,22 +269,9 @@ ${footer({ root: '' })}`;
 // ---------------------------------------------------------------- portafolio
 
 function pagePortfolio() {
-  const fila = p => `
-      <article class="project-card">
-        <div class="project-head">
-          <h3><a href="${p.slug}/index.html">${esc(p.name)}</a></h3>
-          ${p.status === 'published'
-            ? '<span class="tag tag-live">En la App Store</span>'
-            : '<span class="tag">En desarrollo</span>'}
-        </div>
-        <p class="project-tagline">${esc(p.tagline)}</p>
-        <p class="project-meta">${esc(p.role)} · ${esc(p.tech.join(' · '))} · ${esc(p.platforms.join(', '))}</p>
-        <a class="link-arrow" href="${p.slug}/index.html">Ver el proyecto</a>
-      </article>`;
-
   return `${head({
-    title: `Proyectos — ${SITE.name}`,
-    desc: `Portafolio de ${SITE.name}: aplicaciones móviles diseñadas, desarrolladas y publicadas por el estudio.`,
+    title: `Proyectos · ${SITE.name}`,
+    desc: `Apps construidas y publicadas por ${SITE.name}, con su documentación legal publicada.`,
     root: '../'
   })}
 ${header({ root: '../', active: 'work' })}
@@ -276,20 +279,15 @@ ${header({ root: '../', active: 'work' })}
 <main>
   <section class="page-head">
     <div class="wrap">
-      <p class="eyebrow">Portafolio</p>
       <h1>Proyectos</h1>
-      <p class="lede">Producto propio del estudio. Cada proyecto incluye su documentación legal publicada, tal como exige la App Store.</p>
+      <p class="lede">Producto propio del estudio. Tres apps publicadas en la App Store y dos en desarrollo.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <div class="grid-projects">
-        ${PROJECTS.filter(p => p.status === 'published').map(fila).join('\n')}
-      </div>
-      <h2 class="subhead">En desarrollo</h2>
-      <div class="grid-projects">
-        ${PROJECTS.filter(p => p.status !== 'published').map(fila).join('\n')}
+      <div class="work">
+        ${PROJECTS.map(p => workItem(p, '')).join('\n')}
       </div>
     </div>
   </section>
@@ -300,13 +298,15 @@ ${footer({ root: '../' })}`;
 // ---------------------------------------------------------------- proyecto
 
 function pageProject(p) {
-  // Sin enlace a la tienda mientras la app no esté publicada (T3).
+  // Sin enlace a la tienda mientras la app no esté publicada.
   const store = p.status === 'published' && p.appStore
     ? `<a class="btn" href="${esc(p.appStore)}" rel="noopener">Ver en la App Store</a>`
     : '';
 
+  const publicada = p.status === 'published';
+
   return `${head({
-    title: `${p.name} — ${SITE.name}`,
+    title: `${p.name} · ${SITE.name}`,
     desc: p.tagline,
     root: '../../'
   })}
@@ -315,10 +315,10 @@ ${header({ root: '../../', active: 'work' })}
 <main>
   <section class="page-head">
     <div class="wrap">
-      <p class="eyebrow"><a href="../index.html">Proyectos</a> · ${p.status === 'published' ? 'En la App Store' : 'En desarrollo'}</p>
+      <p class="crumb"><a href="../index.html">Proyectos</a></p>
       <h1>${esc(p.name)}</h1>
       <p class="lede">${esc(p.tagline)}</p>
-      <div class="hero-actions">
+      <div class="hero-cta">
         ${store}
         <a class="btn btn-ghost" href="contacto.html">Soporte</a>
       </div>
@@ -326,35 +326,34 @@ ${header({ root: '../../', active: 'work' })}
   </section>
 
   <section class="section">
-    <div class="wrap project-body">
+    <div class="wrap project-grid">
       <div>
         <h2>Sobre el proyecto</h2>
         <p>${esc(p.description)}</p>
-        <ul class="highlights">
+        <ul class="bullets">
           ${p.highlights.map(h => `<li>${esc(h)}</li>`).join('\n          ')}
         </ul>
       </div>
-      <aside class="project-facts">
-        <h2>Ficha</h2>
-        <dl>
-          <dt>Rol</dt><dd>${esc(p.role)}</dd>
-          <dt>Tecnología</dt><dd>${esc(p.tech.join(', '))}</dd>
-          <dt>Plataformas</dt><dd>${esc(p.platforms.join(', '))}</dd>
-          <dt>Año</dt><dd>${esc(p.year)}</dd>
-          <dt>Estado</dt><dd>${p.status === 'published' ? 'Publicada en la App Store' : 'En desarrollo'}</dd>
-        </dl>
-      </aside>
+      <dl class="facts">
+        <div><dt>Estado</dt><dd>${publicada ? 'Publicada' : 'En desarrollo'}</dd></div>
+        ${publicada ? `<div><dt>Versión</dt><dd>${esc(p.version)}</dd></div>
+        <div><dt>Actualizada</dt><dd>${esc(p.lastUpdate)}</dd></div>` : ''}
+        <div><dt>Plataformas</dt><dd>${esc(p.platforms.join(', '))}</dd></div>
+        <div><dt>Tecnología</dt><dd>${esc(p.tech.join(', '))}</dd></div>
+        <div><dt>Rol</dt><dd>${esc(p.role)}</dd></div>
+        ${p.appId ? `<div><dt>App Store ID</dt><dd>${esc(p.appId)}</dd></div>` : ''}
+      </dl>
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section">
     <div class="wrap">
       <h2>Documentación legal</h2>
-      <p class="section-lede">Páginas públicas de este proyecto, en español e inglés.</p>
-      <div class="doc-links">
-        <a class="btn btn-ghost" href="privacidad.html">Política de privacidad</a>
-        <a class="btn btn-ghost" href="terminos.html">Términos de uso y EULA</a>
-        <a class="btn btn-ghost" href="contacto.html">Soporte y contacto</a>
+      <p class="section-lede">Páginas públicas de esta app, en español e inglés dentro del mismo documento.</p>
+      <div class="footer-links">
+        <a href="privacidad.html">Política de privacidad</a>
+        <a href="terminos.html">Términos de uso y EULA</a>
+        <a href="contacto.html">Soporte y contacto</a>
       </div>
     </div>
   </section>
@@ -415,7 +414,7 @@ function pageLegal(p, doc, { titleEs, titleEn, file }) {
   if (en) partes.push(bloque('en', titleEn, en, es ? { id: 'es', label: 'Leer en español' } : null));
 
   return `${head({
-    title: `${titleEs} — ${p.name}`,
+    title: `${titleEs} · ${p.name}`,
     desc: `${titleEs} de ${p.name}. ${titleEn} for ${p.name}.`,
     root: '../../'
   })}
@@ -434,7 +433,7 @@ ${footer({ root: '../../', project: p })}`;
 // Soporte: no viene de los adjuntos, se construye con los datos del proyecto.
 function pageSupport(p) {
   return `${head({
-    title: `Soporte y contacto — ${p.name}`,
+    title: `Soporte y contacto · ${p.name}`,
     desc: `Soporte de ${p.name}. Escríbenos a ${SITE.email}. Support for ${p.name}.`,
     root: '../../'
   })}
@@ -482,7 +481,7 @@ ${footer({ root: '../../', project: p })}`;
 
 function page404() {
   return `${head({
-    title: `Página no encontrada — ${SITE.name}`,
+    title: `Página no encontrada · ${SITE.name}`,
     desc: 'La página solicitada no existe.',
     root: ''
   })}
