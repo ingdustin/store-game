@@ -15,8 +15,15 @@ ErrorDocument 404 /404.html
 
 # ---------------------------------------------------------------- T4
 # Ruta vieja -> ruta nueva, conservando el documento pedido.
-RedirectMatch 301 ^/juegos/block-puzzle-blockmix-trio/?$ /juegos/blockmix/
+# Dos familias de rutas antiguas, publicadas en sitios distintos:
+#   block-puzzle-blockmix-trio  viaja dentro del binario en revisión
+#   blockmix-trio               se usó en la ficha de App Store Connect
+# Ambas deben acabar en el documento, no en un aviso: Apple exige un enlace
+# funcional (Guideline 3.1.2c) y un aviso de mudanza no redirige a nadie.
+RedirectMatch 301 ^/juegos/block-puzzle-blockmix-trio/?$   /juegos/blockmix/
 RedirectMatch 301 ^/juegos/block-puzzle-blockmix-trio/(.*)$ /juegos/blockmix/$1
+RedirectMatch 301 ^/juegos/blockmix-trio/?$                /juegos/blockmix/
+RedirectMatch 301 ^/juegos/blockmix-trio/(.*)$             /juegos/blockmix/$1
 
 # La antigua marketing.html de cada proyecto puede estar declarada como
 # Marketing URL en App Store Connect: lleva a la página del proyecto.

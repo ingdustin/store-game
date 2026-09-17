@@ -49,7 +49,13 @@ const FROZEN_URLS = [
   // páginas de respaldo, porque hay un binario en revisión que la enlaza.
   'juegos/blockmix/privacidad.html',
   'juegos/blockmix/terminos.html',
-  'juegos/blockmix/contacto.html'
+  'juegos/blockmix/contacto.html',
+  // Rutas antiguas de Blockmix: el binario en revisión y la ficha de ASC
+  // apuntan aquí. Sirven el documento completo, además del 301 del .htaccess.
+  'juegos/block-puzzle-blockmix-trio/privacidad.html',
+  'juegos/block-puzzle-blockmix-trio/terminos.html',
+  'juegos/blockmix-trio/privacidad.html',
+  'juegos/blockmix-trio/terminos.html'
 ];
 
 const esc = s => String(s)
@@ -58,7 +64,7 @@ const esc = s => String(s)
 
 // ---------------------------------------------------------------- layout
 
-function head({ title, desc, root, lang = 'es' }) {
+function head({ title, desc, root, lang = 'es', canonical = null }) {
   return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -69,7 +75,7 @@ function head({ title, desc, root, lang = 'es' }) {
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="${root}assets/styles.css">
+${canonical ? `<link rel="canonical" href="${canonical}">\n` : ''}<link rel="stylesheet" href="${root}assets/styles.css">
 </head>
 <body>`;
 }
@@ -388,7 +394,7 @@ function legalDoc(p, doc, lang) {
 
 // Las dos versiones van en el mismo documento, una tras otra, con anclas
 // #es y #en: la app enlaza a una URL fija y no puede elegir idioma (T6).
-function pageLegal(p, doc, { titleEs, titleEn, file }) {
+function pageLegal(p, doc, { titleEs, titleEn, file, canonical = null }) {
   const es = legalDoc(p, doc, 'es');
   const en = legalDoc(p, doc, 'en');
   if (!es && !en) return null;
@@ -416,7 +422,7 @@ function pageLegal(p, doc, { titleEs, titleEn, file }) {
   return `${head({
     title: `${titleEs} · ${p.name}`,
     desc: `${titleEs} de ${p.name}. ${titleEn} for ${p.name}.`,
-    root: '../../'
+    root: '../../', canonical
   })}
 ${header({ root: '../../', active: 'work' })}
 
@@ -431,11 +437,11 @@ ${footer({ root: '../../', project: p })}`;
 }
 
 // Soporte: no viene de los adjuntos, se construye con los datos del proyecto.
-function pageSupport(p) {
+function pageSupport(p, canonical = null) {
   return `${head({
     title: `Soporte y contacto · ${p.name}`,
     desc: `Soporte de ${p.name}. Escríbenos a ${SITE.email}. Support for ${p.name}.`,
-    root: '../../'
+    root: '../../', canonical
   })}
 ${header({ root: '../../', active: 'work' })}
 
@@ -556,6 +562,37 @@ for (const p of PROJECTS) {
 
   if (term) written.push(write(`${dir}/terminos.html`, term));
   else sinDoc.push(`${p.slug}: faltan términos`);
+}
+
+// ---------------------------------------------------------------- rutas antiguas
+//
+// Blockmix vivió antes en otras dos rutas: una viaja dentro del binario que
+// está en revisión, la otra se publicó en la ficha de App Store Connect.
+// El .htaccess las redirige con un 301, que es lo correcto. Estas copias son
+// la red de seguridad: si el servidor ignorase el .htaccess, el revisor de
+// Apple encuentra el documento completo en lugar de un aviso de mudanza, que
+// es lo que costó el rechazo por Guideline 3.1.2(c). Un RedirectMatch actúa
+// sobre la URL antes de mapearla a un fichero, así que tener el archivo no
+// impide que el 301 se dispare.
+const blockmix = PROJECTS.find(p => p.slug === 'blockmix');
+if (blockmix) {
+  const CANON = 'https://myorange.agency/juegos/blockmix/';
+  for (const vieja of ['block-puzzle-blockmix-trio', 'blockmix-trio']) {
+    const dir = `juegos/${vieja}`;
+    const priv = pageLegal(blockmix, 'privacy', {
+      titleEs: 'Política de privacidad', titleEn: 'Privacy Policy',
+      canonical: CANON + 'privacidad.html'
+    });
+    const term = pageLegal(blockmix, 'terms', {
+      titleEs: 'Términos de uso y EULA', titleEn: 'Terms of Use and EULA',
+      canonical: CANON + 'terminos.html'
+    });
+    if (priv) written.push(write(`${dir}/privacidad.html`, priv));
+    if (term) written.push(write(`${dir}/terminos.html`, term));
+    written.push(write(`${dir}/contacto.html`, pageSupport(blockmix, CANON + 'contacto.html')));
+    written.push(write(`${dir}/index.html`, redirectPage('/juegos/blockmix/', blockmix.name)));
+    written.push(write(`${dir}/marketing.html`, redirectPage('/juegos/blockmix/', blockmix.name)));
+  }
 }
 
 // Guarda: ninguna URL congelada puede dejar de existir.
