@@ -1,0 +1,57 @@
+# ATENCION: este archivo debe llamarse .htaccess en el servidor.
+#
+# Subelo a la raiz del sitio (normalmente public_html) y renombralo:
+#     htaccess-SUBIR-COMO-PUNTO-HTACCESS.txt  ->  .htaccess
+#
+# Copia exacta de .htaccess del repositorio. No editar esta copia:
+# se regenera en cada `node build.js`.
+#
+# Comprobacion de que funciona: https://myorange.agency/assets/ debe
+# dejar de listar archivos, y las rutas viejas de Blockmix deben
+# responder 301 en lugar de 200.
+
+# myorange.agency — configuración del sitio
+#
+# T1: sin listados de directorios en ningún punto del dominio.
+# T4: la ruta antigua de Blockmix redirige de forma permanente a la nueva.
+#     Esa URL viaja dentro de un binario en manos de App Review: el redirect
+#     se mantiene indefinidamente y la regla no se retira.
+
+# ---------------------------------------------------------------- T1
+# Ninguna ruta debe listar ficheros. Cubre /juegos/, /assets/ y la raíz.
+Options -Indexes
+
+# Si falta el índice de un directorio, 404 limpio en vez de listado.
+ErrorDocument 403 /404.html
+ErrorDocument 404 /404.html
+
+# ---------------------------------------------------------------- T4
+# Ruta vieja -> ruta nueva, conservando el documento pedido.
+# Dos familias de rutas antiguas, publicadas en sitios distintos:
+#   block-puzzle-blockmix-trio  viaja dentro del binario en revisión
+#   blockmix-trio               se usó en la ficha de App Store Connect
+# Ambas deben acabar en el documento, no en un aviso: Apple exige un enlace
+# funcional (Guideline 3.1.2c) y un aviso de mudanza no redirige a nadie.
+RedirectMatch 301 ^/juegos/block-puzzle-blockmix-trio/?$   /juegos/blockmix/
+RedirectMatch 301 ^/juegos/block-puzzle-blockmix-trio/(.*)$ /juegos/blockmix/$1
+RedirectMatch 301 ^/juegos/blockmix-trio/?$                /juegos/blockmix/
+RedirectMatch 301 ^/juegos/blockmix-trio/(.*)$             /juegos/blockmix/$1
+
+# La antigua marketing.html de cada proyecto puede estar declarada como
+# Marketing URL en App Store Connect: lleva a la página del proyecto.
+RedirectMatch 301 ^/juegos/([^/]+)/marketing\.html$ /juegos/$1/index.html
+
+# ---------------------------------------------------------------- T7
+# Las páginas legales tienen que ser accesibles y legibles: HTTPS y nada más.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+</IfModule>
+
+AddDefaultCharset UTF-8

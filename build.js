@@ -595,6 +595,32 @@ if (blockmix) {
   }
 }
 
+// El .htaccess empieza por punto, así que Finder, muchos clientes FTP y el
+// Administrador de archivos de cPanel lo ocultan por defecto. Esa es la razón
+// de que nunca llegara al servidor. Se genera una copia con nombre visible,
+// siempre idéntica al original, para poder subirla y renombrarla en destino.
+{
+  const src = path.join(ROOT, '.htaccess');
+  if (fs.existsSync(src)) {
+    const aviso = [
+      '# ATENCION: este archivo debe llamarse .htaccess en el servidor.',
+      '#',
+      '# Subelo a la raiz del sitio (normalmente public_html) y renombralo:',
+      '#     htaccess-SUBIR-COMO-PUNTO-HTACCESS.txt  ->  .htaccess',
+      '#',
+      '# Copia exacta de .htaccess del repositorio. No editar esta copia:',
+      '# se regenera en cada `node build.js`.',
+      '#',
+      '# Comprobacion de que funciona: https://myorange.agency/assets/ debe',
+      '# dejar de listar archivos, y las rutas viejas de Blockmix deben',
+      '# responder 301 en lugar de 200.',
+      '', ''
+    ].join('\n');
+    written.push(write('htaccess-SUBIR-COMO-PUNTO-HTACCESS.txt',
+      aviso + fs.readFileSync(src, 'utf8')));
+  }
+}
+
 // Guarda: ninguna URL congelada puede dejar de existir.
 const perdidas = FROZEN_URLS.filter(u => !fs.existsSync(path.join(ROOT, u)));
 if (perdidas.length) {
