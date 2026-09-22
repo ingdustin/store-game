@@ -255,17 +255,31 @@ ${header({ root: '', active: '' })}
   </section>
 
   <section class="section" id="contacto">
-    <div class="wrap contact">
-      <div>
-        <h2>Contacto</h2>
-        <p>Cuéntanos qué quieres construir o en qué se ha atascado un envío. Respondemos en dos días laborables.</p>
-        <a class="btn" href="mailto:${SITE.email}">${SITE.email}</a>
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <h2>Contacto y soporte</h2>
+          <p>Cuéntanos qué quieres construir, o escríbenos si necesitas ayuda con cualquiera de nuestras aplicaciones. Respondemos en dos días laborables.</p>
+          <p>Si escribes por una app, indícanos su nombre, el modelo de tu dispositivo y tu versión de iOS.</p>
+          <a class="btn" href="mailto:${SITE.email}">${SITE.email}</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Responsable</dt><dd>${esc(SITE.owner)}</dd></div>
+          <div><dt>Correo</dt><dd>${SITE.email}</dd></div>
+          <div><dt>Sitio</dt><dd>${esc(SITE.domain)}</dd></div>
+        </dl>
       </div>
-      <dl class="facts">
-        <div><dt>Responsable</dt><dd>${esc(SITE.owner)}</dd></div>
-        <div><dt>Correo</dt><dd>${SITE.email}</dd></div>
-        <div><dt>Sitio</dt><dd>${esc(SITE.domain)}</dd></div>
-      </dl>
+
+      <div class="support-apps">
+        <h3>Aplicaciones que atendemos</h3>
+        <ul>
+          ${PROJECTS.map(p => `<li>
+            <a href="juegos/${p.slug}/index.html">${esc(p.name)}</a>
+            <span>${esc(p.platforms.join(', '))}${p.appId ? ` · App Store ID ${esc(p.appId)}` : ''}</span>
+          </li>`).join('\n          ')}
+        </ul>
+        <p class="fine">Cada aplicación publica además su política de privacidad y sus términos en su propia página.</p>
+      </div>
     </div>
   </section>
 </main>

@@ -277,3 +277,16 @@ footer { border-top: 1px solid var(--rule); padding: 40px 0 52px; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* Apps atendidas desde la sección de contacto: la home hace de Support URL */
+.support-apps { margin-top: 48px; padding-top: 30px; border-top: 1px solid var(--rule); }
+.support-apps h3 { font-size: 17px; font-weight: 640; margin-bottom: 18px; }
+.support-apps ul { margin: 0 0 18px; padding: 0; list-style: none; display: grid; gap: 0; }
+.support-apps li {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px;
+  padding: 12px 0; border-top: 1px solid var(--rule-soft);
+}
+.support-apps li:first-child { border-top: none; }
+.support-apps li a { font-weight: 620; text-decoration: none; color: var(--ink); }
+.support-apps li a:hover { color: var(--accent); }
+.support-apps li span { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
