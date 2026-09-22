@@ -145,6 +145,24 @@ const PROJECTS = [
     legalLangs: ['es', 'en']
   },
   {
+    slug: 'nash-2048',
+    name: 'Nash 2048',
+    tagline: 'Puzle de fusión: las burbujas caen, se funden de dos en dos y encadenan cascadas.',
+    status: 'development',
+    appId: '1551439602',
+    platforms: ['iPhone', 'iPad'],
+    tech: ['Flutter', 'AdMob', 'StoreKit', 'Game Center'],
+    year: '2026',
+    role: 'Diseño, desarrollo y publicación',
+    description: 'Se desliza el dedo y las burbujas caen, se funden de dos en dos y encadenan cascadas. Setenta y dos niveles repartidos en seis mundos, cada uno con su mecánica: gravedad invertida, gravedad giratoria, obstáculos y contrarreloj.',
+    highlights: [
+      'Setenta y dos niveles en seis mundos con mecánicas distintas',
+      'Puzle del día igual para todo el mundo, y duelo asíncrono que viaja en un código, sin servidor',
+      'Funciona entero sin conexión, sin cuentas ni base de datos de jugadores'
+    ],
+    legalLangs: ['es', 'en']
+  },
+  {
     slug: 'go-game-baduk-weiqi-board',
     name: 'Baduk',
     tagline: 'El juego de Go, con motor de inteligencia artificial en el dispositivo.',
