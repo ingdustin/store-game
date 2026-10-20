@@ -163,6 +163,23 @@ const PROJECTS = [
     legalLangs: ['es', 'en']
   },
   {
+    slug: 'pig-dice',
+    name: 'Pig Dice',
+    tagline: 'El juego de dados clásico: acumula puntos, pero un uno se lo lleva todo.',
+    status: 'development',
+    platforms: ['iPhone'],
+    tech: ['Flutter', 'Game Center', 'AdMob', 'StoreKit'],
+    year: '2026',
+    role: 'Diseño, desarrollo y publicación',
+    description: 'Adaptación del juego de dados tradicional conocido como Pig. Los puntos se acumulan mientras sigas lanzando, pero sacar un uno borra todo lo del turno y pasa el dado. La decisión es siempre la misma y nunca es fácil: plantarse o tirar una vez más.',
+    highlights: [
+      'Progreso, logros y clasificaciones en Game Center',
+      'Compra de pago único y suscripción para retirar la publicidad',
+      'Reglas de dominio público, sin apuestas ni premios en dinero'
+    ],
+    legalLangs: ['es', 'en']
+  },
+  {
     slug: 'go-game-baduk-weiqi-board',
     name: 'Baduk',
     tagline: 'El juego de Go, con motor de inteligencia artificial en el dispositivo.',
