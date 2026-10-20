@@ -318,8 +318,9 @@ ${footer({ root: '../' })}`;
 // ---------------------------------------------------------------- proyecto
 
 function pageProject(p) {
-  // Sin enlace a la tienda mientras la app no esté publicada.
-  const store = p.status === 'published' && p.appStore
+  // Sin enlace a la tienda mientras la app no esté publicada, salvo que el
+  // proyecto lo pida expresamente con `showStore`.
+  const store = p.appStore && (p.status === 'published' || p.showStore)
     ? `<a class="btn" href="${esc(p.appStore)}" rel="noopener">Ver en la App Store</a>`
     : '';
 

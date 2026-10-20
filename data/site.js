@@ -166,9 +166,11 @@ const PROJECTS = [
     slug: 'pig-dice',
     name: 'Pig Dice',
     tagline: 'El juego de dados clásico: acumula puntos, pero un uno se lo lleva todo.',
-    // Ficha reservada en App Store Connect, todavía sin publicar: el enlace
-    // a la tienda no se muestra hasta que `status` pase a 'published'.
+    // Ficha reservada en App Store Connect. Todavía no responde, pero el
+    // enlace se muestra por decisión del propietario: `showStore` fuerza el
+    // botón sin marcar la app como publicada.
     status: 'development',
+    showStore: true,
     appId: '6788158696',
     appStore: 'https://apps.apple.com/us/app/pig-dice/id6788158696',
     platforms: ['iPhone'],
