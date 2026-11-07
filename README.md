@@ -62,5 +62,5 @@ Busca `privacy_es.txt`, `privacy_en.txt`, `terms_es.txt` y `terms_en.txt`.
 ## Pendiente
 
 Publicadas con la plantilla genérica, a la espera del texto verificado de cada app:
-`solitaire-klondike-spider`, `asly-tic-tac-toe-xo-gomoku`, `go-game-baduk-weiqi-board`, y
+`solitaire-klondike-spider`, `go-game-baduk-weiqi-board`, y
 la versión en inglés de `deducta-sudoku`.
