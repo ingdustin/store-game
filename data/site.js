@@ -202,6 +202,23 @@ const PROJECTS = [
       'Tamaño de tablero y reglas configurables'
     ],
     legalLangs: ['es']
+  },
+  {
+    slug: 'daii',
+    name: 'Daii: Positive Affirmations',
+    tagline: 'Una afirmación al día, en la app y en el widget.',
+    status: 'development',
+    platforms: ['iPhone', 'Android'],
+    tech: ['Flutter', 'WidgetKit', 'RevenueCat'],
+    year: '2026',
+    role: 'Diseño, desarrollo y publicación',
+    description: 'Cada día, una frase elegida según los temas y el tono de cada persona, en pantalla completa y en los widgets de inicio, bloqueo y StandBy. La frase cambia sola a las 03:00 y todo se queda en el teléfono.',
+    highlights: [
+      'Widgets de iOS y Android que se actualizan solos',
+      'Sin cuentas, sin anuncios y sin analítica de terceros',
+      'Recordatorio diario con horario nocturno'
+    ],
+    legalLangs: ['es', 'en']
   }
 ];
 
