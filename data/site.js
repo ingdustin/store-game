@@ -219,6 +219,23 @@ const PROJECTS = [
       'Recordatorio diario con horario nocturno'
     ],
     legalLangs: ['es', 'en']
+  },
+  {
+    slug: 'seed66',
+    name: 'Seed66: 75 Day Challenge',
+    tagline: 'Retos de hábitos de 21 a 75 días, un día a la vez.',
+    status: 'development',
+    platforms: ['iPhone'],
+    tech: ['Flutter', 'HealthKit', 'Live Activities', 'Firebase', 'RevenueCat'],
+    year: '2026',
+    role: 'Diseño, desarrollo y publicación',
+    description: 'Una app para seguir retos de hábitos: cada día se marcan las tareas, la espiral crece con el avance y Apple Health puede marcar por ti el ejercicio, el agua o los pasos. Los retos, las notas y las fotos se quedan en el teléfono.',
+    highlights: [
+      'Retos de 21, 30, 66 o 75 días con sus tareas diarias',
+      'Apple Health solo en lectura y sin salir del iPhone',
+      'Recordatorios, Live Activity y póster para compartir el avance'
+    ],
+    legalLangs: ['es', 'en']
   }
 ];
 
