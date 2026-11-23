@@ -28,7 +28,7 @@ const inline = s => esc(s)
   .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
   .replace(/\b([\w.+-]+@[\w-]+\.[\w.]+)\b/g, '<a href="mailto:$1">$1</a>')
   .replace(/\b(reportaproblem\.apple\.com)\b/g, '<a href="https://$1" rel="noopener">$1</a>')
-  .replace(/\b(ec\.europa\.eu\/consumers\/odr)\b/g, '<a href="https://$1" rel="noopener">$1</a>');
+  .replace(/https:\/\/www\.apple\.com\/legal\/internet-services\/itunes\/dev\/stdeula\//g, '<a href="$&" rel="noopener">$&</a>');
 
 // Markdown ligero -> HTML. Soporta #, >, ##, listas con - y **negrita**.
 function toHtml(txt) {
